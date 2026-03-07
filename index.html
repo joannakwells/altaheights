@@ -455,9 +455,11 @@
 
     /* WINES */
     .wines-heading {
-      grid-column: 1 / span 4;
-      min-height: 240px;
+      grid-column: 1 / span 12;
       padding: 8px 0 0 0;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 18px;
+      margin-bottom: 6px;
     }
 
     .wines-heading h2 {
@@ -465,25 +467,29 @@
     }
 
     .wines-list {
-      grid-column: 4 / span 8;
+      grid-column: 1 / span 12;
       display: grid;
+      grid-template-columns: repeat(4, 1fr);
       gap: 0;
       border-top: 1px solid var(--line);
     }
 
     .wine-row {
-      display: grid;
-      grid-template-columns: 110px 1.2fr 2fr auto;
-      gap: 18px;
-      align-items: start;
-      padding: 26px 0;
-      border-bottom: 1px solid var(--line-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding: 26px 24px 26px 0;
+      border-right: 1px solid var(--line-soft);
+    }
+
+    .wine-row:last-child {
+      border-right: 0;
     }
 
     .wine-bottle {
       width: 54px;
       height: 172px;
-      margin-left: 24px;
+      margin-left: 0;
       border-radius: 22px 22px 10px 10px;
       background: linear-gradient(180deg, #404748 0%, #161919 80%);
       position: relative;
@@ -522,12 +528,12 @@
     }
 
     .wine-desc {
-      max-width: 420px;
       color: var(--faded);
+      flex: 1;
     }
 
     .wine-meta {
-      text-align: right;
+      text-align: left;
       white-space: nowrap;
     }
 
@@ -813,22 +819,18 @@
       }
 
       .wines-list {
-        border-top: 0;
+        grid-template-columns: repeat(2, 1fr);
       }
 
       .wine-row {
-        grid-template-columns: 1fr;
         gap: 12px;
-        border-top: 1px solid var(--line-soft);
-        padding: 18px 0;
+        padding: 18px 16px 18px 0;
+        border-right: 1px solid var(--line-soft);
+        border-bottom: 1px solid var(--line-soft);
       }
 
-      .wine-bottle {
-        margin-left: 0;
-      }
-
-      .wine-meta {
-        text-align: left;
+      .wine-row:nth-child(even) {
+        border-right: 0;
       }
 
       .story-row {
