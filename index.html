@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alta Heights | California Alpine Wine</title>
+  <meta name="description" content="Alta Heights is California Alpine Wine — fresh mountain air, steep vineyards, and wines that feel alive." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f7f3ed;
+      --bg-soft: #efe8de;
+      --text: #1a2528;
+      --muted: #647074;
+      --line: rgba(26, 37, 40, 0.13);
+      --accent: #2f5a72;
+      --accent-dark: #224355;
+      --fire: #d4500a;        /* bold second accent — campfire orange */
+      --fire-light: #f2ede6;
+      --white: #ffffff;
+      --max: 1200px;
+      --shadow: 0 12px 36px rgba(26, 37, 40, 0.08);
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: var(--sans);
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { display: block; max-width: 100%; height: auto; }
+    a { color: inherit; text-decoration: none; }
+    p { margin: 0; }
+
+    .wrap {
+      width: min(calc(100% - 2.5rem), var(--max));
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--fire);
+      margin-bottom: 0.9rem;
+      border-bottom: 2px solid var(--fire);
+      padding-bottom: 0.2rem;
+    }
+
+    .sec { padding: 5.5rem 0; }
+
+    h2.heading {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 600;
+      line-height: 1.06;
+      letter-spacing: -0.01em;
+      margin: 0 0 0.9rem;
+    }
+
+    .intro {
+      max-width: 600px;
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin: 0 0 2.5rem;
+      line-height: 1.65;
+    }
+
+    /* ── Buttons ─────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 48px;
+      padding: 0 1.5rem;
+      border: 2px solid transparent;
+      font-family: var(--sans);
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.18s, transform 0.18s, border-color 0.18s;
+      border-radius: 0;          /* sharp corners on all buttons */
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-dark {
+      background: var(--text);
+      color: var(--white);
+      border-color: var(--text);
+    }
+    .btn-dark:hover { background: var(--fire); border-color: var(--fire); }
+
+    .btn-fire {
+      background: var(--fire);
+      color: var(--white);
+      border-color: var(--fire);
+    }
+    .btn-fire:hover { background: #b84008; border-color: #b84008; }
+
+    .btn-ghost-white {
+      background: transparent;
+      color: var(--white);
+      border-color: rgba(255,255,255,0.55);
+      backdrop-filter: blur(4px);
+    }
+    .btn-ghost-white:hover { background: rgba(255,255,255,0.12); border-color: var(--white); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border-color: var(--text);
+    }
+    .btn-outline:hover { background: var(--text); color: var(--white); }
+
+    /* ── Header ──────────────────────────── */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(247, 243, 237, 0.93);
+      backdrop-filter: blur(14px);
+      border-bottom: 2px solid var(--text);
+      transition: box-shadow 0.2s;
+    }
+
+    .site-header.scrolled { box-shadow: 0 4px 28px rgba(26,37,40,0.1); }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 70px;
+      gap: 1rem;
+    }
+
+    .logo {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+      gap: 0.22rem;
+    }
+
+    .logo-main {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    .logo-sub {
+      font-size: 0.63rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--fire);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--muted);
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-links a { transition: color 0.15s; }
+    .nav-links a:hover { color: var(--fire); }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .nav-cart {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      height: 42px;
+      padding: 0 1rem;
+      border: 2px solid var(--text);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: border-color 0.18s, background 0.18s, color 0.18s;
+    }
+
+    .nav-cart:hover { border-color: var(--fire); color: var(--fire); }
+
+    /* hamburger */
+    .menu-btn {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 40px;
+      height: 40px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .menu-btn span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text);
+      transition: transform 0.25s, opacity 0.25s;
+      margin: 0 auto;
+    }
+
+    .menu-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .menu-btn.open span:nth-child(2) { opacity: 0; }
+    .menu-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* mobile drawer */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      inset: 70px 0 0 0;
+      background: var(--bg);
+      z-index: 99;
+      padding: 2rem 1.25rem;
+      border-top: 2px solid var(--text);
+      flex-direction: column;
+      gap: 0;
+      overflow-y: auto;
+      transform: translateX(100%);
+      transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .mobile-nav.open { transform: translateX(0); }
+
+    .mobile-nav a {
+      display: block;
+      font-size: 1.35rem;
+      font-family: var(--serif);
+      font-weight: 600;
+      padding: 1.1rem 0;
+      border-bottom: 1px solid var(--line);
+      color: var(--text);
+    }
+
+    .mobile-nav a:hover { color: var(--fire); }
+
+    /* ── Hero ────────────────────────────── */
+    .hero {
+      position: relative;
+      min-height: 90vh;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+      background:
+        linear-gradient(to top, rgba(14,22,25,0.78) 0%, rgba(14,22,25,0.18) 60%),
+        url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1800&q=80") center/cover no-repeat;
+      color: var(--white);
+    }
+
+    /* angled bottom clip on hero */
+    .hero::after {
+      content: "";
+      position: absolute;
+      bottom: -1px; left: 0; right: 0;
+      height: 80px;
+      background: var(--bg);
+      clip-path: polygon(0 100%, 100% 0, 100% 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      padding: 5rem 0 6.5rem;
+      width: min(calc(100% - 2.5rem), var(--max));
+      margin: 0 auto;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--fire);
+      margin-bottom: 1.1rem;
+      border-bottom: 2px solid var(--fire);
+      padding-bottom: 0.2rem;
+    }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(3.4rem, 7.5vw, 6.4rem);
+      font-weight: 600;
+      line-height: 0.98;
+      letter-spacing: -0.02em;
+      margin: 0 0 1.4rem;
+      max-width: 800px;
+    }
+
+    .hero-desc {
+      max-width: 520px;
+      font-size: clamp(1rem, 1.8vw, 1.15rem);
+      color: rgba(255,255,255,0.82);
+      line-height: 1.65;
+      margin: 0 0 2.4rem;
+    }
+
+    .btn-row { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+    /* ── Wine Cards ──────────────────────── */
+    .wine-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.1rem;
+      margin-top: 2.5rem;
+    }
+
+    .wine-card {
+      background: var(--white);
+      border: 2px solid var(--text);
+      overflow: hidden;
+      box-shadow: 5px 5px 0 var(--text);    /* hard offset shadow = funky */
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .wine-card:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 7px 7px 0 var(--fire);
+    }
+
+    .wine-img {
+      aspect-ratio: 4/5;
+      background: linear-gradient(160deg, #dce5ea 0%, #c9b49c 100%);
+      display: grid;
+      place-items: center;
+      padding: 2rem;
+    }
+
+    .bottle {
+      width: 76px;
+      height: 250px;
+      border-radius: 26px 26px 16px 16px;
+      background: linear-gradient(175deg, #3e5059 0%, #141a1d 80%);
+      position: relative;
+      box-shadow: 0 16px 28px rgba(0,0,0,0.22), inset 2px 0 6px rgba(255,255,255,0.06);
+    }
+
+    .bottle::before {
+      content: "";
+      position: absolute;
+      top: -38px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 26px;
+      height: 50px;
+      border-radius: 9px 9px 4px 4px;
+      background: linear-gradient(180deg, #202a2e 0%, #111518 100%);
+    }
+
+    .bottle::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 94px;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 66px;
+      background: #f5f0e8;
+      border-radius: 4px;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,0.06);
+    }
+
+    .wine-body { padding: 1.2rem; }
+
+    .wine-body h3 {
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin: 0 0 0.4rem;
+    }
+
+    .wine-body p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.55;
+      min-height: 2.8em;
+      margin-bottom: 0.9rem;
+    }
+
+    .wine-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 0.9rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .wine-meta a {
+      color: var(--fire);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      transition: opacity 0.15s;
+    }
+    .wine-meta a:hover { opacity: 0.72; }
+
+    /* ── Mountains ───────────────────────── */
+    .mountains-wrap {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 2.5rem;
+      align-items: start;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.9rem;
+      margin-top: 2rem;
+    }
+
+    .feature-card {
+      background: var(--bg-soft);
+      border: 2px solid var(--text);
+      padding: 1.35rem;
+      box-shadow: 3px 3px 0 var(--text);
+    }
+
+    .feature-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: var(--fire);
+      color: var(--white);
+      font-weight: 700;
+      font-size: 0.8rem;
+      margin-bottom: 0.9rem;
+      letter-spacing: 0.05em;
+    }
+
+    .feature-card h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin: 0 0 0.35rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .feature-card p { color: var(--muted); font-size: 0.88rem; }
+
+    /* mountain photo — sharp corners */
+    .mountain-photo {
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background:
+        linear-gradient(to top, rgba(14,22,25,0.52), rgba(14,22,25,0.06)),
+        url("https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80") center/cover no-repeat;
+    }
+
+    .mountain-photo-inner {
+      min-height: 560px;
+      display: flex;
+      align-items: flex-end;
+      padding: 2rem;
+      color: var(--white);
+    }
+
+    .mountain-photo-inner h3 {
+      font-family: var(--serif);
+      font-size: 2.2rem;
+      font-weight: 600;
+      margin: 0 0 0.5rem;
+    }
+
+    .mountain-photo-inner p {
+      color: rgba(255,255,255,0.82);
+      max-width: 320px;
+      font-size: 0.95rem;
+    }
+
+    /* ── Philosophy ──────────────────────── */
+    .philosophy {
+      background: var(--text);
+      color: var(--white);
+      /* angled top & bottom via clip-path */
+      clip-path: polygon(0 3.5%, 100% 0, 100% 96.5%, 0 100%);
+      margin: -2rem 0;
+      padding: 8rem 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    .philosophy-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .philosophy .eyebrow {
+      color: var(--fire);
+      border-bottom-color: var(--fire);
+    }
+
+    .philosophy-copy h2 { color: var(--white); }
+
+    .philosophy-copy p {
+      color: rgba(255,255,255,0.75);
+      font-size: 1.02rem;
+      margin-top: 0.8rem;
+      line-height: 1.7;
+    }
+
+    .quote-card {
+      background: rgba(255,255,255,0.06);
+      border: 2px solid rgba(255,255,255,0.18);
+      padding: 2.4rem;
+      position: relative;
+    }
+
+    /* decorative corner accent */
+    .quote-card::before {
+      content: "";
+      position: absolute;
+      top: -2px; left: -2px;
+      width: 28px; height: 28px;
+      background: var(--fire);
+    }
+
+    .quote-card blockquote {
+      font-family: var(--serif);
+      font-size: 1.45rem;
+      font-style: italic;
+      line-height: 1.28;
+      color: var(--white);
+      margin: 0 0 1.2rem;
+    }
+
+    .quote-attr {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--fire);
+    }
+
+    /* ── Lifestyle Grid ──────────────────── */
+    .life-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr 0.85fr;
+      grid-template-rows: 270px 270px;
+      gap: 4px;                    /* tight gap = raw, editorial */
+      margin-top: 2.5rem;
+    }
+
+    .life-cell {
+      overflow: hidden;
+      position: relative;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .life-main {
+      grid-row: 1 / span 2;
+      background-image:
+        linear-gradient(to top, rgba(14,22,25,0.55), rgba(14,22,25,0.1)),
+        url("https://images.unsplash.com/photo-1501555088652-021faa106b9b?auto=format&fit=crop&w=1200&q=80");
+    }
+
+    .life-cell:nth-child(2) { background-image: url("https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80"); }
+    .life-cell:nth-child(3) { background-image: url("https://images.unsplash.com/photo-1517821365201-7734f463f9dd?auto=format&fit=crop&w=800&q=80"); }
+    .life-cell:nth-child(4) { background-image: url("https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=800&q=80"); }
+    .life-cell:nth-child(5) { background-image: url("https://images.unsplash.com/photo-1465311530779-5241f5a29892?auto=format&fit=crop&w=800&q=80"); }
+
+    .life-label {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 1.4rem 1.6rem;
+      color: var(--white);
+    }
+
+    .life-label h3 {
+      font-family: var(--serif);
+      font-size: 1.7rem;
+      font-weight: 600;
+      margin: 0 0 0.3rem;
+    }
+
+    .life-label p {
+      color: rgba(255,255,255,0.82);
+      font-size: 0.9rem;
+      max-width: 380px;
+    }
+
+    /* ── Newsletter ──────────────────────── */
+    .newsletter {
+      background: var(--fire);
+      color: var(--white);
+      padding: 5rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* big decorative text watermark */
+    .newsletter::before {
+      content: "ALTITUDE";
+      position: absolute;
+      right: -0.05em;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: var(--serif);
+      font-size: clamp(8rem, 18vw, 15rem);
+      font-weight: 600;
+      color: rgba(255,255,255,0.09);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .newsletter-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .newsletter-copy .eyebrow {
+      color: rgba(255,255,255,0.65);
+      border-bottom-color: rgba(255,255,255,0.4);
+    }
+
+    .newsletter-copy h2 {
+      color: var(--white);
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin: 0 0 0.9rem;
+    }
+
+    .newsletter-copy p {
+      color: rgba(255,255,255,0.82);
+      font-size: 1.05rem;
+      line-height: 1.65;
+    }
+
+    .newsletter-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .newsletter-form label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .newsletter-input-row {
+      display: flex;
+      gap: 0;
+    }
+
+    .newsletter-form input[type="email"] {
+      flex: 1;
+      height: 54px;
+      padding: 0 1.2rem;
+      border: 2px solid var(--white);
+      border-right: none;
+      background: rgba(255,255,255,0.1);
+      color: var(--white);
+      font-family: var(--sans);
+      font-size: 1rem;
+      outline: none;
+      transition: background 0.18s;
+    }
+
+    .newsletter-form input[type="email"]::placeholder { color: rgba(255,255,255,0.5); }
+    .newsletter-form input[type="email"]:focus { background: rgba(255,255,255,0.16); }
+
+    .newsletter-form .btn-sub {
+      height: 54px;
+      padding: 0 1.6rem;
+      background: var(--white);
+      color: var(--fire);
+      border: 2px solid var(--white);
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.18s, color 0.18s;
+    }
+
+    .newsletter-form .btn-sub:hover {
+      background: var(--text);
+      border-color: var(--text);
+      color: var(--white);
+    }
+
+    .newsletter-small {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.8rem;
+      margin-top: 0.4rem;
+    }
+
+    /* ── Journal ─────────────────────────── */
+    .journal-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.1rem;
+      margin-top: 2.5rem;
+    }
+
+    .journal-card {
+      background: var(--white);
+      border: 2px solid var(--text);
+      overflow: hidden;
+      box-shadow: 4px 4px 0 var(--text);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .journal-card:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0 var(--fire);
+    }
+
+    /* journal images — no rounding */
+    .journal-img {
+      aspect-ratio: 16/10;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .journal-card:nth-child(1) .journal-img { background-image: url("https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=900&q=80"); }
+    .journal-card:nth-child(2) .journal-img { background-image: url("https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=900&q=80"); }
+    .journal-card:nth-child(3) .journal-img { background-image: url("https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=900&q=80"); }
+
+    .journal-body { padding: 1.3rem; }
+
+    .journal-tag {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--fire);
+      margin-bottom: 0.6rem;
+    }
+
+    .journal-body h3 {
+      font-family: var(--serif);
+      font-size: 1.22rem;
+      font-weight: 600;
+      line-height: 1.2;
+      margin: 0 0 0.5rem;
+    }
+
+    .journal-body p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 1.1rem;
+    }
+
+    /* ── Find It ─────────────────────────── */
+    .find-wrap {
+      display: grid;
+      grid-template-columns: 0.92fr 1.08fr;
+      gap: 1.4rem;
+      align-items: stretch;
+    }
+
+    .find-card, .map-card {
+      background: var(--white);
+      border: 2px solid var(--text);
+      box-shadow: 5px 5px 0 var(--text);
+    }
+
+    .find-card { padding: 2rem; }
+
+    .find-card .intro { margin-bottom: 0; }
+
+    .search-row {
+      display: flex;
+      gap: 0;
+      margin: 1.4rem 0 0;
+    }
+
+    .search-row input {
+      flex: 1;
+      height: 48px;
+      padding: 0 1rem;
+      border: 2px solid var(--text);
+      border-right: none;
+      background: var(--bg);
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.18s;
+    }
+
+    .search-row input:focus { border-color: var(--fire); }
+
+    .search-row .btn {
+      border: 2px solid var(--text);
+    }
+
+    .stockist-list {
+      list-style: none;
+      margin: 1.4rem 0 0;
+      padding: 0;
+    }
+
+    .stockist-list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.95rem 0;
+      border-top: 1px solid var(--line);
+      gap: 1rem;
+    }
+
+    .stockist-list strong {
+      display: block;
+      font-weight: 700;
+      font-size: 0.92rem;
+      margin-bottom: 0.15rem;
+    }
+
+    .stockist-list span {
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .stockist-list a {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--fire);
+      white-space: nowrap;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: opacity 0.15s;
+    }
+
+    .stockist-list a:hover { opacity: 0.7; }
+
+    /* map card — no rounding */
+    .map-card {
+      min-height: 400px;
+      background:
+        linear-gradient(rgba(255,255,255,0.15), rgba(255,255,255,0.15)),
+        url("https://images.unsplash.com/photo-1521295121783-8a321d551ad2?auto=format&fit=crop&w=1200&q=80") center/cover no-repeat;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .map-badge {
+      position: absolute;
+      left: 1.2rem;
+      bottom: 1.2rem;
+      background: rgba(255,255,255,0.96);
+      color: var(--text);
+      padding: 0.75rem 1rem;
+      font-size: 0.88rem;
+      font-weight: 600;
+      box-shadow: 3px 3px 0 var(--text);
+      line-height: 1.4;
+    }
+
+    .map-badge span { color: var(--muted); font-size: 0.8rem; display: block; }
+
+    /* ── Footer ──────────────────────────── */
+    .site-footer {
+      background: var(--text);
+      color: var(--white);
+      border-top: 3px solid var(--fire);
+      padding: 4rem 0 2.5rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 2rem;
+      align-items: start;
+      margin-bottom: 2.5rem;
+    }
+
+    .footer-brand .logo-main { color: var(--white); }
+    .footer-brand .logo-sub { color: var(--fire); }
+
+    .footer-brand p {
+      color: rgba(255,255,255,0.55);
+      font-size: 0.9rem;
+      margin-top: 1rem;
+      max-width: 360px;
+      line-height: 1.65;
+    }
+
+    .footer-col h4 {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin: 0 0 1rem;
+      color: var(--fire);
+    }
+
+    .footer-col a {
+      display: block;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.9rem;
+      padding: 0.3rem 0;
+      transition: color 0.15s;
+    }
+
+    .footer-col a:hover { color: var(--white); }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.4);
+      font-size: 0.84rem;
+    }
+
+    /* ── Responsive ──────────────────────── */
+    @media (max-width: 1024px) {
+      .wine-grid { grid-template-columns: repeat(2, 1fr); }
+      .mountains-wrap,
+      .philosophy-grid,
+      .newsletter-inner,
+      .find-wrap,
+      .footer-grid { grid-template-columns: 1fr; }
+      .life-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+      .life-main { grid-row: auto; min-height: 380px; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links, .nav-cart { display: none; }
+      .menu-btn { display: flex; }
+      .mobile-nav { display: flex; }
+      .sec { padding: 4rem 0; }
+      .wine-grid, .journal-grid { grid-template-columns: 1fr; }
+      .features-grid { grid-template-columns: 1fr; }
+      .life-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
+      .life-main { min-height: 320px; }
+      .life-cell:not(.life-main) { display: none; }
+      .hero { min-height: 82vh; }
+      .mountain-photo-inner { min-height: 320px; }
+      .philosophy-grid { gap: 2rem; }
+      .philosophy { clip-path: polygon(0 2%, 100% 0, 100% 98%, 0 100%); }
+      .newsletter::before { display: none; }
+      .newsletter-input-row { flex-direction: column; }
+      .newsletter-form input[type="email"] { border-right: 2px solid var(--white); }
+      .newsletter-form .btn-sub { width: 100%; }
+    }
+
+    /* ── Scroll fade-in ──────────────────── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header" id="site-header">
+    <div class="wrap nav-inner">
+      <a href="#top" class="logo" aria-label="Alta Heights home">
+        <span class="logo-main">Alta Heights</span>
+        <span class="logo-sub">California Alpine Wine</span>
+      </a>
+
+      <nav aria-label="Primary">
+        <ul class="nav-links">
+          <li><a href="#wines">Wines</a></li>
+          <li><a href="#mountains">The Mountains</a></li>
+          <li><a href="#journal">Journal</a></li>
+          <li><a href="#find-it">Find It</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="#" class="nav-cart" aria-label="Cart, 0 items">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          Cart (0)
+        </a>
+        <button class="menu-btn" aria-label="Toggle menu" aria-expanded="false" id="menuBtn">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile nav -->
+  <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+    <a href="#wines" class="mobile-link">Wines</a>
+    <a href="#mountains" class="mobile-link">The Mountains</a>
+    <a href="#journal" class="mobile-link">Journal</a>
+    <a href="#find-it" class="mobile-link">Find It</a>
+    <a href="#" class="mobile-link">Cart (0)</a>
+  </nav>
+
+  <main id="top">
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-content">
+        <span class="hero-eyebrow">California Alpine Wine</span>
+        <h1>Fresh mountain air.<br>Steep vineyards.<br>Wines that feel alive.</h1>
+        <p class="hero-desc">Alta Heights captures the spirit of California's mountains — bright fruit, cool-air freshness, and an independent point of view.</p>
+        <div class="btn-row">
+          <a href="#wines" class="btn btn-fire">Shop Wines</a>
+          <a href="#mountains" class="btn btn-ghost-white">Explore the Mountains</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Wines -->
+    <section class="sec" id="wines">
+      <div class="wrap">
+        <span class="eyebrow">Featured Wines</span>
+        <h2 class="heading">A tighter range. A stronger point of view.</h2>
+        <p class="intro">Built for freshness, energy, and drinkability. Mountain wine through a lifestyle lens — clear, vivid, and easy to step into.</p>
+
+        <div class="wine-grid">
+          <article class="wine-card fade-up">
+            <div class="wine-img"><div class="bottle" aria-hidden="true"></div></div>
+            <div class="wine-body">
+              <h3>Chardonnay</h3>
+              <p>Crisp mountain citrus, orchard fruit, and a bright alpine edge.</p>
+              <div class="wine-meta"><span>$28</span><a href="#">Shop →</a></div>
+            </div>
+          </article>
+
+          <article class="wine-card fade-up" style="transition-delay: 0.08s">
+            <div class="wine-img"><div class="bottle" aria-hidden="true"></div></div>
+            <div class="wine-body">
+              <h3>Pinot Noir</h3>
+              <p>Wild berries, fresh herbs, and the energy of high-elevation vineyards.</p>
+              <div class="wine-meta"><span>$32</span><a href="#">Shop →</a></div>
+            </div>
+          </article>
+
+          <article class="wine-card fade-up" style="transition-delay: 0.16s">
+            <div class="wine-img"><div class="bottle" aria-hidden="true"></div></div>
+            <div class="wine-body">
+              <h3>Rosé</h3>
+              <p>Bright, refreshing, and built for long summer evenings outdoors.</p>
+              <div class="wine-meta"><span>$24</span><a href="#">Shop →</a></div>
+            </div>
+          </article>
+
+          <article class="wine-card fade-up" style="transition-delay: 0.24s">
+            <div class="wine-img"><div class="bottle" aria-hidden="true"></div></div>
+            <div class="wine-body">
+              <h3>Field Blend</h3>
+              <p>A lively expression of California mountain vineyards and cool air.</p>
+              <div class="wine-meta"><span>$26</span><a href="#">Shop →</a></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mountains -->
+    <section class="sec" id="mountains">
+      <div class="wrap">
+        <div class="mountains-wrap">
+          <div>
+            <span class="eyebrow">Why Mountain Wine</span>
+            <h2 class="heading">What we look for in the vineyards we choose.</h2>
+            <p class="intro">The case for mountain fruit is simple: more freshness, more character, and more life in the glass.</p>
+
+            <div class="features-grid">
+              <article class="feature-card fade-up">
+                <div class="feature-num">01</div>
+                <h3>High Elevation</h3>
+                <p>Warm days and cool nights preserve acidity and natural freshness.</p>
+              </article>
+              <article class="feature-card fade-up" style="transition-delay: 0.08s">
+                <div class="feature-num">02</div>
+                <h3>Coastal Influence</h3>
+                <p>Pacific air moderates the climate and extends the growing season.</p>
+              </article>
+              <article class="feature-card fade-up" style="transition-delay: 0.16s">
+                <div class="feature-num">03</div>
+                <h3>Wild Soils</h3>
+                <p>Rocky, fractured ground encourages concentration and structure.</p>
+              </article>
+              <article class="feature-card fade-up" style="transition-delay: 0.24s">
+                <div class="feature-num">04</div>
+                <h3>Long Ripening</h3>
+                <p>Slow flavor development brings depth without heaviness.</p>
+              </article>
+            </div>
+          </div>
+
+          <div class="mountain-photo fade-up">
+            <div class="mountain-photo-inner">
+              <div>
+                <h3>Drink Independent.</h3>
+                <p>A wine brand shaped by mountain conditions, open skies, and a freedom that makes everything feel sharper.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Philosophy -->
+    <section class="sec philosophy">
+      <div class="wrap philosophy-grid">
+        <div class="philosophy-copy fade-up">
+          <span class="eyebrow">The Alta Heights Philosophy</span>
+          <h2 class="heading">Wine for people who'd rather be outside.</h2>
+          <p>Alta Heights is inspired by California's mountains — trailheads, alpine light, cold mornings, long drives, and tables full of friends at the end of the day.</p>
+          <p>It is not a traditional winery dressed up as a lifestyle brand. The world comes first. The wine belongs to it.</p>
+        </div>
+
+        <div class="quote-card fade-up" style="transition-delay: 0.12s">
+          <blockquote>"Independent in spirit, vibrant in character, and made to go wherever the road leads."</blockquote>
+          <span class="quote-attr">Alta Heights</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lifestyle -->
+    <section class="sec">
+      <div class="wrap">
+        <span class="eyebrow">Lifestyle</span>
+        <h2 class="heading">A broader world than the tasting room.</h2>
+        <p class="intro">The product is present, but the atmosphere does the heavy lifting.</p>
+
+        <div class="life-grid">
+          <div class="life-cell life-main">
+            <div class="life-label">
+              <h3>Drink Independent</h3>
+              <p>The wines belong to mountains, campfires, cabins, and long afternoons that turn into dinner.</p>
+            </div>
+          </div>
+          <div class="life-cell"></div>
+          <div class="life-cell"></div>
+          <div class="life-cell"></div>
+          <div class="life-cell"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Journal -->
+    <section class="sec" id="journal">
+      <div class="wrap">
+        <span class="eyebrow">Journal</span>
+        <h2 class="heading">Stories from the mountains and the people who move through them.</h2>
+
+        <div class="journal-grid">
+          <article class="journal-card fade-up">
+            <div class="journal-img"></div>
+            <div class="journal-body">
+              <div class="journal-tag">Field Notes</div>
+              <h3>The Spirit of California Alpine Wine</h3>
+              <p>Why elevation, light, and coastal air change the shape of the glass.</p>
+              <a href="#" class="btn btn-outline">Read Story</a>
+            </div>
+          </article>
+
+          <article class="journal-card fade-up" style="transition-delay: 0.1s">
+            <div class="journal-img"></div>
+            <div class="journal-body">
+              <div class="journal-tag">Outdoors</div>
+              <h3>Wine After the Trail</h3>
+              <p>A better kind of occasion: lower pressure, better views, stronger memory.</p>
+              <a href="#" class="btn btn-outline">Read Story</a>
+            </div>
+          </article>
+
+          <article class="journal-card fade-up" style="transition-delay: 0.2s">
+            <div class="journal-img"></div>
+            <div class="journal-body">
+              <div class="journal-tag">People & Place</div>
+              <h3>Outdoor Pioneers Who Inspire Us</h3>
+              <p>The kind of lives and ideas Alta Heights wants to be in conversation with.</p>
+              <a href="#" class="btn btn-outline">Read Story</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter" id="newsletter">
+      <div class="wrap newsletter-inner">
+        <div class="newsletter-copy fade-up">
+          <span class="eyebrow">Stay in the Loop</span>
+          <h2 class="heading">Good things come to those who go outside.</h2>
+          <p>New releases, trail pairings, mountain dispatches, and the occasional cold-weather tip — straight to your inbox. No noise, just signal.</p>
+        </div>
+
+        <div class="newsletter-form fade-up" style="transition-delay: 0.12s">
+          <label for="nl-email">Your email address</label>
+          <div class="newsletter-input-row">
+            <input type="email" id="nl-email" name="email" placeholder="you@example.com" autocomplete="email" />
+            <button type="button" class="btn-sub">Subscribe</button>
+          </div>
+          <p class="newsletter-small">No spam. Unsubscribe any time. Responsibly sourced content.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Find It -->
+    <section class="sec" id="find-it">
+      <div class="wrap">
+        <div class="find-wrap">
+          <div class="find-card fade-up">
+            <span class="eyebrow">Find It</span>
+            <h2 class="heading">Find Alta Heights near you.</h2>
+            <p class="intro">Discover restaurants, wine shops, and online retailers carrying Alta Heights.</p>
+
+            <div class="search-row">
+              <input type="text" placeholder="City, state, or zip code" aria-label="Location search" />
+              <button class="btn btn-dark" type="button">Search</button>
+            </div>
+
+            <ul class="stockist-list">
+              <li>
+                <div>
+                  <strong>Trail House Provisions</strong>
+                  <span>Wilmington, DE · Retail</span>
+                </div>
+                <a href="#">Details →</a>
+              </li>
+              <li>
+                <div>
+                  <strong>North Ridge Bottle Shop</strong>
+                  <span>Philadelphia, PA · Retail</span>
+                </div>
+                <a href="#">Details →</a>
+              </li>
+              <li>
+                <div>
+                  <strong>Summit Table</strong>
+                  <span>Hudson Valley, NY · Restaurant</span>
+                </div>
+                <a href="#">Details →</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="map-card fade-up" style="transition-delay: 0.1s" aria-label="Map placeholder">
+            <div class="map-badge">
+              Stockist map
+              <span>Swap in Mapbox or Google Maps</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#top" class="logo" aria-label="Alta Heights home">
+            <span class="logo-main">Alta Heights</span>
+            <span class="logo-sub">California Alpine Wine</span>
+          </a>
+          <p>Independent in spirit, vibrant in character, and made to go wherever the road leads.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <a href="#wines">Wines</a>
+          <a href="#mountains">The Mountains</a>
+          <a href="#journal">Journal</a>
+          <a href="#find-it">Find It</a>
+        </div>
+
+        <div class="footer-col">
+          <h4>Info</h4>
+          <a href="#">About</a>
+          <a href="#">Trade</a>
+          <a href="#">Contact</a>
+          <a href="#">Instagram</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 Alta Heights</span>
+        <span>Please enjoy responsibly.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Sticky header shadow
+    const header = document.getElementById('site-header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 10);
+    }, { passive: true });
+
+    // Mobile nav toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileNav = document.getElementById('mobileNav');
+
+    menuBtn.addEventListener('click', () => {
+      const open = menuBtn.classList.toggle('open');
+      mobileNav.classList.toggle('open', open);
+      menuBtn.setAttribute('aria-expanded', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+
+    // Close mobile nav on link click
+    mobileNav.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        menuBtn.classList.remove('open');
+        mobileNav.classList.remove('open');
+        menuBtn.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // Scroll fade-in
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
