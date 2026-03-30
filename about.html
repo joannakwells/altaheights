@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alta Heights / About</title>
+  <meta
+    name="description"
+    content="About Alta Heights — California Alpine Wine from mountain vineyards shaped by elevation, coastal influence, and human-powered farming."
+  />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="age-gate" id="age-gate" aria-hidden="true">
+    <div class="age-gate-card" role="dialog" aria-modal="true" aria-labelledby="age-gate-title">
+      <span class="tag mono">21+ Only</span>
+      <h2 class="serif" id="age-gate-title">Please confirm you are 21 or older to enter.</h2>
+      <p class="muted">Alta Heights is a wine site. By entering, you confirm you are of legal drinking age in your location.</p>
+      <div class="age-gate-actions">
+        <button class="btn mono age-gate-enter" id="age-gate-enter" type="button">I Am 21+</button>
+        <a class="btn mono age-gate-exit" href="https://www.google.com">Exit</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="nav nav-bleed">
+      <div class="brand">
+        <a href="index.html"><img src="images/ALTA_23_Logos_Orange_Primary Horiz copy.png" alt="Alta Heights" class="brand-logo"></a>
+        <div class="brand-sub mono">California Alpine Wine / About</div>
+      </div>
+
+      <nav class="nav-links mono" aria-label="Primary navigation">
+        <a href="index.html">Home</a>
+        <a href="index.html#wines">Wines</a>
+        <a href="index.html#journal">Journal</a>
+        <a href="#">Trade</a>
+        <a href="#cart" id="cart-trigger" aria-controls="site-cart" aria-expanded="false">Cart <span id="cart-count">[0]</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section about-hero">
+      <div class="wrap scatter">
+        <div class="about-kicker">
+          <span class="tag mono">About</span>
+        </div>
+
+        <div class="about-intro">
+          <div class="mono small muted">California Alpine Wine / Human-Powered / Sonoma</div>
+          <h1 class="serif">The longer route. The higher ground. The better bottle.</h1>
+          <p class="muted">
+            Alta Heights is our answer to a simple question: why should artisan wine only be serious, scarce, and expensive?
+          </p>
+        </div>
+
+        <div class="about-image box">
+          <img src="images/AHCHOcean.jpg" alt="Alta Heights landscape" class="section-bg-img">
+          <div class="about-image-note">
+            <div class="mono small">Alta Heights</div>
+            <p>
+              California Alpine Wines shaped by elevation, weathered soils, and cool coastal air.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section rule-top" id="about-story">
+      <div class="wrap scatter about-grid">
+        <div class="about-copy">
+          <p>
+            Between the two of us, we've spent the better part of our lives in the wine world. Joanna got her start in the Rhône-like "rocks" vineyards of Walla Walla, Washington, while Sean schlepped a wine bag for a distributor in Wilmington, DE, until a wine-soaked trip to the Rhône convinced him he'd rather be making wine than selling it.
+          </p>
+
+          <p>
+            Eventually, the industry pulled us both to California, working together at the pioneering Pinot Noir house Robert Sinskey Vineyards in Napa. From there, Sean worked under Aaron Pott at Seven Stones before spending over a decade as Assistant Winemaker at Rhys Vineyards in the Santa Cruz Mountains. Joanna spent that same decade deepening her craft as Associate Winemaker for cult Pinot brand Kutch Wines.
+          </p>
+
+          <p>
+            In 2013, frustrated with being perpetually in the cellar rather than out in the vines, we were determined to start our own vigneron-style project, calling it Model Farm. We leased two acres of Syrah and farmed it ourselves, by hand, every night and weekend. It was a ton of work - but we got to experience firsthand the intimate, unglamorous, and deeply satisfying connection between the soil and what eventually ends up in your glass.
+          </p>
+
+          <p>
+            We've kept Model Farm going for over thirteen years and counting. But the deeper we went down the rabbit hole of fine wine, the louder a different question got: why does artisan wine have to be so serious, so scarce, and so expensive? Good news - it doesn't. That is Alta Heights.
+          </p>
+
+          <p>
+            The name says it all. Every vineyard we work with sits at an elevation of 1,000 feet or more. These are California Alpine Wines from vineyards where cool coastal influence, weathered-in-place soils, and pure mountain sunshine come together with vibrancy and verve. The wines that come off these hillsides have tension, depth, and soul you simply don't find on the valley floor. Alta Heights is our love letter to the rugged mountain frontiers of California and the spirit of exploration that got us here. We make roughly 3,000 cases a year out of our winery in Sonoma. Every bottle is human-powered. Every wine a true reflection of what we love.
+          </p>
+
+          <p>
+            Thanks for hiking up these hills with us. The road ahead may be steep and winding but we can’t wait to share the story with you.
+          </p>
+        </div>
+
+        <aside class="about-aside">
+          <div class="about-note">
+            <div class="mono small">Founders</div>
+            <h2 class="serif">Joanna &amp; Sean Castorani</h2>
+            <p class="muted">
+              Longtime California winemakers, mountain people, and the hands behind Alta Heights and Model Farm.
+            </p>
+          </div>
+
+          <div class="about-note">
+            <div class="mono small">What We Believe</div>
+            <p class="muted">
+              Mountain wine should have tension, soul, and beauty without feeling gated off from the people who want to drink it.
+            </p>
+          </div>
+
+          <div class="about-note about-signoff">
+            <div class="mono small">Sign-Off</div>
+            <p class="muted">
+              Joanna &amp; Sean Castorani<br>
+              Alta Heights
+            </p>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <div class="cart-overlay" id="cart-overlay" hidden></div>
+  <aside class="cart-drawer" id="site-cart" aria-hidden="true" aria-labelledby="cart-title">
+    <div class="cart-drawer-header">
+      <div>
+        <div class="tag mono">Cart</div>
+        <h2 class="serif" id="cart-title">Your Bottle List</h2>
+      </div>
+      <button class="cart-close" id="cart-close" type="button" aria-label="Close cart">&times;</button>
+    </div>
+
+    <div class="cart-status mono small" id="cart-status" aria-live="polite"></div>
+    <div class="cart-empty muted" id="cart-empty">Your cart is empty. Add a bottle from the wine list to begin.</div>
+    <div class="cart-lines" id="cart-lines"></div>
+
+    <div class="cart-footer">
+      <div class="cart-summary">
+        <span class="mono small">Subtotal</span>
+        <strong id="cart-subtotal">$0.00</strong>
+      </div>
+      <a class="btn mono cart-checkout" id="cart-checkout" href="#" target="_blank" rel="noopener noreferrer" aria-disabled="true">Checkout</a>
+    </div>
+  </aside>
+
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-box">
+          <div class="brand-title serif">Alta Heights</div>
+          <div class="brand-sub mono">California Alpine Wine</div>
+          <p class="muted">
+            A love letter to the rugged mountain frontiers of California and the spirit of exploration.
+          </p>
+        </div>
+
+        <div class="footer-box">
+          <h4 class="mono">Index</h4>
+          <div class="footer-links mono small">
+            <a href="index.html#index">Field Index</a>
+            <a href="index.html#wines">Wine List</a>
+            <a href="index.html#journal">Journal</a>
+            <a href="index.html#find">Find It</a>
+          </div>
+        </div>
+
+        <div class="footer-box">
+          <h4 class="mono">Other Pages</h4>
+          <div class="footer-links mono small">
+            <a href="about.html">About</a>
+            <a href="drink-independent.html">Drink Independent</a>
+            <a href="#">Trade</a>
+            <a href="mailto:hello@altaheightswine.com">Contact</a>
+            <a href="https://www.instagram.com/altaheightswine/" target="_blank" rel="noopener noreferrer">Instagram</a>
+          </div>
+        </div>
+
+        <div class="footer-box">
+          <h4 class="mono">Issue Notes</h4>
+          <div class="footer-links mono small">
+            <span>route archive</span>
+            <span>weather logs</span>
+            <span>elevation markers</span>
+            <span>please enjoy responsibly</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom mono">
+        <span>© 2026 Alta Heights</span>
+        <span>About / Issue 01</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const SHOPIFY_DOMAIN = 'model-store-9670.myshopify.com';
+    const SHOPIFY_STOREFRONT_TOKEN = 'c719c0ff58ad08733d78f86785c95857';
+    const SHOPIFY_API_URL = `https://${SHOPIFY_DOMAIN}/api/2026-01/graphql.json`;
+    const SHOPIFY_CART_STORAGE_KEY = 'altaHeightsShopifyCartId';
+    const AGE_GATE_STORAGE_KEY = 'altaHeightsAgeVerified';
+    const cartTrigger = document.querySelector('#cart-trigger');
+    const cartCount = document.querySelector('#cart-count');
+    const cartOverlay = document.querySelector('#cart-overlay');
+    const cartDrawer = document.querySelector('#site-cart');
+    const cartClose = document.querySelector('#cart-close');
+    const cartStatus = document.querySelector('#cart-status');
+    const cartEmpty = document.querySelector('#cart-empty');
+    const cartLines = document.querySelector('#cart-lines');
+    const cartSubtotal = document.querySelector('#cart-subtotal');
+    const cartCheckout = document.querySelector('#cart-checkout');
+    const ageGate = document.querySelector('#age-gate');
+    const ageGateEnter = document.querySelector('#age-gate-enter');
+    let shopifyCart = null;
+    let cartBusy = false;
+
+    function openAgeGate() {
+      if (!ageGate) return;
+      ageGate.classList.add('is-visible');
+      ageGate.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('age-gate-open');
+    }
+
+    function closeAgeGate() {
+      if (!ageGate) return;
+      ageGate.classList.remove('is-visible');
+      ageGate.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('age-gate-open');
+    }
+
+    if (ageGate && ageGateEnter) {
+      const isVerified = localStorage.getItem(AGE_GATE_STORAGE_KEY) === 'true';
+
+      if (!isVerified) {
+        openAgeGate();
+      }
+
+      ageGateEnter.addEventListener('click', () => {
+        localStorage.setItem(AGE_GATE_STORAGE_KEY, 'true');
+        closeAgeGate();
+      });
+    }
+
+    function updateCartStatus(message, state) {
+      if (!cartStatus) return;
+      cartStatus.textContent = message || '';
+      if (state) {
+        cartStatus.dataset.state = state;
+      } else {
+        delete cartStatus.dataset.state;
+      }
+    }
+
+    function formatMoney(amount, currencyCode) {
+      return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: currencyCode || 'USD'
+      }).format(Number(amount || 0));
+    }
+
+    function openCart() {
+      if (!cartDrawer || !cartOverlay || !cartTrigger) return;
+      cartDrawer.classList.add('is-open');
+      cartDrawer.setAttribute('aria-hidden', 'false');
+      cartOverlay.hidden = false;
+      cartTrigger.setAttribute('aria-expanded', 'true');
+      document.body.classList.add('cart-open');
+    }
+
+    function closeCart() {
+      if (!cartDrawer || !cartOverlay || !cartTrigger) return;
+      cartDrawer.classList.remove('is-open');
+      cartDrawer.setAttribute('aria-hidden', 'true');
+      cartOverlay.hidden = true;
+      cartTrigger.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('cart-open');
+    }
+
+    function renderCart(cart) {
+      if (!cartCount || !cartLines || !cartEmpty || !cartSubtotal || !cartCheckout) return;
+
+      const totalQuantity = cart?.totalQuantity || 0;
+      const subtotalAmount = cart?.cost?.subtotalAmount?.amount || 0;
+      const currencyCode = cart?.cost?.subtotalAmount?.currencyCode || 'USD';
+      const lines = cart?.lines?.edges || [];
+
+      cartCount.textContent = `[${totalQuantity}]`;
+      cartSubtotal.textContent = formatMoney(subtotalAmount, currencyCode);
+      cartLines.innerHTML = '';
+      cartEmpty.hidden = totalQuantity > 0;
+
+      if (totalQuantity > 0) {
+        lines.forEach(({ node }) => {
+          const line = document.createElement('div');
+          line.className = 'cart-line';
+          line.innerHTML = `
+            <div class="cart-line-head">
+              <div class="cart-line-title">${node.merchandise.product.title}</div>
+              <div class="cart-line-price">${formatMoney(node.cost.totalAmount.amount, node.cost.totalAmount.currencyCode)}</div>
+            </div>
+            <div class="cart-line-meta">
+              <div class="cart-qty-wrap">
+                <button class="cart-qty-btn" type="button" data-line-id="${node.id}" data-qty="${node.quantity - 1}" aria-label="Decrease quantity">−</button>
+                <span class="cart-line-qty mono small">${node.quantity}</span>
+                <button class="cart-qty-btn" type="button" data-line-id="${node.id}" data-qty="${node.quantity + 1}" aria-label="Increase quantity">+</button>
+              </div>
+              <button class="cart-remove mono small" type="button" data-line-id="${node.id}">Remove</button>
+            </div>
+          `;
+          cartLines.appendChild(line);
+        });
+      }
+
+      if (cart?.checkoutUrl) {
+        cartCheckout.href = cart.checkoutUrl;
+        cartCheckout.setAttribute('aria-disabled', 'false');
+      } else {
+        cartCheckout.href = '#';
+        cartCheckout.setAttribute('aria-disabled', 'true');
+      }
+    }
+
+    async function storefrontRequest(query, variables = {}) {
+      const response = await fetch(SHOPIFY_API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Shopify-Storefront-Access-Token': SHOPIFY_STOREFRONT_TOKEN
+        },
+        body: JSON.stringify({ query, variables })
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || result.errors?.length) {
+        const messages = result.errors?.map((error) => error.message).join(', ') || 'Unable to reach Shopify.';
+        throw new Error(messages);
+      }
+
+      return result.data;
+    }
+
+    async function getCart(cartId) {
+      const query = `
+        query CartQuery($cartId: ID!) {
+          cart(id: $cartId) {
+            id
+            checkoutUrl
+            totalQuantity
+            cost {
+              subtotalAmount {
+                amount
+                currencyCode
+              }
+            }
+            lines(first: 20) {
+              edges {
+                node {
+                  id
+                  quantity
+                  cost {
+                    totalAmount {
+                      amount
+                      currencyCode
+                    }
+                  }
+                  merchandise {
+                    ... on ProductVariant {
+                      id
+                      product {
+                        title
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      `;
+
+      const data = await storefrontRequest(query, { cartId });
+      return data?.cart || null;
+    }
+
+    async function removeCartLine(lineId) {
+      if (!shopifyCart?.id) return;
+
+      const mutation = `
+        mutation CartLinesRemove($cartId: ID!, $lineIds: [ID!]!) {
+          cartLinesRemove(cartId: $cartId, lineIds: $lineIds) {
+            cart {
+              id
+              checkoutUrl
+              totalQuantity
+              cost {
+                subtotalAmount {
+                  amount
+                  currencyCode
+                }
+              }
+              lines(first: 20) {
+                edges {
+                  node {
+                    id
+                    quantity
+                    cost {
+                      totalAmount {
+                        amount
+                        currencyCode
+                      }
+                    }
+                    merchandise {
+                      ... on ProductVariant {
+                        id
+                        product {
+                          title
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            userErrors {
+              message
+            }
+          }
+        }
+      `;
+
+      const data = await storefrontRequest(mutation, {
+        cartId: shopifyCart.id,
+        lineIds: [lineId]
+      });
+
+      const userErrors = data?.cartLinesRemove?.userErrors || [];
+      if (userErrors.length) {
+        throw new Error(userErrors.map((error) => error.message).join(', '));
+      }
+
+      return data?.cartLinesRemove?.cart;
+    }
+
+    async function updateCartLineQuantity(lineId, quantity) {
+      if (quantity <= 0) {
+        return removeCartLine(lineId);
+      }
+
+      const mutation = `
+        mutation CartLinesUpdate($cartId: ID!, $lines: [CartLineUpdateInput!]!) {
+          cartLinesUpdate(cartId: $cartId, lines: $lines) {
+            cart {
+              id
+              checkoutUrl
+              totalQuantity
+              cost {
+                subtotalAmount {
+                  amount
+                  currencyCode
+                }
+              }
+              lines(first: 20) {
+                edges {
+                  node {
+                    id
+                    quantity
+                    cost {
+                      totalAmount {
+                        amount
+                        currencyCode
+                      }
+                    }
+                    merchandise {
+                      ... on ProductVariant {
+                        id
+                        product {
+                          title
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            userErrors {
+              message
+            }
+          }
+        }
+      `;
+
+      const data = await storefrontRequest(mutation, {
+        cartId: shopifyCart.id,
+        lines: [{ id: lineId, quantity }]
+      });
+
+      const userErrors = data?.cartLinesUpdate?.userErrors || [];
+      if (userErrors.length) {
+        throw new Error(userErrors.map((e) => e.message).join(', '));
+      }
+
+      return data?.cartLinesUpdate?.cart;
+    }
+
+    async function initializeCart() {
+      try {
+        const storedCartId = localStorage.getItem(SHOPIFY_CART_STORAGE_KEY);
+
+        if (!storedCartId) {
+          renderCart(null);
+          return;
+        }
+
+        shopifyCart = await getCart(storedCartId);
+
+        if (!shopifyCart) {
+          localStorage.removeItem(SHOPIFY_CART_STORAGE_KEY);
+        }
+
+        renderCart(shopifyCart);
+      } catch (error) {
+        updateCartStatus(error.message || 'Unable to load your cart.', 'error');
+        renderCart(null);
+      }
+    }
+
+    if (cartTrigger && cartOverlay && cartDrawer && cartClose) {
+      cartTrigger.addEventListener('click', (event) => {
+        event.preventDefault();
+        openCart();
+      });
+
+      cartClose.addEventListener('click', closeCart);
+      cartOverlay.addEventListener('click', closeCart);
+
+      cartLines?.addEventListener('click', async (event) => {
+        const removeButton = event.target.closest('.cart-remove');
+        const qtyButton = event.target.closest('.cart-qty-btn');
+        if ((!removeButton && !qtyButton) || cartBusy) return;
+
+        try {
+          cartBusy = true;
+          updateCartStatus('Updating cart...', 'warning');
+          if (removeButton) {
+            shopifyCart = await removeCartLine(removeButton.dataset.lineId);
+          } else {
+            shopifyCart = await updateCartLineQuantity(qtyButton.dataset.lineId, parseInt(qtyButton.dataset.qty, 10));
+          }
+          renderCart(shopifyCart);
+          updateCartStatus('Cart updated.', 'success');
+        } catch (error) {
+          updateCartStatus(error.message || 'Unable to update your cart.', 'error');
+        } finally {
+          cartBusy = false;
+        }
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          closeCart();
+        }
+      });
+    }
+
+    renderCart(null);
+    initializeCart();
+  </script>
+</body>
+</html>

@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alta Heights / Drink Independent</title>
+  <meta
+    name="description"
+    content="A manifesto for mountain wine. Why we drink independent — and why it matters."
+  />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* ── DRINK INDEPENDENT PAGE ── */
+
+    /* Opening manifesto */
+    .di-opening {
+      padding: clamp(72px, 10vw, 120px) 0;
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .di-opening .wrap {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .di-opening-label {
+      font-family: "Klumpp", monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--faded);
+      display: block;
+      margin-bottom: 32px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 12px;
+    }
+
+    .di-opening p {
+      font-family: "SK Payidar Light", Arial, sans-serif;
+      font-size: clamp(1.15rem, 2.2vw, 1.45rem);
+      line-height: 1.6;
+      margin: 0 0 1.4em;
+      color: var(--ink);
+    }
+
+    .di-opening p:last-child {
+      margin-bottom: 0;
+    }
+
+    .di-opening strong {
+      font-family: "SK Payidar Bold", Georgia, serif;
+      font-weight: 700;
+    }
+
+    /* Two-column text + image block */
+    .di-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .di-split-text {
+      padding: clamp(48px, 7vw, 96px) clamp(28px, 4vw, 64px) clamp(48px, 7vw, 96px) clamp(14px, 3vw, 28px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 24px;
+    }
+
+    .di-split-text .wrap {
+      width: 100%;
+      max-width: none;
+    }
+
+    .di-split-text h2 {
+      font-family: "SK Payidar Bold", Georgia, serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.0;
+      letter-spacing: -0.04em;
+      margin: 0;
+    }
+
+    .di-split-text p {
+      font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+      line-height: 1.6;
+      color: var(--faded);
+      margin: 0;
+    }
+
+    .di-split-image {
+      position: relative;
+      min-height: 520px;
+      overflow: hidden;
+      border-left: 1px solid var(--line);
+    }
+
+    .di-split-image img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .di-split.reverse .di-split-image {
+      border-left: none;
+      border-right: 1px solid var(--line);
+      order: -1;
+    }
+
+    /* Pull quote */
+    .di-pullquote {
+      padding: clamp(72px, 10vw, 128px) 0;
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+      text-align: center;
+    }
+
+    .di-pullquote .wrap {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .di-pullquote blockquote {
+      margin: 0;
+      padding: 0;
+    }
+
+    .di-pullquote blockquote p {
+      font-family: "SK Payidar Bold", Georgia, serif;
+      font-size: clamp(2rem, 5vw, 4.2rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+      margin: 0 0 32px;
+    }
+
+    .di-pullquote cite {
+      font-family: "Klumpp", monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--faded);
+      font-style: normal;
+    }
+
+    /* Stats / data row */
+    .di-stats {
+      padding: clamp(64px, 8vw, 100px) 0;
+      border-bottom: 1px solid var(--line);
+      background: var(--paper);
+    }
+
+    .di-stats .wrap {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+    }
+
+    .di-stat-item {
+      background: var(--paper);
+      padding: clamp(32px, 5vw, 56px) clamp(24px, 4vw, 48px);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .di-stat-number {
+      font-family: "SK Payidar Bold", Georgia, serif;
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      line-height: 0.9;
+      letter-spacing: -0.04em;
+      color: var(--error);
+    }
+
+    .di-stat-label {
+      font-family: "Klumpp", monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--faded);
+    }
+
+    .di-stat-desc {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: var(--ink);
+      max-width: 28ch;
+    }
+
+    /* Full-bleed image interlude */
+    .di-interlude {
+      position: relative;
+      height: clamp(360px, 55vw, 640px);
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .di-interlude img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 40%;
+    }
+
+    .di-interlude-caption {
+      position: absolute;
+      bottom: 24px;
+      right: 24px;
+      font-family: "Klumpp", monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: rgba(255,255,255,0.6);
+    }
+
+    /* Manifesto list */
+    .di-manifesto {
+      padding: clamp(72px, 10vw, 120px) 0;
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .di-manifesto .wrap {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: clamp(32px, 6vw, 80px);
+      align-items: start;
+    }
+
+    .di-manifesto-label {
+      font-family: "Klumpp", monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--blue);
+      padding-top: 8px;
+    }
+
+    .di-manifesto-items {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      counter-reset: manifesto;
+    }
+
+    .di-manifesto-items li {
+      counter-increment: manifesto;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--line-soft);
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 20px;
+      align-items: baseline;
+    }
+
+    .di-manifesto-items li:first-child {
+      border-top: 1px solid var(--line-soft);
+    }
+
+    .di-manifesto-items li::before {
+      content: "0" counter(manifesto);
+      font-family: "Klumpp", monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--faded);
+      padding-top: 4px;
+    }
+
+    .di-manifesto-items li h3 {
+      font-family: "SK Payidar Bold", Georgia, serif;
+      font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+      letter-spacing: -0.03em;
+      margin: 0 0 8px;
+      line-height: 1.1;
+    }
+
+    .di-manifesto-items li p {
+      margin: 0;
+      font-size: 1rem;
+      color: var(--faded);
+      line-height: 1.55;
+      max-width: 52ch;
+    }
+
+    /* CTA block */
+    .di-cta {
+      padding: clamp(48px, 7vw, 80px) 0;
+      background: var(--paper);
+      text-align: center;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .di-cta .wrap {
+      max-width: 640px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .di-cta-kicker {
+      font-family: "Klumpp", monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--faded);
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 10px;
+      align-self: stretch;
+      text-align: center;
+    }
+
+    .di-cta h2 {
+      font-family: "SK Payidar Bold", Georgia, serif;
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      line-height: 1.0;
+      letter-spacing: -0.04em;
+      margin: 0;
+    }
+
+    .di-cta p {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: var(--faded);
+      margin: 0;
+      max-width: 40ch;
+    }
+
+    .di-cta-actions {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn-large {
+      font-size: 13px;
+      min-height: 48px;
+      padding: 0 8px;
+      letter-spacing: 0.12em;
+    }
+
+    .btn-primary {
+      color: var(--error);
+      border-bottom-color: var(--error);
+    }
+
+    .btn-primary:hover {
+      color: var(--error);
+      opacity: 0.7;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .di-split {
+        grid-template-columns: 1fr;
+      }
+
+      .di-split-image {
+        min-height: 360px;
+        border-left: none !important;
+        border-right: none !important;
+        border-top: 1px solid var(--line);
+      }
+
+      .di-split.reverse .di-split-image {
+        order: 0;
+      }
+
+      .di-stats .wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .di-manifesto .wrap {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .di-split-text {
+        padding: 40px 20px;
+      }
+
+      .di-stat-item {
+        padding: 28px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="age-gate" id="age-gate" aria-hidden="true">
+    <div class="age-gate-card" role="dialog" aria-modal="true" aria-labelledby="age-gate-title">
+      <span class="tag mono">21+ Only</span>
+      <h2 class="serif" id="age-gate-title">Please confirm you are 21 or older to enter.</h2>
+      <p class="muted">Alta Heights is a wine site. By entering, you confirm you are of legal drinking age in your location.</p>
+      <div class="age-gate-actions">
+        <button class="btn mono age-gate-enter" id="age-gate-enter" type="button">I Am 21+</button>
+        <a class="btn mono age-gate-exit" href="https://www.google.com">Exit</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="nav nav-bleed">
+      <div class="brand">
+        <a href="index.html"><img src="images/ALTA_23_Logos_Orange_Primary Horiz copy.png" alt="Alta Heights" class="brand-logo"></a>
+        <div class="brand-sub mono">California Alpine Wine / Drink Independent</div>
+      </div>
+
+      <nav class="nav-links mono" aria-label="Primary navigation">
+        <a href="index.html">Home</a>
+        <a href="index.html#wines">Wines</a>
+        <a href="index.html#journal">Journal</a>
+        <a href="about.html">About</a>
+        <a href="#">Trade</a>
+        <a href="#cart" id="cart-trigger" aria-controls="site-cart" aria-expanded="false">Cart <span id="cart-count">[0]</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- CTA -->
+    <section class="di-cta">
+      <div class="wrap">
+        <div class="di-cta-kicker">Alta Heights / 2024 Releases</div>
+        <h2 class="serif">Four bottles. All mountain. All independent.</h2>
+        <p>Chardonnay, Pinot Noir, Rosé, and Cab Sauv — grown high, farmed by hand, and shipped to your door.</p>
+      </div>
+    </section>
+
+    <!-- OPENING MANIFESTO TEXT -->
+    <section class="di-opening">
+      <div class="wrap">
+        <span class="di-opening-label">Manifesto / Alta Heights</span>
+        <p>
+          Alta Heights is a small on purpose, fiercely independent operation. 
+          In response to growing distributor consolidation, corporate acquisitions, incentivized reviews and paid influencers, we decided to pick our fighter – the independent voices that keep wine exciting. This page is our argument for why that matters — and why, once you go up the mountain, it's very hard to come back down.
+        </p>
+      </div>
+    </section>
+
+    <!-- MANIFESTO LIST -->
+    <section class="di-manifesto">
+      <div class="wrap">
+        <div class="di-manifesto-label">The Independent Standard</div>
+        <ul class="di-manifesto-items">
+          <li>
+            <div>
+              <h3 class="serif">Know where it came from.</h3>
+              <p>Not just the region — the vineyard, the elevation, the farmer. Real independent wine has a traceable origin that someone is proud of.</p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <h3 class="serif">Taste the place.</h3>
+              <p>If it could have come from anywhere, it probably did. Mountain wine tastes like the mountain: mineral, brisk, specific. You should be able to close your eyes and see the terrain.</p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <h3 class="serif">Reject the smooth.</h3>
+              <p>Corporate wine is engineered to eliminate edges. Independent wine keeps them. An interesting glass of wine has something to say — texture, tension, a little resistance.</p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <h3 class="serif">Support the farmer, not the brand.</h3>
+              <p>Most famous wine labels are owned by conglomerates. When you buy independent, the money goes to the people who grew it — and they use it to keep growing it the way they believe in.</p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <h3 class="serif">Drink it outside.</h3>
+              <p>Not a requirement. Just a strong suggestion. Mountain wine was designed — spiritually, at least — for open air, good company, and somewhere with a view.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- SPLIT: The Problem -->
+    <section class="di-split">
+      <div class="di-split-text">
+        <span class="tag mono">The Valley Floor Problem</span>
+        <h2 class="serif">Ninety percent of California wine comes from flat land optimized for tonnage.</h2>
+        <p>
+          Valley floor vineyards are efficient. They're irrigated, mechanically harvested, and yield-optimized. The grapes ripen fast and easy. The resulting wine is technically correct and commercially comfortable — and it floods every retail shelf, restaurant list, and grocery aisle in the country.
+        </p>
+        <p>
+          The mountain vineyard operates on different rules entirely. Steep, rocky, often organic by necessity. Hand-farmed. Lower yields. Longer hang time. The vine is stressed; the grape is concentrated. You taste the work.
+        </p>
+      </div>
+      <div class="di-split-image">
+        <img src="images/MtTam1.jpeg" alt="Mountain vineyard terrain">
+      </div>
+    </section>
+
+    <!-- PULL QUOTE -->
+    <section class="di-pullquote">
+      <div class="wrap">
+        <blockquote>
+          <p>"To grow grapes and produce wines in the mountains, you have to be a lot more dedicated. Most of us do it because we love it."</p>
+          <cite>— Ken Burnap, Santa Cruz Mountain Vineyard, 1979</cite>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- STATS ROW -->
+    <section class="di-stats">
+      <div class="wrap">
+        <div class="di-stat-item">
+          <div class="di-stat-number">3%</div>
+          <div class="di-stat-label">Mountain Vineyards</div>
+          <p class="di-stat-desc">Of California wine comes from mountain-designated AVAs. Most of what's on the shelf is not this.</p>
+        </div>
+        <div class="di-stat-item">
+          <div class="di-stat-number">+40%</div>
+          <div class="di-stat-label">Longer Hang Time</div>
+          <p class="di-stat-desc">Elevation and coastal fog extend the growing season, building complexity in the grape before it's ever picked.</p>
+        </div>
+        <div class="di-stat-item">
+          <div class="di-stat-number">0</div>
+          <div class="di-stat-label">Compromise</div>
+          <p class="di-stat-desc">No mega-winery ownership. No investor yield targets. No additives to smooth the rough edges off.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SPLIT: What It Is (reversed) -->
+    <section class="di-split reverse">
+      <div class="di-split-text">
+        <span class="tag mono">What Mountain Wine Actually Is</span>
+        <h2 class="serif">Alive, specific, and slightly inconvenient to make.</h2>
+        <p>
+          Mountain wine isn't a style — it's a condition. It's what happens when a small team of people decides to grow grapes in a difficult place for reasons that have nothing to do with maximizing ROI.
+        </p>
+        <p>
+          The wines are tighter in youth, more aromatic, more food-friendly. The tannins have texture rather than grip. The acidity is real, not added. The color comes from the fruit, not from concentration. These aren't things you can engineer in a lab or replicate at scale. They emerge from place, season, and restraint.
+        </p>
+      </div>
+      <div class="di-split-image">
+        <img src="images/Redwood1.jpeg" alt="Redwood forest mountain terrain">
+      </div>
+    </section>
+
+    <!-- FULL-BLEED IMAGE INTERLUDE -->
+    <section class="di-interlude">
+      <img src="images/Yosemite4.jpeg" alt="California mountain landscape">
+      <div class="di-interlude-caption">Santa Cruz Mountains / Alta Heights Territory</div>
+    </section>
+  </main>
+
+  <div class="cart-overlay" id="cart-overlay" hidden></div>
+  <aside class="cart-drawer" id="site-cart" aria-hidden="true" aria-labelledby="cart-title">
+    <div class="cart-drawer-header">
+      <div>
+        <div class="tag mono">Cart</div>
+        <h2 class="serif" id="cart-title">Your Bottle List</h2>
+      </div>
+      <button class="cart-close" id="cart-close" type="button" aria-label="Close cart">&times;</button>
+    </div>
+
+    <div class="cart-status mono small" id="cart-status" aria-live="polite"></div>
+    <div class="cart-empty muted" id="cart-empty">Your cart is empty. Add a bottle from the wine list to begin.</div>
+    <div class="cart-lines" id="cart-lines"></div>
+
+    <div class="cart-footer">
+      <div class="cart-summary">
+        <span class="mono small">Subtotal</span>
+        <strong id="cart-subtotal">$0.00</strong>
+      </div>
+      <a class="btn mono cart-checkout" id="cart-checkout" href="#" target="_blank" rel="noopener noreferrer" aria-disabled="true">Checkout</a>
+    </div>
+  </aside>
+
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-box">
+          <div class="brand-title serif">Alta Heights</div>
+          <div class="brand-sub mono">California Alpine Wine</div>
+          <p class="muted">
+            A love letter to the rugged mountain frontiers of California and the spirit of exploration.
+          </p>
+        </div>
+
+        <div class="footer-box">
+          <h4 class="mono">Index</h4>
+          <div class="footer-links mono small">
+            <a href="index.html">Field Index</a>
+            <a href="index.html#wines">Wine List</a>
+            <a href="index.html#journal">Journal</a>
+            <a href="index.html#find">Find It</a>
+          </div>
+        </div>
+
+        <div class="footer-box">
+          <h4 class="mono">Other Pages</h4>
+          <div class="footer-links mono small">
+            <a href="about.html">About</a>
+            <a href="drink-independent.html">Drink Independent</a>
+            <a href="#">Trade</a>
+            <a href="mailto:hello@altaheightswine.com">Contact</a>
+            <a href="https://www.instagram.com/altaheightswine/" target="_blank" rel="noopener noreferrer">Instagram</a>
+          </div>
+        </div>
+
+        <div class="footer-box">
+          <h4 class="mono">Issue Notes</h4>
+          <div class="footer-links mono small">
+            <span>route archive</span>
+            <span>weather logs</span>
+            <span>elevation markers</span>
+            <span>please enjoy responsibly</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom mono">
+        <span>© 2026 Alta Heights</span>
+        <span>Field Index / Issue 01</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const SHOPIFY_DOMAIN = 'model-store-9670.myshopify.com';
+    const SHOPIFY_STOREFRONT_TOKEN = 'c719c0ff58ad08733d78f86785c95857';
+    const SHOPIFY_API_URL = `https://${SHOPIFY_DOMAIN}/api/2026-01/graphql.json`;
+    const SHOPIFY_CART_STORAGE_KEY = 'altaHeightsShopifyCartId';
+    const AGE_GATE_STORAGE_KEY = 'altaHeightsAgeVerified';
+    const cartTrigger = document.querySelector('#cart-trigger');
+    const cartCount = document.querySelector('#cart-count');
+    const cartOverlay = document.querySelector('#cart-overlay');
+    const cartDrawer = document.querySelector('#site-cart');
+    const cartClose = document.querySelector('#cart-close');
+    const cartStatus = document.querySelector('#cart-status');
+    const cartEmpty = document.querySelector('#cart-empty');
+    const cartLines = document.querySelector('#cart-lines');
+    const cartSubtotal = document.querySelector('#cart-subtotal');
+    const cartCheckout = document.querySelector('#cart-checkout');
+    const ageGate = document.querySelector('#age-gate');
+    const ageGateEnter = document.querySelector('#age-gate-enter');
+
+    // Age gate
+    function openAgeGate() {
+      ageGate.removeAttribute('aria-hidden');
+      document.body.classList.add('age-gate-open');
+    }
+    function closeAgeGate() {
+      ageGate.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('age-gate-open');
+    }
+    if (!localStorage.getItem(AGE_GATE_STORAGE_KEY)) openAgeGate();
+    ageGateEnter?.addEventListener('click', () => {
+      localStorage.setItem(AGE_GATE_STORAGE_KEY, '1');
+      closeAgeGate();
+    });
+
+    // Cart
+    function openCart() {
+      cartDrawer.removeAttribute('aria-hidden');
+      cartOverlay.removeAttribute('hidden');
+      document.body.classList.add('cart-open');
+      cartTrigger?.setAttribute('aria-expanded', 'true');
+    }
+    function closeCart() {
+      cartDrawer.setAttribute('aria-hidden', 'true');
+      cartOverlay.setAttribute('hidden', '');
+      document.body.classList.remove('cart-open');
+      cartTrigger?.setAttribute('aria-expanded', 'false');
+    }
+    cartTrigger?.addEventListener('click', e => { e.preventDefault(); openCart(); });
+    cartClose?.addEventListener('click', closeCart);
+    cartOverlay?.addEventListener('click', closeCart);
+
+    function formatMoney(amount, currency) {
+      return new Intl.NumberFormat('en-US', { style: 'currency', currency }).format(amount);
+    }
+    async function getOrCreateCart() {
+      const id = localStorage.getItem(SHOPIFY_CART_STORAGE_KEY);
+      if (id) {
+        const res = await fetch(SHOPIFY_API_URL, {
+          method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Shopify-Storefront-Access-Token': SHOPIFY_STOREFRONT_TOKEN },
+          body: JSON.stringify({ query: `{ cart(id:"${id}"){id checkoutUrl lines(first:20){edges{node{id quantity merchandise{...on ProductVariant{id title priceV2{amount currencyCode}product{title}}}}}} cost{totalAmount{amount currencyCode}}} }` })
+        });
+        const { data } = await res.json();
+        if (data?.cart) return data.cart;
+      }
+      const res = await fetch(SHOPIFY_API_URL, {
+        method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Shopify-Storefront-Access-Token': SHOPIFY_STOREFRONT_TOKEN },
+        body: JSON.stringify({ query: `mutation { cartCreate { cart { id checkoutUrl lines(first:20){edges{node{id quantity merchandise{...on ProductVariant{id title priceV2{amount currencyCode}product{title}}}}}} cost{totalAmount{amount currencyCode}} } } }` })
+      });
+      const { data } = await res.json();
+      const cart = data?.cartCreate?.cart;
+      if (cart) localStorage.setItem(SHOPIFY_CART_STORAGE_KEY, cart.id);
+      return cart;
+    }
+    async function renderCart(cart) {
+      const lines = cart?.lines?.edges || [];
+      cartCount.textContent = `[${lines.reduce((s, e) => s + e.node.quantity, 0)}]`;
+      cartEmpty.style.display = lines.length ? 'none' : '';
+      cartLines.innerHTML = lines.map(({ node }) => `
+        <div class="cart-line-item" data-line-id="${node.id}">
+          <div class="cart-line-info">
+            <div class="cart-line-title mono small">${node.merchandise.product.title}</div>
+            <div class="cart-line-price muted mono small">${formatMoney(node.merchandise.priceV2.amount, node.merchandise.priceV2.currencyCode)} × ${node.quantity}</div>
+          </div>
+          <button class="cart-remove btn mono small" data-line-id="${node.id}" aria-label="Remove item">×</button>
+        </div>`).join('');
+      cartSubtotal.textContent = cart?.cost?.totalAmount ? formatMoney(cart.cost.totalAmount.amount, cart.cost.totalAmount.currencyCode) : '$0.00';
+      if (cart?.checkoutUrl) { cartCheckout.href = cart.checkoutUrl; cartCheckout.removeAttribute('aria-disabled'); }
+      document.querySelectorAll('.cart-remove').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const lineId = btn.dataset.lineId;
+          const c = await getOrCreateCart();
+          const res = await fetch(SHOPIFY_API_URL, {
+            method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Shopify-Storefront-Access-Token': SHOPIFY_STOREFRONT_TOKEN },
+            body: JSON.stringify({ query: `mutation { cartLinesRemove(cartId:"${c.id}", lineIds:["${lineId}"]){ cart { id checkoutUrl lines(first:20){edges{node{id quantity merchandise{...on ProductVariant{id title priceV2{amount currencyCode}product{title}}}}}} cost{totalAmount{amount currencyCode}} } } }` })
+          });
+          const { data } = await res.json();
+          renderCart(data?.cartLinesRemove?.cart);
+        });
+      });
+    }
+    getOrCreateCart().then(renderCart).catch(() => {});
+  </script>
+</body>
+</html>
