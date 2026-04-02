@@ -301,36 +301,25 @@
           <span class="tag mono">Find It</span>
           <h2 class="serif">Find Alta Heights near you.</h2>
           <p class="muted">
-            Places to see and be seen. Let us know if you want to be on the list.
+            Search our current retail and restaurant placements by city, state, or account name.
           </p>
 
-          <form class="stockist-search">
-            <input type="text" placeholder="City, state, or zip" />
+          <form class="stockist-search" id="stockist-search-form">
+            <input type="text" id="stockist-search-input" placeholder="City, state, or account" />
             <button class="btn mono" type="submit">Search</button>
           </form>
 
-          <div class="stockist-list mono small">
-            <div class="stockist-item">
-              <span><strong>Trail House Provisions</strong><br>Wilmington, DE / Retail</span>
-              <a href="#">Open</a>
-            </div>
-            <div class="stockist-item">
-              <span><strong>North Ridge Bottle Shop</strong><br>Philadelphia, PA / Retail</span>
-              <a href="#">Open</a>
-            </div>
-            <div class="stockist-item">
-              <span><strong>Summit Table</strong><br>Hudson Valley, NY / Restaurant</span>
-              <a href="#">Open</a>
-            </div>
+          <div class="stockist-list mono small" id="stockist-list" aria-live="polite">
+            <p class="muted" id="stockist-empty-state">Search by city, state, or account name to reveal placements.</p>
           </div>
         </div>
 
         <div class="stockist-map box">
           <img src="images/Sierra2.jpeg" alt="Sierra Nevada landscape" class="section-bg-img">
           <div class="map-box">
-            <div class="mono small">Map Placeholder</div>
+            <div class="mono small">64 Placements / 7 States</div>
             <p>
-              A scenic view instead. This is better anyway.
+              36 retail accounts and 28 restaurant placements in the current Alta Heights where-to-buy list.
             </p>
           </div>
         </div>
@@ -434,6 +423,9 @@
     const cartSubtotal = document.querySelector('#cart-subtotal');
     const cartCheckout = document.querySelector('#cart-checkout');
     const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+    const stockistSearchForm = document.querySelector('#stockist-search-form');
+    const stockistSearchInput = document.querySelector('#stockist-search-input');
+    const stockistList = document.querySelector('#stockist-list');
     const mailingListForm = document.querySelector('#mailing-list-form');
     const mailingListStatus = document.querySelector('#mailing-list-status');
     const ageGate = document.querySelector('#age-gate');
@@ -442,6 +434,129 @@
     let currentColumns = 3;
     let shopifyCart = null;
     let cartBusy = false;
+
+    const stockistPlacements = [
+      { name: 'Bay Grape', city: 'Oakland', state: 'California', type: 'Retail' },
+      { name: 'Gus Community Market', city: 'San Francisco', state: 'California', type: 'Retail' },
+      { name: 'Paul Marcus Wines', city: 'Oakland', state: 'California', type: 'Retail' },
+      { name: 'Pizzaiolo', city: 'Oakland', state: 'California', type: 'Restaurant' },
+      { name: 'Plumpjack Wines Noe Valley', city: 'San Francisco', state: 'California', type: 'Retail' },
+      { name: "Sonny's", city: 'Los Angeles', state: 'California', type: 'Restaurant' },
+      { name: 'Vinovore', city: 'Los Angeles', state: 'California', type: 'Retail' },
+      { name: 'Vintage Berkeley', city: 'Berkeley', state: 'California', type: 'Retail' },
+      { name: 'Wine On Piedmont', city: 'Oakland', state: 'California', type: 'Retail' },
+      { name: 'Ancora Vino', city: 'Los Gatos', state: 'California', type: 'Retail' },
+      { name: 'Bar And Garden', city: 'Culver City', state: 'California', type: 'Retail' },
+      { name: 'Deer Park Wines And Spirits', city: 'Aptos', state: 'California', type: 'Retail' },
+      { name: 'Disco Ranch', city: 'Boonville', state: 'California', type: 'Retail' },
+      { name: 'Half Moon Bay Cheese Company', city: 'Half Moon Bay', state: 'California', type: 'Retail' },
+      { name: 'Madison', city: 'Los Angeles', state: 'California', type: 'Retail' },
+      { name: 'Olive Wine And Liquor', city: 'Burbank', state: 'California', type: 'Retail' },
+      { name: 'Solano Cellars', city: 'Berkeley', state: 'California', type: 'Retail' },
+      { name: '11th & Bay Southern Table', city: 'Columbus', state: 'Georgia', type: 'Restaurant' },
+      { name: 'Avize', city: 'Atlanta', state: 'Georgia', type: 'Restaurant' },
+      { name: 'Barcelona Vinoteca', city: 'Atlanta', state: 'Georgia', type: 'Restaurant' },
+      { name: 'Bread & Butterfly', city: 'Atlanta', state: 'Georgia', type: 'Restaurant' },
+      { name: 'Druid Hills Golf Club Inc', city: 'Atlanta', state: 'Georgia', type: 'Restaurant' },
+      { name: 'Elemental Spirits Co', city: 'Atlanta', state: 'Georgia', type: 'Retail' },
+      { name: "Kelly's Market", city: 'Decatur', state: 'Georgia', type: 'Retail' },
+      { name: "Liam's Restaurant", city: 'Thomasville', state: 'Georgia', type: 'Restaurant' },
+      { name: 'New York Butcher Shoppe', city: 'Columbus', state: 'Georgia', type: 'Retail' },
+      { name: 'The Bottle Shop', city: 'Columbus', state: 'Georgia', type: 'Retail' },
+      { name: 'Wahoo Wine & Provisions', city: 'Decatur', state: 'Georgia', type: 'Restaurant' },
+      { name: 'Brush Sushi', city: 'Atlanta', state: 'Georgia', type: 'Restaurant' },
+      { name: 'Candler Park Market', city: 'Atlanta', state: 'Georgia', type: 'Retail' },
+      { name: 'Citi Wine And Spirits', city: 'Atlanta', state: 'Georgia', type: 'Retail' },
+      { name: "My Friend's Bottle Shop", city: 'Atlanta', state: 'Georgia', type: 'Retail' },
+      { name: 'North Creek', city: 'Atlanta', state: 'Georgia', type: 'Restaurant' },
+      { name: 'Oakhurst Market', city: 'Decatur', state: 'Georgia', type: 'Retail' },
+      { name: "Sidd's Liquor Store", city: 'Marietta', state: 'Georgia', type: 'Retail' },
+      { name: 'Suntrust Park', city: 'Atlanta', state: 'Georgia', type: 'Restaurant' },
+      { name: 'Wahoo Grill', city: 'Decatur', state: 'Georgia', type: 'Restaurant' },
+      { name: 'Cordelia', city: 'Brooklyn', state: 'New York', type: 'Restaurant' },
+      { name: "The Cellar D'Or", city: 'Ithaca', state: 'New York', type: 'Retail' },
+      { name: 'Manleys Liquor Store', city: 'New York', state: 'New York', type: 'Retail' },
+      { name: 'Musette Wine Bar', city: 'New York', state: 'New York', type: 'Restaurant' },
+      { name: 'Pound Ridge Wines & Spirits Llc', city: 'Pound Ridge', state: 'New York', type: 'Retail' },
+      { name: 'Matilda at the Henson', city: 'Catskills', state: 'New York', type: 'Restaurant' },
+      { name: 'With Others', city: 'Brooklyn', state: 'New York', type: 'Restaurant' },
+      { name: 'York Cellars', city: 'Brooklyn', state: 'New York', type: 'Retail' },
+      { name: 'Fox Hole Tavern', city: 'Philadelphia', state: 'Pennsylvania', type: 'Restaurant' },
+      { name: 'Hermans', city: 'Philadelphia', state: 'Pennsylvania', type: 'Retail' },
+      { name: 'Bloomsday', city: 'Philadelphia', state: 'Pennsylvania', type: 'Restaurant' },
+      { name: 'Jaffa', city: 'Philadelphia', state: 'Pennsylvania', type: 'Restaurant' },
+      { name: 'Tria', city: 'Philadelphia', state: 'Pennsylvania', type: 'Restaurant' },
+      { name: 'La Fete', city: 'Wilmington', state: 'Delaware', type: 'Restaurant' },
+      { name: 'Bin 66', city: 'Rehoboth Beach', state: 'Delaware', type: 'Retail' },
+      { name: 'Swigg', city: 'Wilmington', state: 'Delaware', type: 'Retail' },
+      { name: "Frank's", city: 'Wilmington', state: 'Delaware', type: 'Retail' },
+      { name: 'Bardea Steak', city: 'Wilmington', state: 'Delaware', type: 'Restaurant' },
+      { name: 'Roost', city: 'Wilmington', state: 'Delaware', type: 'Restaurant' },
+      { name: 'Greenville Wine and Spirits', city: 'Wilmington', state: 'Delaware', type: 'Retail' },
+      { name: 'Black Olive', city: 'Baltimore', state: 'Maryland', type: 'Restaurant' },
+      { name: 'Milton Inn', city: 'Baltimore', state: 'Maryland', type: 'Restaurant' },
+      { name: 'Chain Bridge Cellars', city: 'McLean', state: 'Virginia', type: 'Retail' },
+      { name: "Johnny's", city: 'Baltimore', state: 'Maryland', type: 'Restaurant' },
+      { name: 'Sisu', city: 'Baltimore', state: 'Maryland', type: 'Restaurant' },
+      { name: 'Unwined Belleview', city: 'Alexandria', state: 'Virginia', type: 'Retail' },
+      { name: 'Stateline Liquors', city: 'Elkton', state: 'Maryland', type: 'Retail' }
+    ];
+
+    function renderStockistResults(matches, query) {
+      if (!stockistList) return;
+
+      stockistList.innerHTML = '';
+
+      if (!query) {
+        const prompt = document.createElement('p');
+        prompt.className = 'muted';
+        prompt.textContent = 'Search by city, state, or account name to reveal placements.';
+        stockistList.appendChild(prompt);
+        return;
+      }
+
+      if (!matches.length) {
+        const empty = document.createElement('p');
+        empty.className = 'muted';
+        empty.textContent = `No placements found for "${query}". Try a city or state instead.`;
+        stockistList.appendChild(empty);
+        return;
+      }
+
+      matches.forEach((placement) => {
+        const item = document.createElement('div');
+        item.className = 'stockist-item';
+
+        const details = document.createElement('span');
+        const name = document.createElement('strong');
+        name.textContent = placement.name;
+        details.appendChild(name);
+        details.appendChild(document.createElement('br'));
+        details.appendChild(document.createTextNode(`${placement.city}, ${placement.state}`));
+
+        const type = document.createElement('span');
+        type.textContent = placement.type;
+
+        item.append(details, type);
+        stockistList.append(item);
+      });
+    }
+
+    function searchStockists(query) {
+      const normalizedQuery = query.trim().toLowerCase();
+
+      if (!normalizedQuery) {
+        renderStockistResults([], '');
+        return;
+      }
+
+      const matches = stockistPlacements.filter((placement) => {
+        const haystack = [placement.name, placement.city, placement.state, placement.type].join(' ').toLowerCase();
+        return haystack.includes(normalizedQuery);
+      });
+
+      renderStockistResults(matches, query.trim());
+    }
 
     function openAgeGate() {
       if (!ageGate) return;
@@ -1022,6 +1137,19 @@
 
     renderCart(null);
     initializeCart();
+
+    if (stockistSearchForm && stockistSearchInput) {
+      renderStockistResults([], '');
+
+      stockistSearchForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        searchStockists(stockistSearchInput.value);
+      });
+
+      stockistSearchInput.addEventListener('input', () => {
+        searchStockists(stockistSearchInput.value);
+      });
+    }
 
     if (mailingListForm && mailingListStatus) {
       const formLoadedAtInput = document.querySelector('#form-loaded-at');
