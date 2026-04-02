@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alta Heights / Trade</title>
+  <meta
+    name="description"
+    content="Alta Heights trade resources, sell sheets, shelf talkers, labels, reviews, and brand materials for wholesale partners."
+  />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .trade-hero {
+      border-bottom: 1px solid var(--line);
+      background: var(--paper);
+    }
+
+    .trade-hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      min-height: min(72vh, 820px);
+    }
+
+    .trade-hero-copy {
+      padding: clamp(56px, 7vw, 104px) clamp(20px, 4vw, 48px) clamp(56px, 7vw, 88px) 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 22px;
+      background: var(--paper);
+      background-image:
+        radial-gradient(circle at 20% 20%, rgba(23,22,20,0.03) 0 1px, transparent 1px),
+        linear-gradient(rgba(23,22,20,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(23,22,20,0.025) 1px, transparent 1px);
+      background-size: 18px 18px, 26px 26px, 26px 26px;
+    }
+
+    .trade-hero-copy h1 {
+      margin: 0;
+      font-size: clamp(3rem, 7vw, 6.5rem);
+      line-height: 0.92;
+      max-width: 7ch;
+    }
+
+    .trade-hero-copy p {
+      margin: 0;
+      font-size: clamp(1rem, 1.7vw, 1.18rem);
+      line-height: 1.65;
+      color: var(--faded);
+      max-width: 34ch;
+    }
+
+    .trade-hero-note {
+      padding: clamp(56px, 7vw, 88px) 0 clamp(56px, 7vw, 88px) clamp(20px, 4vw, 48px);
+      border-left: 1px solid var(--line);
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-start;
+      background:
+        linear-gradient(180deg, rgba(56,47,45,0.08), rgba(56,47,45,0.04)),
+        url("images/Thanks copy 4.png") center / cover no-repeat;
+      min-height: 100%;
+    }
+
+    .trade-note-card {
+      width: min(100%, 320px);
+      padding: 18px 18px 16px;
+      background: rgba(251, 248, 239, 0.9);
+      border: 1px solid rgba(56, 47, 45, 0.14);
+      backdrop-filter: blur(8px);
+    }
+
+    .trade-note-card p {
+      margin: 10px 0 0;
+      color: var(--ink);
+      line-height: 1.55;
+      font-size: 0.98rem;
+    }
+
+    .trade-library {
+      padding: clamp(44px, 6vw, 72px) 0 clamp(80px, 9vw, 120px);
+    }
+
+    .trade-library-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+
+    .trade-library-head h2 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 3.6rem);
+      line-height: 0.96;
+      max-width: 10ch;
+    }
+
+    .trade-library-head p {
+      margin: 0;
+      max-width: 34ch;
+      color: var(--faded);
+      line-height: 1.6;
+    }
+
+    .trade-grid {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .trade-card {
+      position: relative;
+      min-height: 280px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      isolation: isolate;
+    }
+
+    .trade-card:nth-child(1),
+    .trade-card:nth-child(2) {
+      grid-column: span 6;
+    }
+
+    .trade-card:nth-child(3),
+    .trade-card:nth-child(4),
+    .trade-card:nth-child(5) {
+      grid-column: span 4;
+    }
+
+    .trade-card-image {
+      width: 100%;
+      height: 100%;
+      min-height: 280px;
+      object-fit: cover;
+      transition: transform 0.35s ease, filter 0.35s ease;
+    }
+
+    .trade-card-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 18px;
+      pointer-events: none;
+    }
+
+    .trade-card-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      color: rgba(255, 253, 248, 0.82);
+    }
+
+    .trade-card-meta span:last-child {
+      text-align: right;
+    }
+
+    .trade-card-menu {
+      width: min(100%, 240px);
+      padding: 14px 14px 12px;
+      background: rgba(251, 248, 239, 0.96);
+      border: 1px solid rgba(56, 47, 45, 0.16);
+      box-shadow: 0 18px 30px rgba(56, 47, 45, 0.12);
+      transform: translateY(18px);
+      opacity: 0;
+      transition: opacity 0.22s ease, transform 0.22s ease;
+      pointer-events: auto;
+    }
+
+    .trade-card-menu-title {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--faded);
+    }
+
+    .trade-card-links {
+      display: grid;
+      gap: 8px;
+    }
+
+    .trade-card-links a {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--line-soft);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .trade-card-links a:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .trade-card:hover .trade-card-image,
+    .trade-card:focus-within .trade-card-image {
+      transform: scale(1.03);
+      filter: saturate(1.03);
+    }
+
+    .trade-card:hover .trade-card-menu,
+    .trade-card:focus-within .trade-card-menu {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .trade-card-anchor {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+
+    .trade-card-menu,
+    .trade-card-meta {
+      position: relative;
+      z-index: 2;
+    }
+
+    @media (max-width: 1000px) {
+      .trade-hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .trade-hero-note {
+        border-left: 0;
+        border-top: 1px solid var(--line);
+        min-height: 300px;
+      }
+
+      .trade-card:nth-child(1),
+      .trade-card:nth-child(2),
+      .trade-card:nth-child(3),
+      .trade-card:nth-child(4),
+      .trade-card:nth-child(5) {
+        grid-column: span 6;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .trade-library-head {
+        flex-direction: column;
+        align-items: start;
+      }
+
+      .trade-card:nth-child(1),
+      .trade-card:nth-child(2),
+      .trade-card:nth-child(3),
+      .trade-card:nth-child(4),
+      .trade-card:nth-child(5) {
+        grid-column: span 12;
+      }
+
+      .trade-card-menu {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="age-gate" id="age-gate" aria-hidden="true">
+    <div class="age-gate-card" role="dialog" aria-modal="true" aria-labelledby="age-gate-title">
+      <span class="tag mono">21+ Only</span>
+      <h2 class="serif" id="age-gate-title">Please confirm you are 21 or older to enter.</h2>
+      <p class="muted">Alta Heights is a wine site. By entering, you confirm you are of legal drinking age in your location.</p>
+      <div class="age-gate-actions">
+        <button class="btn mono age-gate-enter" id="age-gate-enter" type="button">I Am 21+</button>
+        <a class="btn mono age-gate-exit" href="https://www.google.com">Exit</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="nav nav-bleed">
+      <div class="brand">
+        <a href="index.html"><img src="images/ALTA_23_Logos_Orange_Primary Horiz copy.png" alt="Alta Heights" class="brand-logo"></a>
+        <div class="brand-sub mono">California Alpine Wine / Trade</div>
+      </div>
+
+      <nav class="nav-links mono" aria-label="Primary navigation">
+        <a href="index.html">Home</a>
+        <a href="index.html#wines">Wines</a>
+        <a href="index.html#journal">Journal</a>
+        <a href="about.html">About</a>
+        <a href="trade.html">Trade</a>
+        <a href="#cart" id="cart-trigger" aria-controls="site-cart" aria-expanded="false">Cart <span id="cart-count">[0]</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    
+    </section>
+
+    <section class="trade-library">
+      <div class="wrap">
+        <div class="trade-library-head">
+          <div>
+            <span class="tag mono">Trade Files</span>
+          </div>
+          <p>Hover on desktop or tab into a card to reveal the temporary dropdown. We can wire each one to real PDFs, Dropbox folders, or order forms next.</p>
+        </div>
+
+        <div class="trade-grid">
+          <article class="trade-card">
+            <img src="images/BRAND DECK.png" alt="Brand deck trade asset" class="trade-card-image">
+            <a href="#" class="trade-card-anchor" aria-label="Open brand deck resource card"></a>
+            <div class="trade-card-overlay">
+              <div class="trade-card-meta mono small">
+                <span>Trade Asset 01</span>
+                <span>Its not a powerpoint</span>
+              </div>
+              <div class="trade-card-menu">
+                <span class="trade-card-menu-title mono small">Quick Links</span>
+                <div class="trade-card-links mono">
+                  <a href="#"><span>Open keynote placeholder</span><span>01</span></a>
+                  <a href="#"><span>See slide outline</span><span>02</span></a>
+                  <a href="#"><span>Share deck link</span><span>03</span></a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="trade-card">
+            <img src="images/SELL SHEETS.png" alt="Sell sheets trade asset" class="trade-card-image">
+            <a href="#" class="trade-card-anchor" aria-label="Open sell sheets resource card"></a>
+            <div class="trade-card-overlay">
+              <div class="trade-card-meta mono small">
+                <span>Trade Asset 02</span>
+                <span>The Nitty Gritty</span>
+              </div>
+              <div class="trade-card-menu">
+                <span class="trade-card-menu-title mono small">Quick Links</span>
+                <div class="trade-card-links mono">
+                  <a href="#"><span>View placeholder sheet</span><span>01</span></a>
+                  <a href="#"><span>Copy tasting notes</span><span>02</span></a>
+                  <a href="#"><span>Open pricing doc</span><span>03</span></a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="trade-card">
+            <img src="images/SHELF TALKERS.png" alt="Shelf talkers trade asset" class="trade-card-image">
+            <a href="#" class="trade-card-anchor" aria-label="Open shelf talkers resource card"></a>
+            <div class="trade-card-overlay">
+              <div class="trade-card-meta mono small">
+                <span>Trade Asset 03</span>
+                <span>Miniature Sell Sheets</span>
+              </div>
+              <div class="trade-card-menu">
+                <span class="trade-card-menu-title mono small">Quick Links</span>
+                <div class="trade-card-links mono">
+                  <a href="#"><span>Download sample PDF</span><span>01</span></a>
+                  <a href="#"><span>Open size guide</span><span>02</span></a>
+                  <a href="#"><span>Send print request</span><span>03</span></a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="trade-card">
+            <img src="images/Thanks copy 4.png" alt="Reviews trade asset" class="trade-card-image">
+            <a href="#" class="trade-card-anchor" aria-label="Open reviews resource card"></a>
+            <div class="trade-card-overlay">
+              <div class="trade-card-meta mono small">
+                <span>Trade Asset 04</span>
+                <span>People are talking</span>
+              </div>
+              <div class="trade-card-menu">
+                <span class="trade-card-menu-title mono small">Quick Links</span>
+                <div class="trade-card-links mono">
+                  <a href="#"><span>View sample quotes</span><span>01</span></a>
+                  <a href="#"><span>Grab press notes</span><span>02</span></a>
+                  <a href="#"><span>Email dummy contact</span><span>03</span></a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="trade-card">
+            <img src="images/LABELS.png" alt="Labels trade asset" class="trade-card-image">
+            <a href="#" class="trade-card-anchor" aria-label="Open labels resource card"></a>
+            <div class="trade-card-overlay">
+              <div class="trade-card-meta mono small">
+                <span>Trade Asset 05</span>
+                <span>Sticker the world</span>
+              </div>
+              <div class="trade-card-menu">
+                <span class="trade-card-menu-title mono small">Quick Links</span>
+                <div class="trade-card-links mono">
+                  <a href="#"><span>Download placeholder</span><span>01</span></a>
+                  <a href="#"><span>Request print specs</span><span>02</span></a>
+                  <a href="#"><span>Open mockup folder</span><span>03</span></a>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="cart-overlay" id="cart-overlay" hidden></div>
+  <aside class="cart-drawer" id="site-cart" aria-hidden="true" aria-labelledby="cart-title">
+    <div class="cart-drawer-header">
+      <div>
+        <div class="tag mono">Cart</div>
+        <h2 class="serif" id="cart-title">Your Bottle List</h2>
+      </div>
+      <button class="cart-close" id="cart-close" type="button" aria-label="Close cart">&times;</button>
+    </div>
+
+    <div class="cart-status mono small" id="cart-status" aria-live="polite"></div>
+    <div class="cart-empty muted" id="cart-empty">Your cart is empty. Add a bottle from the wine list to begin.</div>
+    <div class="cart-lines" id="cart-lines"></div>
+
+    <div class="cart-footer">
+      <div class="cart-summary">
+        <span class="mono small">Subtotal</span>
+        <strong id="cart-subtotal">$0.00</strong>
+      </div>
+      <a class="btn mono cart-checkout" id="cart-checkout" href="#" target="_blank" rel="noopener noreferrer" aria-disabled="true">Checkout</a>
+    </div>
+  </aside>
+
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-box">
+          <div class="brand-title serif">Alta Heights</div>
+          <div class="brand-sub mono">California Alpine Wine</div>
+          <p class="muted">
+            A love letter to the rugged mountain frontiers of California and the spirit of exploration.
+          </p>
+        </div>
+
+        <div class="footer-box">
+          <h4 class="mono">Index</h4>
+          <div class="footer-links mono small">
+            <a href="index.html">Field Index</a>
+            <a href="index.html#wines">Wine List</a>
+            <a href="index.html#journal">Journal</a>
+            <a href="index.html#find">Find It</a>
+          </div>
+        </div>
+
+        <div class="footer-box">
+          <h4 class="mono">Other Pages</h4>
+          <div class="footer-links mono small">
+            <a href="about.html">About</a>
+            <a href="drink-independent.html">Drink Independent</a>
+            <a href="trade.html">Trade</a>
+            <a href="mailto:hello@altaheightswine.com">Contact</a>
+            <a href="https://www.instagram.com/altaheightswine/" target="_blank" rel="noopener noreferrer">Instagram</a>
+          </div>
+        </div>
+
+        <div class="footer-box">
+          <h4 class="mono">Issue Notes</h4>
+          <div class="footer-links mono small">
+            <span>wholesale archive</span>
+            <span>retail tools</span>
+            <span>drop folders</span>
+            <span>please enjoy responsibly</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom mono">
+        <span>© 2026 Alta Heights</span>
+        <span>Trade / Issue 01</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const SHOPIFY_DOMAIN = 'model-store-9670.myshopify.com';
+    const SHOPIFY_STOREFRONT_TOKEN = 'c719c0ff58ad08733d78f86785c95857';
+    const SHOPIFY_API_URL = `https://${SHOPIFY_DOMAIN}/api/2026-01/graphql.json`;
+    const SHOPIFY_CART_STORAGE_KEY = 'altaHeightsShopifyCartId';
+    const AGE_GATE_STORAGE_KEY = 'altaHeightsAgeVerified';
+    const cartTrigger = document.querySelector('#cart-trigger');
+    const cartCount = document.querySelector('#cart-count');
+    const cartOverlay = document.querySelector('#cart-overlay');
+    const cartDrawer = document.querySelector('#site-cart');
+    const cartClose = document.querySelector('#cart-close');
+    const cartStatus = document.querySelector('#cart-status');
+    const cartEmpty = document.querySelector('#cart-empty');
+    const cartLines = document.querySelector('#cart-lines');
+    const cartSubtotal = document.querySelector('#cart-subtotal');
+    const cartCheckout = document.querySelector('#cart-checkout');
+    const ageGate = document.querySelector('#age-gate');
+    const ageGateEnter = document.querySelector('#age-gate-enter');
+    let shopifyCart = null;
+    let cartBusy = false;
+
+    function openAgeGate() {
+      if (!ageGate) return;
+      ageGate.classList.add('is-visible');
+      ageGate.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('age-gate-open');
+    }
+
+    function closeAgeGate() {
+      if (!ageGate) return;
+      ageGate.classList.remove('is-visible');
+      ageGate.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('age-gate-open');
+    }
+
+    if (ageGate && ageGateEnter) {
+      const isVerified = localStorage.getItem(AGE_GATE_STORAGE_KEY) === 'true';
+
+      if (!isVerified) {
+        openAgeGate();
+      }
+
+      ageGateEnter.addEventListener('click', () => {
+        localStorage.setItem(AGE_GATE_STORAGE_KEY, 'true');
+        closeAgeGate();
+      });
+    }
+
+    function updateCartStatus(message, state) {
+      if (!cartStatus) return;
+      cartStatus.textContent = message || '';
+      if (state) {
+        cartStatus.dataset.state = state;
+      } else {
+        delete cartStatus.dataset.state;
+      }
+    }
+
+    function formatMoney(amount, currencyCode) {
+      return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: currencyCode || 'USD'
+      }).format(Number(amount || 0));
+    }
+
+    function openCart() {
+      if (!cartDrawer || !cartOverlay || !cartTrigger) return;
+      cartDrawer.classList.add('is-open');
+      cartDrawer.setAttribute('aria-hidden', 'false');
+      cartOverlay.hidden = false;
+      cartTrigger.setAttribute('aria-expanded', 'true');
+      document.body.classList.add('cart-open');
+    }
+
+    function closeCart() {
+      if (!cartDrawer || !cartOverlay || !cartTrigger) return;
+      cartDrawer.classList.remove('is-open');
+      cartDrawer.setAttribute('aria-hidden', 'true');
+      cartOverlay.hidden = true;
+      cartTrigger.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('cart-open');
+    }
+
+    function renderCart(cart) {
+      if (!cartCount || !cartLines || !cartEmpty || !cartSubtotal || !cartCheckout) return;
+
+      const totalQuantity = cart?.totalQuantity || 0;
+      const subtotalAmount = cart?.cost?.subtotalAmount?.amount || 0;
+      const currencyCode = cart?.cost?.subtotalAmount?.currencyCode || 'USD';
+      const lines = cart?.lines?.edges || [];
+
+      cartCount.textContent = `[${totalQuantity}]`;
+      cartSubtotal.textContent = formatMoney(subtotalAmount, currencyCode);
+      cartLines.innerHTML = '';
+      cartEmpty.hidden = totalQuantity > 0;
+
+      if (totalQuantity > 0) {
+        lines.forEach(({ node }) => {
+          const line = document.createElement('div');
+          line.className = 'cart-line';
+          line.innerHTML = `
+            <div class="cart-line-head">
+              <div class="cart-line-title">${node.merchandise.product.title}</div>
+              <div class="cart-line-price">${formatMoney(node.cost.totalAmount.amount, node.cost.totalAmount.currencyCode)}</div>
+            </div>
+            <div class="cart-line-meta">
+              <div class="cart-qty-wrap">
+                <button class="cart-qty-btn" type="button" data-line-id="${node.id}" data-qty="${node.quantity - 1}" aria-label="Decrease quantity">−</button>
+                <span class="cart-line-qty mono small">${node.quantity}</span>
+                <button class="cart-qty-btn" type="button" data-line-id="${node.id}" data-qty="${node.quantity + 1}" aria-label="Increase quantity">+</button>
+              </div>
+              <button class="cart-remove mono small" type="button" data-line-id="${node.id}">Remove</button>
+            </div>
+          `;
+          cartLines.appendChild(line);
+        });
+      }
+
+      if (cart?.checkoutUrl) {
+        cartCheckout.href = cart.checkoutUrl;
+        cartCheckout.setAttribute('aria-disabled', 'false');
+      } else {
+        cartCheckout.href = '#';
+        cartCheckout.setAttribute('aria-disabled', 'true');
+      }
+    }
+
+    async function storefrontRequest(query, variables = {}) {
+      const response = await fetch(SHOPIFY_API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Shopify-Storefront-Access-Token': SHOPIFY_STOREFRONT_TOKEN
+        },
+        body: JSON.stringify({ query, variables })
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || result.errors?.length) {
+        const messages = result.errors?.map((error) => error.message).join(', ') || 'Unable to reach Shopify.';
+        throw new Error(messages);
+      }
+
+      return result.data;
+    }
+
+    async function getCart(cartId) {
+      const query = `
+        query CartQuery($cartId: ID!) {
+          cart(id: $cartId) {
+            id
+            checkoutUrl
+            totalQuantity
+            cost {
+              subtotalAmount {
+                amount
+                currencyCode
+              }
+            }
+            lines(first: 20) {
+              edges {
+                node {
+                  id
+                  quantity
+                  cost {
+                    totalAmount {
+                      amount
+                      currencyCode
+                    }
+                  }
+                  merchandise {
+                    ... on ProductVariant {
+                      id
+                      product {
+                        title
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      `;
+
+      const data = await storefrontRequest(query, { cartId });
+      return data?.cart || null;
+    }
+
+    async function removeCartLine(lineId) {
+      if (!shopifyCart?.id) return;
+
+      const mutation = `
+        mutation CartLinesRemove($cartId: ID!, $lineIds: [ID!]!) {
+          cartLinesRemove(cartId: $cartId, lineIds: $lineIds) {
+            cart {
+              id
+              checkoutUrl
+              totalQuantity
+              cost {
+                subtotalAmount {
+                  amount
+                  currencyCode
+                }
+              }
+              lines(first: 20) {
+                edges {
+                  node {
+                    id
+                    quantity
+                    cost {
+                      totalAmount {
+                        amount
+                        currencyCode
+                      }
+                    }
+                    merchandise {
+                      ... on ProductVariant {
+                        id
+                        product {
+                          title
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            userErrors {
+              message
+            }
+          }
+        }
+      `;
+
+      const data = await storefrontRequest(mutation, {
+        cartId: shopifyCart.id,
+        lineIds: [lineId]
+      });
+
+      const userErrors = data?.cartLinesRemove?.userErrors || [];
+      if (userErrors.length) {
+        throw new Error(userErrors.map((error) => error.message).join(', '));
+      }
+
+      return data?.cartLinesRemove?.cart;
+    }
+
+    async function updateCartLineQuantity(lineId, quantity) {
+      if (quantity <= 0) {
+        return removeCartLine(lineId);
+      }
+
+      const mutation = `
+        mutation CartLinesUpdate($cartId: ID!, $lines: [CartLineUpdateInput!]!) {
+          cartLinesUpdate(cartId: $cartId, lines: $lines) {
+            cart {
+              id
+              checkoutUrl
+              totalQuantity
+              cost {
+                subtotalAmount {
+                  amount
+                  currencyCode
+                }
+              }
+              lines(first: 20) {
+                edges {
+                  node {
+                    id
+                    quantity
+                    cost {
+                      totalAmount {
+                        amount
+                        currencyCode
+                      }
+                    }
+                    merchandise {
+                      ... on ProductVariant {
+                        id
+                        product {
+                          title
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            userErrors {
+              message
+            }
+          }
+        }
+      `;
+
+      const data = await storefrontRequest(mutation, {
+        cartId: shopifyCart.id,
+        lines: [{ id: lineId, quantity }]
+      });
+
+      const userErrors = data?.cartLinesUpdate?.userErrors || [];
+      if (userErrors.length) {
+        throw new Error(userErrors.map((e) => e.message).join(', '));
+      }
+
+      return data?.cartLinesUpdate?.cart;
+    }
+
+    async function initializeCart() {
+      try {
+        const storedCartId = localStorage.getItem(SHOPIFY_CART_STORAGE_KEY);
+
+        if (!storedCartId) {
+          renderCart(null);
+          return;
+        }
+
+        shopifyCart = await getCart(storedCartId);
+
+        if (!shopifyCart) {
+          localStorage.removeItem(SHOPIFY_CART_STORAGE_KEY);
+        }
+
+        renderCart(shopifyCart);
+      } catch (error) {
+        updateCartStatus(error.message || 'Unable to load your cart.', 'error');
+        renderCart(null);
+      }
+    }
+
+    if (cartTrigger && cartOverlay && cartDrawer && cartClose) {
+      cartTrigger.addEventListener('click', (event) => {
+        event.preventDefault();
+        openCart();
+      });
+
+      cartClose.addEventListener('click', closeCart);
+      cartOverlay.addEventListener('click', closeCart);
+
+      cartLines?.addEventListener('click', async (event) => {
+        const removeButton = event.target.closest('.cart-remove');
+        const qtyButton = event.target.closest('.cart-qty-btn');
+        if ((!removeButton && !qtyButton) || cartBusy) return;
+
+        try {
+          cartBusy = true;
+          updateCartStatus('Updating cart...', 'warning');
+          if (removeButton) {
+            shopifyCart = await removeCartLine(removeButton.dataset.lineId);
+          } else {
+            shopifyCart = await updateCartLineQuantity(qtyButton.dataset.lineId, parseInt(qtyButton.dataset.qty, 10));
+          }
+          renderCart(shopifyCart);
+          updateCartStatus('Cart updated.', 'success');
+        } catch (error) {
+          updateCartStatus(error.message || 'Unable to update your cart.', 'error');
+        } finally {
+          cartBusy = false;
+        }
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          closeCart();
+        }
+      });
+    }
+
+    renderCart(null);
+    initializeCart();
+  </script>
+</body>
+</html>

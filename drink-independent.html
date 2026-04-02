@@ -6,7 +6,7 @@
   <title>Alta Heights / Drink Independent</title>
   <meta
     name="description"
-    content="A manifesto for mountain wine. Why we drink independent — and why it matters."
+    content="Why we drink independent: the problem with mass-market wine, how Alta Heights is fixing it, and what makes California Alpine Wine different."
   />
   <link rel="stylesheet" href="styles.css" />
   <style>
@@ -111,7 +111,7 @@
 
     /* Pull quote */
     .di-pullquote {
-      padding: clamp(72px, 10vw, 128px) 0;
+      padding: clamp(72px, 10vw, 128px) 0 clamp(44px, 6vw, 72px);
       background: var(--paper);
       border-bottom: 1px solid var(--line);
       text-align: center;
@@ -143,6 +143,25 @@
       letter-spacing: 0.16em;
       color: var(--faded);
       font-style: normal;
+    }
+
+    .di-pullquote-copy {
+      max-width: 700px;
+      margin: 28px auto 0;
+      font-size: clamp(1rem, 1.7vw, 1.12rem);
+      line-height: 1.65;
+      color: var(--faded);
+    }
+
+    .di-pullquote-sticker {
+      width: min(100%, 340px);
+      margin: 28px auto 0;
+    }
+
+    .di-pullquote-sticker img {
+      width: 100%;
+      height: auto;
+      display: block;
     }
 
     /* Stats / data row */
@@ -219,8 +238,13 @@
 
     /* Manifesto list */
     .di-manifesto {
-      padding: clamp(72px, 10vw, 120px) 0;
+      padding: clamp(52px, 7vw, 84px) 0;
       background: var(--paper);
+      background-image:
+        radial-gradient(circle at 20% 20%, rgba(23,22,20,0.03) 0 1px, transparent 1px),
+        linear-gradient(rgba(23,22,20,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(23,22,20,0.025) 1px, transparent 1px);
+      background-size: 18px 18px, 26px 26px, 26px 26px;
       border-bottom: 1px solid var(--line);
     }
 
@@ -237,7 +261,7 @@
       text-transform: uppercase;
       letter-spacing: 0.14em;
       color: var(--blue);
-      padding-top: 8px;
+      padding-top: 4px;
     }
 
     .di-manifesto-items {
@@ -419,167 +443,25 @@
         <a href="index.html#wines">Wines</a>
         <a href="index.html#journal">Journal</a>
         <a href="about.html">About</a>
-        <a href="#">Trade</a>
+        <a href="trade.html">Trade</a>
         <a href="#cart" id="cart-trigger" aria-controls="site-cart" aria-expanded="false">Cart <span id="cart-count">[0]</span></a>
       </nav>
     </div>
   </header>
 
   <main>
-
-    <!-- CTA -->
-    <section class="di-cta">
-      <div class="wrap">
-        <div class="di-cta-kicker">Alta Heights / 2024 Releases</div>
-        <h2 class="serif">Four bottles. All mountain. All independent.</h2>
-        <p>Chardonnay, Pinot Noir, Rosé, and Cab Sauv — grown high, farmed by hand, and shipped to your door.</p>
-      </div>
-    </section>
-
-    <!-- OPENING MANIFESTO TEXT -->
-    <section class="di-opening">
-      <div class="wrap">
-        <span class="di-opening-label">Manifesto / Alta Heights</span>
-        <p>
-          Alta Heights is a small on purpose, fiercely independent operation. 
-          In response to growing distributor consolidation, corporate acquisitions, incentivized reviews and paid influencers, we decided to pick our fighter – the independent voices that keep wine exciting. This page is our argument for why that matters — and why, once you go up the mountain, it's very hard to come back down.
-        </p>
-      </div>
-    </section>
-
-    <!-- MANIFESTO LIST -->
-    <section class="di-manifesto">
-      <div class="wrap">
-        <div class="di-manifesto-label">The Independent Standard</div>
-        <ul class="di-manifesto-items">
-          <li>
-            <div>
-              <h3 class="serif">Know where it came from.</h3>
-              <p>Not just the region — the vineyard, the elevation, the farmer. Real independent wine has a traceable origin that someone is proud of.</p>
-            </div>
-          </li>
-          <li>
-            <div>
-              <h3 class="serif">Taste the place.</h3>
-              <p>If it could have come from anywhere, it probably did. Mountain wine tastes like the mountain: mineral, brisk, specific. You should be able to close your eyes and see the terrain.</p>
-            </div>
-          </li>
-          <li>
-            <div>
-              <h3 class="serif">Reject the smooth.</h3>
-              <p>Corporate wine is engineered to eliminate edges. Independent wine keeps them. An interesting glass of wine has something to say — texture, tension, a little resistance.</p>
-            </div>
-          </li>
-          <li>
-            <div>
-              <h3 class="serif">Support the farmer, not the brand.</h3>
-              <p>Most famous wine labels are owned by conglomerates. When you buy independent, the money goes to the people who grew it — and they use it to keep growing it the way they believe in.</p>
-            </div>
-          </li>
-          <li>
-            <div>
-              <h3 class="serif">Drink it outside.</h3>
-              <p>Not a requirement. Just a strong suggestion. Mountain wine was designed — spiritually, at least — for open air, good company, and somewhere with a view.</p>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- SPLIT: The Problem -->
-    <section class="di-split">
-      <div class="di-split-text">
-        <span class="tag mono">The Valley Floor Problem</span>
-        <h2 class="serif">Ninety percent of California wine comes from flat land optimized for tonnage.</h2>
-        <p>
-          Valley floor vineyards are efficient. They're irrigated, mechanically harvested, and yield-optimized. The grapes ripen fast and easy. The resulting wine is technically correct and commercially comfortable — and it floods every retail shelf, restaurant list, and grocery aisle in the country.
-        </p>
-        <p>
-          The mountain vineyard operates on different rules entirely. Steep, rocky, often organic by necessity. Hand-farmed. Lower yields. Longer hang time. The vine is stressed; the grape is concentrated. You taste the work.
-        </p>
-      </div>
-      <div class="di-split-image">
-        <img src="images/MtTam1.jpeg" alt="Mountain vineyard terrain">
-      </div>
-    </section>
-
-    <!-- PULL QUOTE -->
     <section class="di-pullquote">
       <div class="wrap">
         <blockquote>
-          <p>"To grow grapes and produce wines in the mountains, you have to be a lot more dedicated. Most of us do it because we love it."</p>
-          <cite>— Ken Burnap, Santa Cruz Mountain Vineyard, 1979</cite>
+          <p>Boring, pretentious wines are ruining our good times.</p>
+          <cite>Drink Independent / Alta Heights</cite>
         </blockquote>
-      </div>
-    </section>
-
-    <!-- STATS ROW -->
-    <section class="di-stats">
-      <div class="wrap">
-        <div class="di-stat-item">
-          <div class="di-stat-number">3%</div>
-          <div class="di-stat-label">Mountain Vineyards</div>
-          <p class="di-stat-desc">Of California wine comes from mountain-designated AVAs. Most of what's on the shelf is not this.</p>
-        </div>
-        <div class="di-stat-item">
-          <div class="di-stat-number">+40%</div>
-          <div class="di-stat-label">Longer Hang Time</div>
-          <p class="di-stat-desc">Elevation and coastal fog extend the growing season, building complexity in the grape before it's ever picked.</p>
-        </div>
-        <div class="di-stat-item">
-          <div class="di-stat-number">0</div>
-          <div class="di-stat-label">Compromise</div>
-          <p class="di-stat-desc">No mega-winery ownership. No investor yield targets. No additives to smooth the rough edges off.</p>
+        <p class="di-pullquote-copy">Alta Heights is a fiercely independent operation. In response to the epidemic of growing corporate consolidation, private equity acquisitions, incentivized critics and paid influencers in wine, we have chosen our fighter - the independent voices that keep wine exciting.</p>
+        <div class="di-pullquote-sticker">
+          <img src="images/bumpersticker.png" alt="Drink Independent bumper sticker graphic">
         </div>
       </div>
     </section>
-
-    <!-- SPLIT: What It Is (reversed) -->
-    <section class="di-split reverse">
-      <div class="di-split-text">
-        <span class="tag mono">What Mountain Wine Actually Is</span>
-        <h2 class="serif">Alive, specific, and slightly inconvenient to make.</h2>
-        <p>
-          Mountain wine isn't a style — it's a condition. It's what happens when a small team of people decides to grow grapes in a difficult place for reasons that have nothing to do with maximizing ROI.
-        </p>
-        <p>
-          The wines are tighter in youth, more aromatic, more food-friendly. The tannins have texture rather than grip. The acidity is real, not added. The color comes from the fruit, not from concentration. These aren't things you can engineer in a lab or replicate at scale. They emerge from place, season, and restraint.
-        </p>
-      </div>
-      <div class="di-split-image">
-        <img src="images/Redwood1.jpeg" alt="Redwood forest mountain terrain">
-      </div>
-    </section>
-
-    <!-- FULL-BLEED IMAGE INTERLUDE -->
-    <section class="di-interlude">
-      <img src="images/Yosemite4.jpeg" alt="California mountain landscape">
-      <div class="di-interlude-caption">Santa Cruz Mountains / Alta Heights Territory</div>
-    </section>
-  </main>
-
-  <div class="cart-overlay" id="cart-overlay" hidden></div>
-  <aside class="cart-drawer" id="site-cart" aria-hidden="true" aria-labelledby="cart-title">
-    <div class="cart-drawer-header">
-      <div>
-        <div class="tag mono">Cart</div>
-        <h2 class="serif" id="cart-title">Your Bottle List</h2>
-      </div>
-      <button class="cart-close" id="cart-close" type="button" aria-label="Close cart">&times;</button>
-    </div>
-
-    <div class="cart-status mono small" id="cart-status" aria-live="polite"></div>
-    <div class="cart-empty muted" id="cart-empty">Your cart is empty. Add a bottle from the wine list to begin.</div>
-    <div class="cart-lines" id="cart-lines"></div>
-
-    <div class="cart-footer">
-      <div class="cart-summary">
-        <span class="mono small">Subtotal</span>
-        <strong id="cart-subtotal">$0.00</strong>
-      </div>
-      <a class="btn mono cart-checkout" id="cart-checkout" href="#" target="_blank" rel="noopener noreferrer" aria-disabled="true">Checkout</a>
-    </div>
-  </aside>
 
   <footer class="footer">
     <div class="wrap">
@@ -607,7 +489,7 @@
           <div class="footer-links mono small">
             <a href="about.html">About</a>
             <a href="drink-independent.html">Drink Independent</a>
-            <a href="#">Trade</a>
+            <a href="trade.html">Trade</a>
             <a href="mailto:hello@altaheightswine.com">Contact</a>
             <a href="https://www.instagram.com/altaheightswine/" target="_blank" rel="noopener noreferrer">Instagram</a>
           </div>
