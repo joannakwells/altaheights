@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alta Heights / Field Notes / 01</title>
+  <meta
+    name="description"
+    content="Field Notes / 01 — The Spirit of California Alpine Wine. Why elevation, coastal influence, and weathered-in-place soils change the game."
+  />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .field-hero {
+      padding: 28px 0 0;
+    }
+
+    .field-kicker {
+      grid-column: 1 / span 2;
+      padding-top: 10px;
+    }
+
+    .field-intro {
+      grid-column: 3 / span 5;
+      padding-right: 24px;
+    }
+
+    .field-intro h1 {
+      margin: 14px 0 16px;
+      font-size: clamp(3rem, 7vw, 6rem);
+      line-height: 0.9;
+      text-transform: uppercase;
+    }
+
+    .field-subtitle {
+      max-width: 34rem;
+      font-size: 19px;
+      line-height: 1.45;
+      color: var(--faded);
+      margin: 0;
+    }
+
+    .field-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 20px;
+      color: var(--faded);
+    }
+
+    .field-hero-media {
+      grid-column: 8 / span 5;
+      border-top: 1px solid var(--line);
+      padding-top: 12px;
+    }
+
+    .field-hero-media img {
+      width: 100%;
+      aspect-ratio: 4 / 4.8;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .field-story {
+      padding-top: 20px;
+    }
+
+    .field-copy {
+      grid-column: 3 / span 6;
+      min-width: 0;
+    }
+
+    .field-copy p {
+      margin: 0 0 18px;
+      font-size: 18px;
+      line-height: 1.72;
+      color: var(--ink);
+    }
+
+    .field-copy p.muted-note {
+      font-size: 15px;
+      color: var(--faded);
+    }
+
+    .field-copy h2 {
+      margin: 34px 0 14px;
+      font-size: clamp(2rem, 4.2vw, 3.1rem);
+      line-height: 0.94;
+      text-transform: uppercase;
+    }
+
+    .field-copy h3 {
+      margin: 34px 0 8px;
+      color: var(--blue);
+    }
+
+    .field-aside {
+      grid-column: 10 / span 3;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .field-rail-card,
+    .field-fact-box,
+    .field-grid,
+    .field-next {
+      border: 1px solid var(--line);
+      background: rgba(255, 253, 248, 0.6);
+    }
+
+    .field-rail-card,
+    .field-fact-box,
+    .field-next {
+      padding: 16px;
+    }
+
+    .field-rail-card p,
+    .field-fact-box p,
+    .field-next p {
+      margin: 8px 0 0;
+      color: var(--faded);
+      line-height: 1.55;
+    }
+
+    .field-pullquote {
+      margin: 30px 0;
+      padding: 24px 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      text-align: center;
+    }
+
+    .field-pullquote p {
+      margin: 0 auto;
+      max-width: 26rem;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      line-height: 1.22;
+      color: var(--error);
+    }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin: 28px 0;
+    }
+
+    .field-grid-item {
+      padding: 16px;
+      border-right: 1px solid var(--line);
+    }
+
+    .field-grid-item:last-child {
+      border-right: 0;
+    }
+
+    .field-grid-item p {
+      margin: 8px 0 0;
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--faded);
+    }
+
+    .field-inline-photo {
+      margin: 28px 0;
+      border-top: 1px solid var(--line);
+      padding-top: 12px;
+    }
+
+    .field-inline-photo img {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .field-next {
+      margin-top: 34px;
+    }
+
+    .field-next-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 14px;
+    }
+
+    @media (max-width: 1100px) {
+      .field-intro {
+        grid-column: 1 / span 7;
+        padding-right: 0;
+      }
+
+      .field-hero-media {
+        grid-column: 8 / span 5;
+      }
+
+      .field-copy {
+        grid-column: 1 / span 8;
+      }
+
+      .field-aside {
+        grid-column: 9 / span 4;
+      }
+    }
+
+    @media (max-width: 820px) {
+      .field-kicker,
+      .field-intro,
+      .field-hero-media,
+      .field-copy,
+      .field-aside {
+        grid-column: 1 / span 12;
+      }
+
+      .field-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .field-grid-item {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .field-grid-item:last-child {
+        border-bottom: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="age-gate" id="age-gate" aria-hidden="true">
+    <div class="age-gate-card" role="dialog" aria-modal="true" aria-labelledby="age-gate-title">
+      <span class="tag mono">21+ Only</span>
+      <h2 class="serif" id="age-gate-title">Please confirm you are 21 or older to enter.</h2>
+      <p class="muted">Alta Heights is a wine site. By entering, you confirm you are of legal drinking age in your location.</p>
+      <div class="age-gate-actions">
+        <button class="btn mono age-gate-enter" id="age-gate-enter" type="button">I Am 21+</button>
+        <a class="btn mono age-gate-exit" href="https://www.google.com">Exit</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="nav nav-bleed">
+      <div class="brand">
+        <a href="index.html"><img src="images/ALTA_23_Logos_Orange_Primary Horiz copy.png" alt="Alta Heights" class="brand-logo"></a>
+        <div class="brand-sub mono">California Alpine Wine / Field Notes / 01</div>
+      </div>
+
+      <nav class="nav-links mono" aria-label="Primary navigation">
+        <a href="index.html">Home</a>
+        <a href="index.html#wines">Wines</a>
+        <a href="index.html#journal">Journal</a>
+        <a href="about.html">About</a>
+        <a href="trade.html">Trade</a>
+        <a href="#cart" id="cart-trigger" aria-controls="site-cart" aria-expanded="false">Cart <span id="cart-count">[0]</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section field-hero">
+      <div class="wrap scatter">
+        <div class="field-kicker">
+          <span class="tag mono">Field Notes</span>
+        </div>
+
+        <div class="field-intro">
+          <div class="mono small muted">01 / Journal Entry / April 21, 2026</div>
+          <h1 class="serif">The Spirit of California Alpine Wine</h1>
+          <p class="field-subtitle">
+            Why elevation, coastal influence, and weathered-in-place soils change the game.
+          </p>
+          <div class="field-meta mono small">
+            <span>Issue 01</span>
+            <span>Alta Heights</span>
+            <span>Mountain Frontiers of California</span>
+          </div>
+        </div>
+
+        <div class="field-hero-media">
+          <img src="images/Halfdome2.jpeg" alt="California alpine wine country landscape" />
+        </div>
+      </div>
+    </section>
+
+    <section class="section rule-top field-story">
+      <div class="wrap scatter">
+        <article class="field-copy">
+          <p>Let's get one thing straight: nobody farms a remote mountain top for the fun of it. You choose to grow in the mountains because something up there is worth risk, the extra effort, the reward. And it turns out that same motivation, the quest for something great, is exactly what California's Mountain winemaking pioneers have been proving for decades.</p>
+
+          <p>When most people hear "California Wine", they think Napa. Which is fine. Napa is great. But if Napa is the famous shortstop, there is an entire bench of players doing something stranger and arguably more interesting in the Santa Cruz Mountains, up on Arrowhead Mountain, and deep in the Mendocino Coastal Mountains. These are places only found through the spirit of exploration.</p>
+
+          <div class="field-pullquote">
+            <p class="serif">The best wines from California taste just like the land looks.</p>
+          </div>
+
+          <h3 class="mono small">What We Mean By Alpine</h3>
+          <h2 class="serif">The Advantage of Altitude</h2>
+
+          <p>When people talk about elevation in wine, they usually jump straight to temperature. Yes, it is usually cooler up high. But the real magic is in the inversion layer - the dramatic shift to nighttime warmth and continued ripening that moves the sugar maturity of the grapes rapidly, preserving fresher flavors and higher acidities than in the valleys below. </p>
+
+          <p>Acid. Structure. Aromatics that would otherwise be lost at lower elevations. Up high, those volatile compounds stick around. Which is why a Pinot Noir from the Santa Cruz Mountains at 1,800 feet can feel more lifted, more precise, and more alive than something grown in an valley floor site. The mountains simply tell a different story.</p>
+
+          <div class="field-grid">
+            <div class="field-grid-item">
+              <div class="mono small">Elevation</div>
+              <p>Longer hang time and colder nights lock in acidity and aromatics that warm valleys struggle to hold.</p>
+            </div>
+            <div class="field-grid-item">
+              <div class="mono small">Coastal Influence</div>
+              <p>Marine fog and Pacific wind create a daily push and pull with the sun that sharpens the fruit instead of softening it.</p>
+            </div>
+            <div class="field-grid-item">
+              <div class="mono small">Weathered Soils</div>
+              <p>Granite, shale, and serpentine drain hard, force deep roots, and keep yields low enough for real specificity.</p>
+            </div>
+          </div>
+
+          <div class="field-inline-photo">
+            <img src="images/Sierra2.jpeg" alt="Pacific fog rolling over California mountain range" />
+          </div>
+
+          <h3 class="mono small">The Pacific Factor</h3>
+          <h2 class="serif">When The Ocean Reaches The Mountain</h2>
+
+          <p>Here is where California does something genuinely unusual: it lets the Pacific Ocean into the conversation. The coastal ranges act as a kind of atmospheric thermostat. Fog pours through the gaps each morning, cools everything down, then burns off by afternoon as inland heat pulls it back. This is the daily drama of the Sta. Rita Hills, the Sonoma Coast, and the Santa Cruz Mountains. The vine wakes up in a sweater and goes to bed in the sun.</p>
+
+          <p>That thermal whiplash sounds stressful, and it is, for the vine, which is the point. Stressed vines do not produce a lot. What they produce, they put everything into. The berries are small, thick-skinned, and loaded with character. The juice is concentrated without being heavy. The result is a wine that tastes like it has a point of view.</p>
+
+          <div class="field-fact-box">
+            <div class="mono small">Worth Knowing</div>
+            <p>The Santa Cruz Mountains AVA sits on the San Andreas Fault and carries some of the most geologically diverse soils in California: marine sediment, sandstone, and fractured shale laid down by the same tectonic restlessness that makes the whole region feel slightly alive underfoot.</p>
+            <p>Mount Harlan, meanwhile, sits on limestone that Josh Jensen spent years searching for, convinced it was the only soil that could make truly great Pinot Noir in California. The wines from Calera are still making that case.</p>
+          </div>
+
+          <h3 class="mono small">The Soils Beneath It All</h3>
+          <h2 class="serif">Why Ancient Rock Matters</h2>
+
+          <p>Transported soils, the kind deposited by rivers and floods, are fertile, generous, and good for farming. They are also, in winemaking terms, a little too helpful. The vine finds water. It finds nutrients. It does well. The fruit is plentiful and pleasant and does not necessarily surprise you.</p>
+
+          <p>Ancient, weathered-in-place soils are a different proposition entirely. Decomposed granite in the Sierra Foothills. Fractured sandstone along the Santa Cruz ridge. Serpentine, that strange magnesium-rich stone that most plants will not grow in at all, scattered through the coastal ranges. These soils drain fast, hold little, and offer the vine nothing it did not earn.</p>
+
+          <div class="field-inline-photo">
+            <img src="images/Redwood1.jpeg" alt="Old vine vineyard on steep hillside terrain at elevation" />
+          </div>
+
+          <p>The roots go deep. Yields stay low. And the grapes develop a specificity, a mineral edge, that you genuinely cannot fake. There is a word that gets overused in wine writing, terroir, and it often ends up being a fancy way of saying "this costs more." But in the context of California's alpine and coastal mountain sites, the concept earns its keep.</p>
+
+          <div class="field-pullquote">
+            <p class="serif">Stress is the winemaker's vocabulary. The mountain just speaks it fluently.</p>
+          </div>
+
+          <h3 class="mono small">The Winemakers</h3>
+          <h2 class="serif">The People Who Choose The Hard Way</h2>
+
+          <p>Here is maybe the most important thing about California alpine wine: the people making it are, almost without exception, a little obsessed. Not in an unpleasant way. In the way that someone who found the thing they were supposed to be doing is obsessed, quietly, stubbornly, cheerfully committed to a place that most people find inconvenient.</p>
+
+          <p>You drive windy two-lane roads to get to these vineyards. Harvest is unpredictable because the weather at elevation is unpredictable. The machinery does not always like the slopes. The fog rolls in and the temperature drops twenty degrees in an hour and somebody has to make a call. These are not winemakers optimizing for ease.</p>
+
+          <p>They are optimizing for the thing that made them come up here in the first place, which is the suspicion, usually correct, that these mountains are making wine no valley floor can replicate. That the difficulty is the feature. That the stone, the cold, and the Pacific wind are not obstacles to great wine but the actual reason for it.</p>
+
+          <h3 class="mono small">Where To Start</h3>
+          <h2 class="serif">If You're New To The Heights</h2>
+
+          <p>If you are coming to California alpine wine for the first time, the Santa Cruz Mountains are a generous place to begin. Ridge's Monte Bello is the canonical example, a Cabernet from a ridge at 2,600 feet that has been proving the point for decades. But there are smaller producers making Chardonnay and Pinot Noir along the ridge that are easier on the wallet and no less compelling.</p>
+
+          <p>The Sierra Foothills, especially Amador County and El Dorado County, are where old-vine Zinfandel and Barbera reach an elevation and intensity that surprise anyone who only knows the flatter, broader versions. The Sta. Rita Hills, technically coastal rather than alpine, still operates on the same cold-stress principles. The fog does the work. The winemaker takes notes.</p>
+
+          <p>The spirit of California alpine wine is not really about prestige, elevation stats, or any particular grape. It is about the bet: the choice to plant in a place that makes things harder and trust that the difficulty will show up in the glass. It almost always does.</p>
+
+          <p class="muted-note">Go find the mountain wine. It has been waiting.</p>
+
+          <div class="field-next">
+            <div class="mono small">Next Move</div>
+            <p>Keep wandering the margins. Head back to the index, or explore the bottles that carry this same mountain logic into the glass.</p>
+            <div class="field-next-links">
+              <a href="index.html#journal" class="btn mono">Back to Journal</a>
+              <a href="https://shop.altaheightswine.com" class="btn mono">Visit Shop</a>
+            </div>
+          </div>
+        </article>
+
+        <aside class="field-aside">
+          <div class="field-rail-card">
+            <div class="mono small">Field Marker</div>
+            <p>California Alpine Wine is less about a strict legal category than a shared set of conditions: altitude, coastal drag, difficult farming, and wines with tension rather than bulk.</p>
+          </div>
+
+          <div class="field-rail-card">
+            <div class="mono small">Issue Notes</div>
+            <p>Think Santa Cruz Mountains, Sonoma Mountain, Mendocino Ridge, Mount Harlan, El Dorado, and cold-edge sites where weather and topography force precision.</p>
+          </div>
+
+          <div class="field-rail-card">
+            <div class="mono small">In The Glass</div>
+            <p>Look for brightness, lift, texture, and a kind of rocky calm. Less softness. More snap, shape, and verve.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <div class="cart-overlay" id="cart-overlay" hidden></div>
+  <aside class="cart-drawer" id="site-cart" aria-hidden="true" aria-labelledby="cart-title">
+    <div class="cart-drawer-header">
+      <div>
+        <div class="tag mono">Cart</div>
+        <h2 class="serif" id="cart-title">Your Bottle List</h2>
+      </div>
+      <button class="cart-close" id="cart-close" type="button" aria-label="Close cart">&times;</button>
+    </div>
+
+    <div class="cart-status mono small" id="cart-status" aria-live="polite"></div>
+    <div class="cart-empty muted" id="cart-empty">Your cart is empty. Add a bottle from the wine list to begin.</div>
+    <div class="cart-lines" id="cart-lines"></div>
+
+    <div class="cart-footer">
+      <div class="cart-summary">
+        <span class="mono small">Subtotal</span>
+        <strong id="cart-subtotal">$0.00</strong>
+      </div>
+      <a class="btn mono cart-checkout" id="cart-checkout" href="#" target="_blank" rel="noopener noreferrer" aria-disabled="true">Checkout</a>
+    </div>
+  </aside>
+
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-box">
+          <div class="brand-title serif">Alta Heights</div>
+          <div class="brand-sub mono">California Alpine Wine</div>
+          <p class="muted">
+            A love letter to the rugged mountain frontiers of California and the spirit of exploration.
+          </p>
+        </div>
+
+        <div class="footer-box">
+          <h4 class="mono">Index</h4>
+          <div class="footer-links mono small">
+            <a href="index.html#index">Field Index</a>
+            <a href="index.html#wines">Wine List</a>
+            <a href="index.html#journal">Journal</a>
+            <a href="index.html#find">Find It</a>
+          </div>
+        </div>
+
+        <div class="footer-box">
+          <h4 class="mono">Other Pages</h4>
+          <div class="footer-links mono small">
+            <a href="about.html">About</a>
+            <a href="drink-independent.html">Drink Independent</a>
+            <a href="trade.html">Trade</a>
+            <a href="mailto:hello@altaheightswine.com">Contact</a>
+            <a href="https://www.instagram.com/altaheightswine/" target="_blank" rel="noopener noreferrer">Instagram</a>
+          </div>
+        </div>
+
+        <div class="footer-box">
+          <h4 class="mono">Issue Notes</h4>
+          <div class="footer-links mono small">
+            <span>Field notes / 01</span>
+            <span>elevation markers</span>
+            <span>coastal drag</span>
+            <span>please enjoy responsibly</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom mono">
+        <span>© 2026 Alta Heights</span>
+        <span>Field Notes / 01</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const SHOPIFY_DOMAIN = 'model-store-9670.myshopify.com';
+    const SHOPIFY_STOREFRONT_TOKEN = 'c719c0ff58ad08733d78f86785c95857';
+    const SHOPIFY_API_URL = `https://${SHOPIFY_DOMAIN}/api/2026-01/graphql.json`;
+    const SHOPIFY_CART_STORAGE_KEY = 'altaHeightsShopifyCartId';
+    const AGE_GATE_STORAGE_KEY = 'altaHeightsAgeVerified';
+    const cartTrigger = document.querySelector('#cart-trigger');
+    const cartCount = document.querySelector('#cart-count');
+    const cartOverlay = document.querySelector('#cart-overlay');
+    const cartDrawer = document.querySelector('#site-cart');
+    const cartClose = document.querySelector('#cart-close');
+    const cartStatus = document.querySelector('#cart-status');
+    const cartEmpty = document.querySelector('#cart-empty');
+    const cartLines = document.querySelector('#cart-lines');
+    const cartSubtotal = document.querySelector('#cart-subtotal');
+    const cartCheckout = document.querySelector('#cart-checkout');
+    const ageGate = document.querySelector('#age-gate');
+    const ageGateEnter = document.querySelector('#age-gate-enter');
+    let shopifyCart = null;
+    let cartBusy = false;
+
+    function openAgeGate() {
+      if (!ageGate) return;
+      ageGate.classList.add('is-visible');
+      ageGate.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('age-gate-open');
+    }
+
+    function closeAgeGate() {
+      if (!ageGate) return;
+      ageGate.classList.remove('is-visible');
+      ageGate.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('age-gate-open');
+    }
+
+    if (ageGate && ageGateEnter) {
+      const isVerified = localStorage.getItem(AGE_GATE_STORAGE_KEY) === 'true';
+
+      if (!isVerified) {
+        openAgeGate();
+      }
+
+      ageGateEnter.addEventListener('click', () => {
+        localStorage.setItem(AGE_GATE_STORAGE_KEY, 'true');
+        closeAgeGate();
+      });
+    }
+
+    function openCart() {
+      if (!cartDrawer || !cartOverlay) return;
+      cartDrawer.classList.add('is-open');
+      cartDrawer.setAttribute('aria-hidden', 'false');
+      cartOverlay.hidden = false;
+      document.body.classList.add('cart-open');
+      cartTrigger?.setAttribute('aria-expanded', 'true');
+    }
+
+    function closeCart() {
+      if (!cartDrawer || !cartOverlay) return;
+      cartDrawer.classList.remove('is-open');
+      cartDrawer.setAttribute('aria-hidden', 'true');
+      cartOverlay.hidden = true;
+      document.body.classList.remove('cart-open');
+      cartTrigger?.setAttribute('aria-expanded', 'false');
+    }
+
+    function updateCartStatus(message, tone = '') {
+      if (!cartStatus) return;
+      cartStatus.textContent = message || '';
+      cartStatus.dataset.tone = tone;
+    }
+
+    function formatMoney(amount, currencyCode = 'USD') {
+      return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: currencyCode
+      }).format(Number(amount || 0));
+    }
+
+    function renderCart(cart) {
+      const quantity = cart?.totalQuantity || 0;
+      if (cartCount) {
+        cartCount.textContent = `[${quantity}]`;
+      }
+
+      if (!cart || !cart.lines?.edges?.length) {
+        cartLines.innerHTML = '';
+        cartEmpty.hidden = false;
+        cartSubtotal.textContent = '$0.00';
+        cartCheckout.href = '#';
+        cartCheckout.setAttribute('aria-disabled', 'true');
+        return;
+      }
+
+      cartEmpty.hidden = true;
+      cartLines.innerHTML = cart.lines.edges.map(({ node }) => {
+        const lineTotal = node.cost?.totalAmount;
+        return `
+          <div class="cart-line">
+            <div>
+              <div class="mono small">${node.merchandise.product.title}</div>
+              <strong>${formatMoney(lineTotal?.amount, lineTotal?.currencyCode)}</strong>
+            </div>
+            <div class="cart-line-actions">
+              <div class="cart-qty mono small">
+                <button class="cart-qty-btn" type="button" data-line-id="${node.id}" data-qty="${node.quantity - 1}" aria-label="Decrease quantity">−</button>
+                <span>${node.quantity}</span>
+                <button class="cart-qty-btn" type="button" data-line-id="${node.id}" data-qty="${node.quantity + 1}" aria-label="Increase quantity">+</button>
+              </div>
+              <button class="cart-remove mono small" type="button" data-line-id="${node.id}">Remove</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      cartSubtotal.textContent = formatMoney(
+        cart.cost?.subtotalAmount?.amount,
+        cart.cost?.subtotalAmount?.currencyCode
+      );
+
+      if (cart?.checkoutUrl) {
+        cartCheckout.href = cart.checkoutUrl;
+        cartCheckout.setAttribute('aria-disabled', 'false');
+      } else {
+        cartCheckout.href = '#';
+        cartCheckout.setAttribute('aria-disabled', 'true');
+      }
+    }
+
+    async function storefrontRequest(query, variables = {}) {
+      const response = await fetch(SHOPIFY_API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Shopify-Storefront-Access-Token': SHOPIFY_STOREFRONT_TOKEN
+        },
+        body: JSON.stringify({ query, variables })
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || result.errors?.length) {
+        const messages = result.errors?.map((error) => error.message).join(', ') || 'Unable to reach Shopify.';
+        throw new Error(messages);
+      }
+
+      return result.data;
+    }
+
+    async function getCart(cartId) {
+      const query = `
+        query CartQuery($cartId: ID!) {
+          cart(id: $cartId) {
+            id
+            checkoutUrl
+            totalQuantity
+            cost {
+              subtotalAmount {
+                amount
+                currencyCode
+              }
+            }
+            lines(first: 20) {
+              edges {
+                node {
+                  id
+                  quantity
+                  cost {
+                    totalAmount {
+                      amount
+                      currencyCode
+                    }
+                  }
+                  merchandise {
+                    ... on ProductVariant {
+                      id
+                      product {
+                        title
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      `;
+
+      const data = await storefrontRequest(query, { cartId });
+      return data?.cart || null;
+    }
+
+    async function removeCartLine(lineId) {
+      if (!shopifyCart?.id) return;
+
+      const mutation = `
+        mutation CartLinesRemove($cartId: ID!, $lineIds: [ID!]!) {
+          cartLinesRemove(cartId: $cartId, lineIds: $lineIds) {
+            cart {
+              id
+              checkoutUrl
+              totalQuantity
+              cost {
+                subtotalAmount {
+                  amount
+                  currencyCode
+                }
+              }
+              lines(first: 20) {
+                edges {
+                  node {
+                    id
+                    quantity
+                    cost {
+                      totalAmount {
+                        amount
+                        currencyCode
+                      }
+                    }
+                    merchandise {
+                      ... on ProductVariant {
+                        id
+                        product {
+                          title
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            userErrors {
+              message
+            }
+          }
+        }
+      `;
+
+      const data = await storefrontRequest(mutation, {
+        cartId: shopifyCart.id,
+        lineIds: [lineId]
+      });
+
+      const userErrors = data?.cartLinesRemove?.userErrors || [];
+      if (userErrors.length) {
+        throw new Error(userErrors.map((error) => error.message).join(', '));
+      }
+
+      return data?.cartLinesRemove?.cart;
+    }
+
+    async function updateCartLineQuantity(lineId, quantity) {
+      if (quantity <= 0) {
+        return removeCartLine(lineId);
+      }
+
+      const mutation = `
+        mutation CartLinesUpdate($cartId: ID!, $lines: [CartLineUpdateInput!]!) {
+          cartLinesUpdate(cartId: $cartId, lines: $lines) {
+            cart {
+              id
+              checkoutUrl
+              totalQuantity
+              cost {
+                subtotalAmount {
+                  amount
+                  currencyCode
+                }
+              }
+              lines(first: 20) {
+                edges {
+                  node {
+                    id
+                    quantity
+                    cost {
+                      totalAmount {
+                        amount
+                        currencyCode
+                      }
+                    }
+                    merchandise {
+                      ... on ProductVariant {
+                        id
+                        product {
+                          title
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            userErrors {
+              message
+            }
+          }
+        }
+      `;
+
+      const data = await storefrontRequest(mutation, {
+        cartId: shopifyCart.id,
+        lines: [{ id: lineId, quantity }]
+      });
+
+      const userErrors = data?.cartLinesUpdate?.userErrors || [];
+      if (userErrors.length) {
+        throw new Error(userErrors.map((e) => e.message).join(', '));
+      }
+
+      return data?.cartLinesUpdate?.cart;
+    }
+
+    async function initializeCart() {
+      try {
+        const storedCartId = localStorage.getItem(SHOPIFY_CART_STORAGE_KEY);
+
+        if (!storedCartId) {
+          renderCart(null);
+          return;
+        }
+
+        shopifyCart = await getCart(storedCartId);
+
+        if (!shopifyCart) {
+          localStorage.removeItem(SHOPIFY_CART_STORAGE_KEY);
+        }
+
+        renderCart(shopifyCart);
+      } catch (error) {
+        updateCartStatus(error.message || 'Unable to load your cart.', 'error');
+        renderCart(null);
+      }
+    }
+
+    if (cartTrigger && cartOverlay && cartDrawer && cartClose) {
+      cartTrigger.addEventListener('click', (event) => {
+        event.preventDefault();
+        openCart();
+      });
+
+      cartClose.addEventListener('click', closeCart);
+      cartOverlay.addEventListener('click', closeCart);
+
+      cartLines?.addEventListener('click', async (event) => {
+        const removeButton = event.target.closest('.cart-remove');
+        const qtyButton = event.target.closest('.cart-qty-btn');
+        if ((!removeButton && !qtyButton) || cartBusy) return;
+
+        try {
+          cartBusy = true;
+          updateCartStatus('Updating cart...', 'warning');
+          if (removeButton) {
+            shopifyCart = await removeCartLine(removeButton.dataset.lineId);
+          } else {
+            shopifyCart = await updateCartLineQuantity(qtyButton.dataset.lineId, parseInt(qtyButton.dataset.qty, 10));
+          }
+          renderCart(shopifyCart);
+          updateCartStatus('Cart updated.', 'success');
+        } catch (error) {
+          updateCartStatus(error.message || 'Unable to update your cart.', 'error');
+        } finally {
+          cartBusy = false;
+        }
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          closeCart();
+        }
+      });
+    }
+
+    renderCart(null);
+    initializeCart();
+  </script>
+</body>
+</html>
