@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alta Heights / Drink Independent</title>
+  <meta
+    name="description"
+    content="Why we drink independent: the problem with mass-market wine, how Alta Heights is fixing it, and what makes California Alpine Wine different."
+  />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* ── DRINK INDEPENDENT PAGE ── */
+
+    /* Opening manifesto */
+    .di-opening {
+      padding: clamp(72px, 10vw, 120px) 0;
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .di-opening .wrap {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .di-opening-label {
+      font-family: "Klumpp", monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--faded);
+      display: block;
+      margin-bottom: 32px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 12px;
+    }
+
+    .di-opening p {
+      font-family: "SK Payidar Light", Arial, sans-serif;
+      font-size: clamp(1.15rem, 2.2vw, 1.45rem);
+      line-height: 1.6;
+      margin: 0 0 1.4em;
+      color: var(--ink);
+    }
+
+    .di-opening p:last-child {
+      margin-bottom: 0;
+    }
+
+    .di-opening strong {
+      font-family: "SK Payidar Bold", Georgia, serif;
+      font-weight: 700;
+    }
+
+    /* Two-column text + image block */
+    .di-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .di-split-text {
+      padding: clamp(48px, 7vw, 96px) clamp(28px, 4vw, 64px) clamp(48px, 7vw, 96px) clamp(14px, 3vw, 28px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 24px;
+    }
+
+    .di-split-text .wrap {
+      width: 100%;
+      max-width: none;
+    }
+
+    .di-split-text h2 {
+      font-family: "SK Payidar Bold", Georgia, serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.0;
+      letter-spacing: -0.04em;
+      margin: 0;
+    }
+
+    .di-split-text p {
+      font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+      line-height: 1.6;
+      color: var(--faded);
+      margin: 0;
+    }
+
+    .di-split-image {
+      position: relative;
+      min-height: 520px;
+      overflow: hidden;
+      border-left: 1px solid var(--line);
+    }
+
+    .di-split-image img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .di-split.reverse .di-split-image {
+      border-left: none;
+      border-right: 1px solid var(--line);
+      order: -1;
+    }
+
+    /* Pull quote */
+    .di-pullquote {
+      padding: clamp(72px, 10vw, 128px) 0 clamp(44px, 6vw, 72px);
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+      text-align: center;
+    }
+
+    .di-pullquote .wrap {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .di-pullquote blockquote {
+      margin: 0;
+      padding: 0;
+    }
+
+    .di-pullquote blockquote p {
+      font-family: "SK Payidar Bold", Georgia, serif;
+      font-size: clamp(2rem, 5vw, 4.2rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+      margin: 0 0 32px;
+    }
+
+    .di-pullquote cite {
+      font-family: "Klumpp", monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--faded);
+      font-style: normal;
+    }
+
+    .di-pullquote-copy {
+      max-width: 700px;
+      margin: 28px auto 0;
+      font-size: clamp(1rem, 1.7vw, 1.12rem);
+      line-height: 1.65;
+      color: var(--faded);
+    }
+
+    .di-pullquote-sticker {
+      width: min(100%, 340px);
+      margin: 28px auto 0;
+    }
+
+    .di-pullquote-sticker img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Stats / data row */
+    .di-stats {
+      padding: clamp(64px, 8vw, 100px) 0;
+      border-bottom: 1px solid var(--line);
+      background: var(--paper);
+    }
+
+    .di-stats .wrap {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+    }
+
+    .di-stat-item {
+      background: var(--paper);
+      padding: clamp(32px, 5vw, 56px) clamp(24px, 4vw, 48px);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .di-stat-number {
+      font-family: "SK Payidar Bold", Georgia, serif;
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      line-height: 0.9;
+      letter-spacing: -0.04em;
+      color: var(--error);
+    }
+
+    .di-stat-label {
+      font-family: "Klumpp", monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--faded);
+    }
+
+    .di-stat-desc {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: var(--ink);
+      max-width: 28ch;
+    }
+
+    /* Full-bleed image interlude */
+    .di-interlude {
+      position: relative;
+      height: clamp(360px, 55vw, 640px);
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .di-interlude img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 40%;
+    }
+
+    .di-interlude-caption {
+      position: absolute;
+      bottom: 24px;
+      right: 24px;
+      font-family: "Klumpp", monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: rgba(255,255,255,0.6);
+    }
+
+    /* Manifesto list */
+    .di-manifesto {
+      padding: clamp(52px, 7vw, 84px) 0;
+      background: var(--paper);
+      background-image:
+        radial-gradient(circle at 20% 20%, rgba(23,22,20,0.03) 0 1px, transparent 1px),
+        linear-gradient(rgba(23,22,20,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(23,22,20,0.025) 1px, transparent 1px);
+      background-size: 18px 18px, 26px 26px, 26px 26px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .di-manifesto .wrap {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: clamp(32px, 6vw, 80px);
+      align-items: start;
+    }
+
+    .di-manifesto-label {
+      font-family: "Klumpp", monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--blue);
+      padding-top: 4px;
+    }
+
+    .di-manifesto-items {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      counter-reset: manifesto;
+    }
+
+    .di-manifesto-items li {
+      counter-increment: manifesto;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--line-soft);
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 20px;
+      align-items: baseline;
+    }
+
+    .di-manifesto-items li:first-child {
+      border-top: 1px solid var(--line-soft);
+    }
+
+    .di-manifesto-items li::before {
+      content: "0" counter(manifesto);
+      font-family: "Klumpp", monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--faded);
+      padding-top: 4px;
+    }
+
+    .di-manifesto-items li h3 {
+      font-family: "SK Payidar Bold", Georgia, serif;
+      font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+      letter-spacing: -0.03em;
+      margin: 0 0 8px;
+      line-height: 1.1;
+    }
+
+    .di-manifesto-items li p {
+      margin: 0;
+      font-size: 1rem;
+      color: var(--faded);
+      line-height: 1.55;
+      max-width: 52ch;
+    }
+
+    /* CTA block */
+    .di-cta {
+      padding: clamp(48px, 7vw, 80px) 0;
+      background: var(--paper);
+      text-align: center;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .di-cta .wrap {
+      max-width: 640px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .di-cta-kicker {
+      font-family: "Klumpp", monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--faded);
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 10px;
+      align-self: stretch;
+      text-align: center;
+    }
+
+    .di-cta h2 {
+      font-family: "SK Payidar Bold", Georgia, serif;
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      line-height: 1.0;
+      letter-spacing: -0.04em;
+      margin: 0;
+    }
+
+    .di-cta p {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: var(--faded);
+      margin: 0;
+      max-width: 40ch;
+    }
+
+    .di-cta-actions {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn-large {
+      font-size: 13px;
+      min-height: 48px;
+      padding: 0 8px;
+      letter-spacing: 0.12em;
+    }
+
+    .btn-primary {
+      color: var(--error);
+      border-bottom-color: var(--error);
+    }
+
+    .btn-primary:hover {
+      color: var(--error);
+      opacity: 0.7;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .di-split {
+        grid-template-columns: 1fr;
+      }
+
+      .di-split-image {
+        min-height: 360px;
+        border-left: none !important;
+        border-right: none !important;
+        border-top: 1px solid var(--line);
+      }
+
+      .di-split.reverse .di-split-image {
+        order: 0;
+      }
+
+      .di-stats .wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .di-manifesto .wrap {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .di-split-text {
+        padding: 40px 20px;
+      }
+
+      .di-stat-item {
+        padding: 28px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="age-gate" id="age-gate" aria-hidden="true">
+    <div class="age-gate-card" role="dialog" aria-modal="true" aria-labelledby="age-gate-title">
+      <span class="tag mono">21+ Only</span>
+      <h2 class="serif" id="age-gate-title">Please confirm you are 21 or older to enter.</h2>
+      <p class="muted">Alta Heights is a wine site. By entering, you confirm you are of legal drinking age in your location.</p>
+      <div class="age-gate-actions">
+        <button class="btn mono age-gate-enter" id="age-gate-enter" type="button">I Am 21+</button>
+        <a class="btn mono age-gate-exit" href="https://www.google.com">Exit</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="nav nav-bleed">
+      <div class="brand">
+        <a href="index.html"><img src="images/ALTA_23_Logos_Orange_Primary Horiz copy.png" alt="Alta Heights" class="brand-logo"></a>
+        <div class="brand-sub mono">California Alpine Wine / Drink Independent</div>
+      </div>
+
+      <nav class="nav-links mono" aria-label="Primary navigation">
+        <a href="index.html">Home</a>
+        <a href="index.html#wines">Wines</a>
+        <a href="index.html#journal">Journal</a>
+        <a href="about.html">About</a>
+        <a href="trade.html">Trade</a>
+        <a href="#cart" id="cart-trigger" aria-controls="site-cart" aria-expanded="false">Cart <span id="cart-count">[0]</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="di-pullquote">
+      <div class="wrap">
+        <blockquote>
+          <p>Boring, pretentious wines are ruining our good times.</p>
+          <cite>Drink Independent / Alta Heights</cite>
+        </blockquote>
+        <p class="di-pullquote-copy">Alta Heights is a fiercely independent operation. In response to the epidemic of growing corporate consolidation, private equity acquisitions, incentivized critics and paid influencers in wine, we have chosen our fighter - the independent voices that keep wine exciting.</p>
+        <div class="di-pullquote-sticker">
+          <img src="images/bumpersticker.png" alt="Drink Independent bumper sticker graphic">
+        </div>
+      </div>
+    </section>
+
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-box">
+          <div class="brand-title serif">Alta Heights</div>
+          <div class="brand-sub mono">California Alpine Wine</div>
+          <p class="muted">
+            A love letter to the rugged mountain frontiers of California and the spirit of exploration.
+          </p>
+        </div>
+
+        <div class="footer-box">
+          <h4 class="mono">Index</h4>
+          <div class="footer-links mono small">
+            <a href="index.html">Field Index</a>
+            <a href="index.html#wines">Wine List</a>
+            <a href="index.html#journal">Journal</a>
+            <a href="index.html#find">Find It</a>
+          </div>
+        </div>
+
+        <div class="footer-box">
+          <h4 class="mono">Other Pages</h4>
+          <div class="footer-links mono small">
+            <a href="about.html">About</a>
+            <a href="drink-independent.html">Drink Independent</a>
+            <a href="trade.html">Trade</a>
+            <a href="mailto:hello@altaheightswine.com">Contact</a>
+            <a href="https://www.instagram.com/altaheightswine/" target="_blank" rel="noopener noreferrer">Instagram</a>
+          </div>
+        </div>
+
+        <div class="footer-box">
+          <h4 class="mono">Issue Notes</h4>
+          <div class="footer-links mono small">
+            <span>route archive</span>
+            <span>weather logs</span>
+            <span>elevation markers</span>
+            <span>please enjoy responsibly</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom mono">
+        <span>© 2026 Alta Heights</span>
+        <span>Field Index / Issue 01</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const SHOPIFY_DOMAIN = 'model-store-9670.myshopify.com';
+    const SHOPIFY_STOREFRONT_TOKEN = 'c719c0ff58ad08733d78f86785c95857';
+    const SHOPIFY_API_URL = `https://${SHOPIFY_DOMAIN}/api/2026-01/graphql.json`;
+    const SHOPIFY_CART_STORAGE_KEY = 'altaHeightsShopifyCartId';
+    const AGE_GATE_STORAGE_KEY = 'altaHeightsAgeVerified';
+    const cartTrigger = document.querySelector('#cart-trigger');
+    const cartCount = document.querySelector('#cart-count');
+    const cartOverlay = document.querySelector('#cart-overlay');
+    const cartDrawer = document.querySelector('#site-cart');
+    const cartClose = document.querySelector('#cart-close');
+    const cartStatus = document.querySelector('#cart-status');
+    const cartEmpty = document.querySelector('#cart-empty');
+    const cartLines = document.querySelector('#cart-lines');
+    const cartSubtotal = document.querySelector('#cart-subtotal');
+    const cartCheckout = document.querySelector('#cart-checkout');
+    const ageGate = document.querySelector('#age-gate');
+    const ageGateEnter = document.querySelector('#age-gate-enter');
+
+    // Age gate
+    function openAgeGate() {
+      ageGate.removeAttribute('aria-hidden');
+      document.body.classList.add('age-gate-open');
+    }
+    function closeAgeGate() {
+      ageGate.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('age-gate-open');
+    }
+    if (!localStorage.getItem(AGE_GATE_STORAGE_KEY)) openAgeGate();
+    ageGateEnter?.addEventListener('click', () => {
+      localStorage.setItem(AGE_GATE_STORAGE_KEY, '1');
+      closeAgeGate();
+    });
+
+    // Cart
+    function openCart() {
+      cartDrawer.removeAttribute('aria-hidden');
+      cartOverlay.removeAttribute('hidden');
+      document.body.classList.add('cart-open');
+      cartTrigger?.setAttribute('aria-expanded', 'true');
+    }
+    function closeCart() {
+      cartDrawer.setAttribute('aria-hidden', 'true');
+      cartOverlay.setAttribute('hidden', '');
+      document.body.classList.remove('cart-open');
+      cartTrigger?.setAttribute('aria-expanded', 'false');
+    }
+    cartTrigger?.addEventListener('click', e => { e.preventDefault(); openCart(); });
+    cartClose?.addEventListener('click', closeCart);
+    cartOverlay?.addEventListener('click', closeCart);
+
+    function formatMoney(amount, currency) {
+      return new Intl.NumberFormat('en-US', { style: 'currency', currency }).format(amount);
+    }
+    async function getOrCreateCart() {
+      const id = localStorage.getItem(SHOPIFY_CART_STORAGE_KEY);
+      if (id) {
+        const res = await fetch(SHOPIFY_API_URL, {
+          method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Shopify-Storefront-Access-Token': SHOPIFY_STOREFRONT_TOKEN },
+          body: JSON.stringify({ query: `{ cart(id:"${id}"){id checkoutUrl lines(first:20){edges{node{id quantity merchandise{...on ProductVariant{id title priceV2{amount currencyCode}product{title}}}}}} cost{totalAmount{amount currencyCode}}} }` })
+        });
+        const { data } = await res.json();
+        if (data?.cart) return data.cart;
+      }
+      const res = await fetch(SHOPIFY_API_URL, {
+        method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Shopify-Storefront-Access-Token': SHOPIFY_STOREFRONT_TOKEN },
+        body: JSON.stringify({ query: `mutation { cartCreate { cart { id checkoutUrl lines(first:20){edges{node{id quantity merchandise{...on ProductVariant{id title priceV2{amount currencyCode}product{title}}}}}} cost{totalAmount{amount currencyCode}} } } }` })
+      });
+      const { data } = await res.json();
+      const cart = data?.cartCreate?.cart;
+      if (cart) localStorage.setItem(SHOPIFY_CART_STORAGE_KEY, cart.id);
+      return cart;
+    }
+    async function renderCart(cart) {
+      const lines = cart?.lines?.edges || [];
+      cartCount.textContent = `[${lines.reduce((s, e) => s + e.node.quantity, 0)}]`;
+      cartEmpty.style.display = lines.length ? 'none' : '';
+      cartLines.innerHTML = lines.map(({ node }) => `
+        <div class="cart-line-item" data-line-id="${node.id}">
+          <div class="cart-line-info">
+            <div class="cart-line-title mono small">${node.merchandise.product.title}</div>
+            <div class="cart-line-price muted mono small">${formatMoney(node.merchandise.priceV2.amount, node.merchandise.priceV2.currencyCode)} × ${node.quantity}</div>
+          </div>
+          <button class="cart-remove btn mono small" data-line-id="${node.id}" aria-label="Remove item">×</button>
+        </div>`).join('');
+      cartSubtotal.textContent = cart?.cost?.totalAmount ? formatMoney(cart.cost.totalAmount.amount, cart.cost.totalAmount.currencyCode) : '$0.00';
+      if (cart?.checkoutUrl) { cartCheckout.href = cart.checkoutUrl; cartCheckout.removeAttribute('aria-disabled'); }
+      document.querySelectorAll('.cart-remove').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const lineId = btn.dataset.lineId;
+          const c = await getOrCreateCart();
+          const res = await fetch(SHOPIFY_API_URL, {
+            method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Shopify-Storefront-Access-Token': SHOPIFY_STOREFRONT_TOKEN },
+            body: JSON.stringify({ query: `mutation { cartLinesRemove(cartId:"${c.id}", lineIds:["${lineId}"]){ cart { id checkoutUrl lines(first:20){edges{node{id quantity merchandise{...on ProductVariant{id title priceV2{amount currencyCode}product{title}}}}}} cost{totalAmount{amount currencyCode}} } } }` })
+          });
+          const { data } = await res.json();
+          renderCart(data?.cartLinesRemove?.cart);
+        });
+      });
+    }
+    getOrCreateCart().then(renderCart).catch(() => {});
+  </script>
+</body>
+</html>
