@@ -3,12 +3,351 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Alta Heights / Field Index</title>
+  <title>Alta Heights / Shop</title>
   <meta
     name="description"
-    content="Alta Heights — California Alpine Wine. A cult mountain magazine meets an off-grid wine archive."
+    content="Shop Alta Heights — California Alpine Wine. Order online and drink independent."
   />
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* SHOP PAGE SPECIFIC */
+    .shop-hero {
+      min-height: 320px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .shop-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(23,22,20,0.62), rgba(23,22,20,0.12));
+      z-index: 1;
+    }
+
+    .shop-hero-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 30%;
+      z-index: 0;
+    }
+
+    .shop-hero-inner {
+      position: relative;
+      z-index: 2;
+      width: min(calc(100% - 28px), var(--max));
+      margin: 0 auto;
+      padding: 28px 0;
+      color: var(--white);
+    }
+
+    .shop-hero-inner h1 {
+      margin: 12px 0 0;
+      font-size: clamp(2.8rem, 7vw, 6rem);
+      line-height: 0.88;
+      text-transform: uppercase;
+    }
+
+    .shop-section {
+      padding: 32px 0 60px;
+    }
+
+    .shop-filters {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+
+    .shop-filter-btn {
+      padding: 6px 0;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-family: "Klumpp", "Courier New", Courier, monospace;
+      color: var(--faded);
+      background: transparent;
+      border: 0;
+      border-bottom: 1px solid transparent;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .shop-filter-btn.active,
+    .shop-filter-btn:hover {
+      color: var(--blue);
+      border-bottom-color: var(--blue);
+    }
+
+    .shop-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .shop-card {
+      display: flex;
+      flex-direction: column;
+      padding: 24px 20px 28px;
+      border-right: 1px solid var(--line-soft);
+      border-bottom: 1px solid var(--line-soft);
+    }
+
+    .shop-card.is-focused {
+      background: rgba(0, 81, 139, 0.06);
+      box-shadow: inset 0 0 0 1px rgba(0, 81, 139, 0.22);
+    }
+
+    .shop-card:nth-child(3n) {
+      border-right: 0;
+    }
+
+    .shop-card-image-wrap {
+      aspect-ratio: 3 / 3.6;
+      overflow: hidden;
+      background: var(--paper);
+      margin-bottom: 18px;
+      position: relative;
+    }
+
+    .shop-card-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .shop-card:hover .shop-card-image {
+      transform: scale(1.03);
+    }
+
+    .shop-card-image-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .shop-bottle-placeholder {
+      width: 42px;
+      height: 130px;
+      border-radius: 16px 16px 8px 8px;
+      background: linear-gradient(180deg, #404748 0%, #161919 80%);
+      position: relative;
+      box-shadow: 0 8px 14px rgba(23,22,20,0.08);
+    }
+
+    .shop-bottle-placeholder::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: -20px;
+      transform: translateX(-50%);
+      width: 12px;
+      height: 26px;
+      background: #1d2122;
+      border-radius: 3px 3px 2px 2px;
+    }
+
+    .shop-bottle-placeholder::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50px;
+      transform: translateX(-50%);
+      width: 26px;
+      height: 36px;
+      background: #f3eee4;
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .shop-card-meta {
+      font-family: "Klumpp", "Courier New", Courier, monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--blue);
+      margin-bottom: 6px;
+    }
+
+    .shop-card h2 {
+      margin: 0 0 8px;
+      font-size: 1.9rem;
+      line-height: 0.92;
+      text-transform: uppercase;
+    }
+
+    .shop-card-desc {
+      font-size: 13px;
+      color: var(--faded);
+      line-height: 1.5;
+      flex: 1;
+      margin-bottom: 20px;
+    }
+
+    .shop-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line-soft);
+    }
+
+    .shop-card-price {
+      font-family: "SK Payidar Light", Arial, Helvetica, sans-serif;
+      font-size: 14px;
+      color: var(--ink);
+      letter-spacing: 0.04em;
+    }
+
+    .shop-card-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .shop-add-btn {
+      font-family: "Klumpp", "Courier New", Courier, monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--error);
+      background: var(--error-soft);
+      border: 1px solid rgba(208, 93, 39, 0.32);
+      padding: 0 14px;
+      min-height: 36px;
+      cursor: pointer;
+      transition: color 0.2s, background 0.2s, border-color 0.2s;
+      display: flex;
+      align-items: center;
+    }
+
+    .shop-add-btn:hover:not(:disabled) {
+      color: var(--white);
+      background: var(--error);
+      border-color: var(--error);
+    }
+
+    .shop-add-btn:disabled {
+      color: var(--faded);
+      background: transparent;
+      border-color: var(--line);
+      cursor: not-allowed;
+    }
+
+    .shop-details-link {
+      font-family: "Klumpp", "Courier New", Courier, monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--faded);
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 1px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .shop-details-link:hover {
+      color: var(--error);
+      border-bottom-color: var(--error);
+    }
+
+    /* LOADING / EMPTY / ERROR STATES */
+    .shop-state {
+      grid-column: 1 / -1;
+      padding: 60px 0;
+      text-align: center;
+      color: var(--faded);
+      font-family: "Klumpp", "Courier New", Courier, monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .shop-state-title {
+      font-family: "SK Payidar Bold", Georgia, serif;
+      font-size: 2rem;
+      color: var(--ink);
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .shop-loading-dots {
+      display: inline-flex;
+      gap: 6px;
+      margin-top: 16px;
+    }
+
+    .shop-loading-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--blue);
+      animation: shop-pulse 1.2s ease-in-out infinite;
+    }
+
+    .shop-loading-dot:nth-child(2) { animation-delay: 0.2s; }
+    .shop-loading-dot:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes shop-pulse {
+      0%, 80%, 100% { opacity: 0.2; transform: scale(0.8); }
+      40% { opacity: 1; transform: scale(1); }
+    }
+
+    @media (max-width: 1220px) {
+      .shop-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 860px) {
+      .shop-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .shop-card:nth-child(3n) {
+        border-right: 1px solid var(--line-soft);
+      }
+
+      .shop-card:nth-child(2n) {
+        border-right: 0;
+      }
+
+      .shop-hero {
+        min-height: 240px;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .shop-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .shop-card,
+      .shop-card:nth-child(3n),
+      .shop-card:nth-child(2n) {
+        border-right: 0;
+      }
+
+      .shop-hero {
+        min-height: 200px;
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="age-gate" id="age-gate" aria-hidden="true">
@@ -24,305 +363,50 @@
   </div>
 
   <header class="site-header">
-    <div class="nav nav-bleed">
+    <div class="wrap nav">
       <div class="brand">
-        <img src="images/ALTA_23_Logos_Treated_Orange_Primary Horiz.svg" alt="Alta Heights" class="brand-logo">
-        <div class="brand-sub mono">California Alpine Wine / Field Index / Issue 01</div>
+        <a href="https://altaheightswine.com" class="brand-title serif">Alta Heights</a>
+        <div class="brand-sub mono">California Alpine Wine / Shop</div>
       </div>
 
       <nav class="nav-links mono" aria-label="Primary navigation">
-        <a href="#wines">Wines</a>
-        <a href="#journal">Journal</a>
-        <a href="#find">Find It</a>
-        <a href="about.html">About</a>
-        <a href="trade.html">Trade</a>
+        <a href="https://altaheightswine.com">Home</a>
+        <a href="https://altaheightswine.com/#wines">Wines</a>
+        <a href="https://altaheightswine.com/#journal">Journal</a>
+        <a href="https://altaheightswine.com/about.html">About</a>
+        <a href="https://altaheightswine.com/trade.html">Trade</a>
         <a href="#cart" id="cart-trigger" aria-controls="site-cart" aria-expanded="false">Cart <span id="cart-count">[0]</span></a>
       </nav>
     </div>
   </header>
 
   <main>
-    <section class="section" id="index">
-      <div class="hero-grid">
-        <div class="hero-main">
-          <img src="images/Yosemite_NoWhite.jpeg" alt="Yosemite landscape" class="hero-bg-img">
-          <div class="hero-inner">
-            <div class="hero-top mono small">
-              <span>California Alpine Wine</span>
-              <span>Field Release / 2026</span>
-            </div>
-
-            <div class="hero-copy">
-              <h1 class="serif">A Mountain Club That Makes Wine.</h1>
-              <p>
-                Alta Heights is a love letter to the rugged mountain frontiers of California and the spirit of exploration.
-              </p>
-              <div class="hero-actions mono">
-                <a href="drink-independent.html" class="btn">drink independent</a>
-              </div>
-            </div>
-            <div class="hero-bottom">
-              <span>Open skies / route numbers / rough maps / slow ripening / coastlines</span>
-              <span>Not optimized for everyone</span>
-            </div>
-
-            <div class="hero-note">
-              <div class="mono small">Note from Us</div>
-              <p>
-               We hope you'll stay awhile. Trek through the margins and sub-pages of our world. Look for us in print soon.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="hero-sidebar">
-          <div class="sidebar-block">
-            <div class="mono small muted">Issue 01 / 2024 Vintage</div>
-            <dl class="sidebar-stats mono small">
-              <div><dt>Elevation</dt><dd>1000 – 2,800 ft</dd></div>
-              <div><dt>Regions</dt><dd>Santa Cruz Mtns / Sonoma Mtn / Mendocino Ridge</dd></div>
-              <div><dt>Farming</dt><dd>Organic / hand-farmed</dd></div>
-              <div><dt>Varieties</dt><dd>Chard / Rosé / Pinot / Cabernet</dd></div>
-            </dl>
-          </div>
-
-          <div class="sidebar-block">
-            <p class="serif sidebar-line">Peak <br> Vibrancy <br>& Verve.</p>
-            <p class="mono small muted"> A never-ending search for the top.</p>
-          </div>
-
-          <div class="sidebar-block">
-            <p class="muted sidebar-body">The Mountains make our wines. It is where we find our inspiration and the spark that keeps our fire lit. We were led here by long dirt roads, miles from nowhere, up some remote mountain top, to a vineyard tucked into the sky. Enjoy the view.</p>
-          </div>
-
-          <div class="sidebar-block sidebar-block--footer">
-            <p class="serif sidebar-line sidebar-line--sm">Elevation. Coastal Air. Rocky Peaks. <br>Made by Hand.</p>
-            <p class="muted sidebar-body">A true departure from the valley floor wines that flood the shelves, we plant our flag at the summits. <br><br>Raise the standard with wines that reflect the rugged beauty and relentless spirit of the California Alpine. Organically grown, naturally fermented, handcrafted wines of peak vibrancy and verve.</p>
-            <div class="mono small muted sidebar-vintage">Issue 01 / 2024 Vintage</div>
-          </div>
-        </div>
+    <div class="shop-hero">
+      <img src="images/MtTam1.jpeg" alt="Mountain landscape" class="shop-hero-bg">
+      <div class="shop-hero-inner">
+        <div class="mono small" style="color: rgba(255,253,248,0.7);">Shop / All Bottles</div>
+        <h1 class="serif">Drink Independent.</h1>
       </div>
-    </section>
+    </div>
 
-    <section class="section rule-top" id="wines">
-      <div class="wrap scatter">
-        <div class="wines-heading">
-          <span class="tag mono">Wine List</span>
-        </div>
-
-        <div class="wines-list">
-          <article class="wine-row">
-            <div class="wine-bottle-wrap"><img src="/images/chard-gif-edit.gif" alt="2024 Alta Heights Chardonnay" class="wine-bottle-img"></div>
-            <div class="wine-name">
-              <div class="mono small muted">01 / White / salt Air</div>
-              <h3 class="serif">Chardonnay</h3>
-            </div>
-            <div class="wine-desc">
-              Crisp citrus, cool wind, and coastal tension come together in this breath of fresh air.
-            </div>
-            <div class="wine-meta">
-              $25
-              <a href="#" class="btn mono small add-to-cart-btn" data-shopify-handle="2023-alta-heights-chardonnay">Add to Pack</a>
-              <a href="https://shop.altaheightswine.com/?product=2023-alta-heights-chardonnay" class="btn mono small">Read More</a>
-            </div>
-          </article>
-
-          <article class="wine-row">
-            <div class="wine-bottle-wrap"><img src="/images/pn-gif.gif" alt="2024 Alta Heights Pinot Noir" class="wine-bottle-img"></div>
-            <div class="wine-name">
-              <div class="mono small muted">02 / Red / Redwood Forest</div>
-              <h3 class="serif">Pinot Noir</h3>
-            </div>
-            <div class="wine-desc">
-              Wild berries, alpine herbs, and lifted mountain acidity match deep mountain concentration.
-            </div>
-            <div class="wine-meta">
-              $25
-              <a href="#" class="btn mono small add-to-cart-btn" data-shopify-handle="2024-alta-heights-pinot-noir">Add to Pack</a>
-              <a href="https://shop.altaheightswine.com/?product=2024-alta-heights-pinot-noir" class="btn mono small">Read More</a>
-            </div>
-          </article>
-
-          <article class="wine-row">
-            <div class="wine-bottle-wrap"><img src="/images/ahrose.jpg" alt="2024 Alta Heights Rosé" class="wine-bottle-img"></div>
-            <div class="wine-name">
-              <div class="mono small muted">03 / Pink / Flotilla Season</div>
-              <h3 class="serif">Rosé</h3>
-            </div>
-            <div class="wine-desc">
-              Dry, bright, and almost too delicious. Best in the presence of pals and on uneven ground.
-            </div>
-            <div class="wine-meta">
-              $25
-              <button type="button" class="btn mono small" disabled aria-disabled="true">Coming Soon</button>
-              <a href="https://shop.altaheightswine.com/?filter=ros%C3%A9" class="btn mono small">Read More</a>
-            </div>
-          </article>
-
-          <article class="wine-row">
-            <div class="wine-bottle-wrap"><img src="/images/ahcab.jpg" alt="2024 Alta Heights Cab Sauv" class="wine-bottle-img"></div>
-            <div class="wine-name">
-              <div class="mono small muted">04 / Mixed Terrain / Field Issue</div>
-              <h3 class="serif">Cab Sauv</h3>
-            </div>
-            <div class="wine-desc">
-              A livelier, fresher expression of California Mountain Cab. This is what we have all been waiting for.
-            </div>
-            <div class="wine-meta">
-              $25
-              <button type="button" class="btn mono small" disabled aria-disabled="true">Coming Soon</button>
-              <a href="https://shop.altaheightswine.com/?filter=red" class="btn mono small">Read More</a>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="di-pullquote">
+    <section class="shop-section">
       <div class="wrap">
-        <blockquote>
-          <p>"To grow grapes and produce wines in the mountains, you have to be a lot more dedicated. Most of us do it because we love it."</p>
-          <cite>— Ken Burnap, Santa Cruz Mountain Vineyard, 1979</cite>
-        </blockquote>
-      </div>
-    </section>
-
-    <section class="stats-section">
-      <div class="wrap">
-        <div class="stats-grid">
-          <div class="stats-cell">
-            <div class="stats-number">100%</div>
-            <div class="stats-label mono">mountain grown, <br>Superior Wines</div>
-            <p>Every bottle grow in mountain-designated AVAs. No valley floor filler.</p>
-          </div>
-          <div class="stats-cell">
-            <div class="stats-number">ZERO</div>
-            <div class="stats-label mono">Corporate <br>Industrial Nonsense</div>
-            <p>Human-powered wines made with only grapes.</p>
-          </div>
-          <div class="stats-cell">
-            <div class="stats-number">+ More</div>
-            <div class="stats-label mono">of the good stuff</div>
-            <p>More mountains to climb. More is more. Just enjoy it.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="di-split reverse">
-      <div class="di-split-text">
-        <span class="tag mono">What is California Alpine Wine</span>
-        <h2 class="serif">Pure, alive, and inconvenient.</h2>
-        <p>
-          Mountain wine is the purist expression of terroir. Weathered-in-place soils create individualistic wines that are unlike anything else. The vineyards we work with are alive with the natural flora and fauna that surround them, cultivated by nature - not by machine. The hillsides are steep, the weather can be harsh, the hand-work is daunting. It's highly inconvenient and not optimized for everyone. As Ken Burnap said, we do it because we love it.
-        </p>
-        <p>
-         Mountain wines are more concentrated, more aromatic, more food-friendly. The tannins have texture rather than just grip. The acidity is fresh and real, not added. These are the qualities that only emerge from place, season, and honest winemaking. 
-        </p>
-      </div>
-      <div class="di-split-image">
-        <img src="images/Redwood1.jpeg" alt="Redwood forest mountain terrain">
-      </div>
-    </section>
-
-    <section class="section rule-top mailing-list-section" id="mailing-list">
-      <div class="wrap scatter">
-        <div class="mailing-list-signup">
-          <span class="tag mono">Mailing List</span>
-          <h2 class="serif">Join the list for releases, dispatches from the field, and all things Alta Heights.</h2>
-          <form class="stockist-search mailing-list-form" id="mailing-list-form">
-            <input type="text" name="name" placeholder="Name" />
-            <input type="email" name="email" placeholder="Email address" required />
-            <input type="text" name="company" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" />
-            <input type="hidden" name="form_loaded_at" id="form-loaded-at" />
-            <button class="btn mono" type="submit">Sign Up</button>
-          </form>
-          <p class="mailing-list-status mono small" id="mailing-list-status" aria-live="polite"></p>
-        </div>
-        <div class="mailing-list-divider" aria-hidden="true"></div>
-      </div>
-    </section>
-
-    <section class="section" id="journal">
-      <div class="wrap scatter">
-        <div class="journal-kicker">
-          <span class="tag mono">Journal</span>
+        <div class="shop-filters">
+          <span class="tag mono" style="border: 0; padding: 0; margin-right: 6px;">Filter</span>
+          <button class="shop-filter-btn active" data-filter="all" type="button">All</button>
+          <button class="shop-filter-btn" data-filter="white" type="button">White</button>
+          <button class="shop-filter-btn" data-filter="red" type="button">Red</button>
+          <button class="shop-filter-btn" data-filter="rosé" type="button">Rosé</button>
         </div>
 
-        <div class="journal-carousel">
-          <button class="journal-arrow journal-prev" aria-label="Previous entry">&#8592;</button>
-
-          <div class="journal-track-wrap">
-            <div class="journal-track">
-              <article class="story-row">
-                <img class="story-image" src="images/Halfdome2.jpeg" alt="Half Dome">
-                <div class="story-copy">
-                  <div class="mono small muted">Field Notes / 01</div>
-                  <h3 class="serif">The Spirit of California Alpine Wine</h3>
-                  <p>Why elevation, coastal influence, and weathered-in-place soils change the game.</p>
-                  <a href="field-notes-01.html" class="btn mono">Read Entry</a>
-                </div>
-              </article>
-
-              <article class="story-row">
-                <img class="story-image" src="images/PeaceRoof.jpeg" alt="Peace on top an RV.">
-                <div class="story-copy">
-                  <div class="mono small muted">Route Copy / 02</div>
-                  <h3 class="serif">On the Road</h3>
-                  <p>Let's Party: Where we will be and when.</p>
-                  <a href="#" class="btn mono">Read Entry</a>
-                </div>
-              </article>
-
-              <article class="story-row">
-                <img class="story-image" src="images/WinePatagonia2.png" alt="Drinking wine after a hike.">
-                <div class="story-copy">
-                  <div class="mono small muted">People + Place / 03</div>
-                  <h3 class="serif">The Pioneers</h3>
-                  <p>The lives, ideas, and obsessions we follow.</p>
-                  <a href="#" class="btn mono">Read Entry</a>
-                </div>
-              </article>
+        <div class="shop-grid" id="shop-grid">
+          <div class="shop-state" id="shop-loading">
+            <span class="shop-state-title">Loading the cellar.</span>
+            <div class="shop-loading-dots">
+              <span class="shop-loading-dot"></span>
+              <span class="shop-loading-dot"></span>
+              <span class="shop-loading-dot"></span>
             </div>
-          </div>
-
-          <button class="journal-arrow journal-next" aria-label="Next entry">&#8594;</button>
-        </div>
-
-        <div class="journal-dots mono small">
-          <span class="journal-dot active"></span>
-          <span class="journal-dot"></span>
-          <span class="journal-dot"></span>
-        </div>
-      </div>
-    </section>
-
-    <section class="section rule-top" id="find">
-      <div class="wrap scatter">
-        <div class="stockist-left">
-          <span class="tag mono">Find It</span>
-          <h2 class="serif">Find Alta Heights near you.</h2>
-          <p class="muted">
-            Search our current retail and restaurant placements by city, state, or account name.
-          </p>
-
-          <form class="stockist-search" id="stockist-search-form">
-            <input type="text" id="stockist-search-input" placeholder="City, state, or account" />
-            <button class="btn mono" type="submit">Search</button>
-          </form>
-
-          <div class="stockist-list mono small" id="stockist-list" aria-live="polite">
-            <p class="muted" id="stockist-empty-state">Search by city, state, or account name to reveal placements.</p>
-          </div>
-        </div>
-
-        <div class="stockist-map box">
-          <img src="images/Sierra2.jpeg" alt="Sierra Nevada landscape" class="section-bg-img">
-          <div class="map-box">
-            <div class="mono small">64 Placements / 7 States</div>
-            <p>
-              36 retail accounts and 28 restaurant placements in the current Alta Heights where-to-buy list.
-            </p>
           </div>
         </div>
       </div>
@@ -340,7 +424,7 @@
     </div>
 
     <div class="cart-status mono small" id="cart-status" aria-live="polite"></div>
-    <div class="cart-empty muted" id="cart-empty">Your cart is empty. Add a bottle from the wine list to begin.</div>
+    <div class="cart-empty muted" id="cart-empty">Your cart is empty. Add a bottle from the list to begin.</div>
     <div class="cart-lines" id="cart-lines"></div>
 
     <div class="cart-footer">
@@ -359,26 +443,25 @@
           <div class="brand-title serif">Alta Heights</div>
           <div class="brand-sub mono">California Alpine Wine</div>
           <p class="muted">
-            A love letter to the rugged mountain frontiers of California and the spirit of exploration. 
+            A love letter to the rugged mountain frontiers of California and the spirit of exploration.
           </p>
         </div>
 
         <div class="footer-box">
           <h4 class="mono">Index</h4>
           <div class="footer-links mono small">
-            <a href="#index">Field Index</a>
-            <a href="#wines">Wine List</a>
-            <a href="#journal">Journal</a>
-            <a href="#find">Find It</a>
+            <a href="https://altaheightswine.com">Home</a>
+            <a href="https://altaheightswine.com/#wines">Wine List</a>
+            <a href="https://altaheightswine.com/#journal">Journal</a>
+            <a href="https://altaheightswine.com/#find">Find It</a>
           </div>
         </div>
 
         <div class="footer-box">
           <h4 class="mono">Other Pages</h4>
           <div class="footer-links mono small">
-            <a href="about.html">About</a>
-            <a href="drink-independent.html">Drink Independent</a>
-            <a href="trade.html">Trade</a>
+            <a href="https://altaheightswine.com/about.html">About</a>
+            <a href="https://altaheightswine.com/trade.html">Trade</a>
             <a href="mailto:hello@altaheightswine.com">Contact</a>
             <a href="https://www.instagram.com/altaheightswine/" target="_blank" rel="noopener noreferrer">Instagram</a>
           </div>
@@ -397,23 +480,18 @@
 
       <div class="footer-bottom mono">
         <span>© 2026 Alta Heights</span>
-        <span>Field Index / Issue 01</span>
+        <span>Shop / Issue 01</span>
       </div>
     </div>
   </footer>
+
   <script>
-    const MAILING_LIST_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyHO_hZH7MkkO3MiH5Y8UJYUFyr7_MN2FyMe_W4yI6o28i3NFa6LzXyfh7bd0hjM40mCQ/exec';
     const SHOPIFY_DOMAIN = 'model-store-9670.myshopify.com';
     const SHOPIFY_STOREFRONT_TOKEN = 'c719c0ff58ad08733d78f86785c95857';
     const SHOPIFY_API_URL = `https://${SHOPIFY_DOMAIN}/api/2026-01/graphql.json`;
     const SHOPIFY_CART_STORAGE_KEY = 'altaHeightsShopifyCartId';
     const AGE_GATE_STORAGE_KEY = 'altaHeightsAgeVerified';
-    const track = document.querySelector('.journal-track');
-    const slides = document.querySelectorAll('.story-row');
-    const journalDots = document.querySelector('.journal-dots');
-    const trackWrap = document.querySelector('.journal-track-wrap');
-    const prev = document.querySelector('.journal-prev');
-    const next = document.querySelector('.journal-next');
+
     const cartTrigger = document.querySelector('#cart-trigger');
     const cartCount = document.querySelector('#cart-count');
     const cartOverlay = document.querySelector('#cart-overlay');
@@ -424,142 +502,17 @@
     const cartLines = document.querySelector('#cart-lines');
     const cartSubtotal = document.querySelector('#cart-subtotal');
     const cartCheckout = document.querySelector('#cart-checkout');
-    const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
-    const stockistSearchForm = document.querySelector('#stockist-search-form');
-    const stockistSearchInput = document.querySelector('#stockist-search-input');
-    const stockistList = document.querySelector('#stockist-list');
-    const mailingListForm = document.querySelector('#mailing-list-form');
-    const mailingListStatus = document.querySelector('#mailing-list-status');
+    const shopGrid = document.querySelector('#shop-grid');
     const ageGate = document.querySelector('#age-gate');
     const ageGateEnter = document.querySelector('#age-gate-enter');
-    let currentPage = 0;
-    let currentColumns = 3;
     let shopifyCart = null;
     let cartBusy = false;
+    let allProducts = [];
+    const shopParams = new URLSearchParams(window.location.search);
+    const requestedProductHandle = (shopParams.get('product') || '').toLowerCase();
+    const requestedFilter = (shopParams.get('filter') || 'all').toLowerCase();
 
-    const stockistPlacements = [
-      { name: 'Bay Grape', city: 'Oakland', state: 'California', type: 'Retail' },
-      { name: 'Gus Community Market', city: 'San Francisco', state: 'California', type: 'Retail' },
-      { name: 'Paul Marcus Wines', city: 'Oakland', state: 'California', type: 'Retail' },
-      { name: 'Pizzaiolo', city: 'Oakland', state: 'California', type: 'Restaurant' },
-      { name: 'Plumpjack Wines Noe Valley', city: 'San Francisco', state: 'California', type: 'Retail' },
-      { name: "Sonny's", city: 'Los Angeles', state: 'California', type: 'Restaurant' },
-      { name: 'Vinovore', city: 'Los Angeles', state: 'California', type: 'Retail' },
-      { name: 'Vintage Berkeley', city: 'Berkeley', state: 'California', type: 'Retail' },
-      { name: 'Wine On Piedmont', city: 'Oakland', state: 'California', type: 'Retail' },
-      { name: 'Ancora Vino', city: 'Los Gatos', state: 'California', type: 'Retail' },
-      { name: 'Bar And Garden', city: 'Culver City', state: 'California', type: 'Retail' },
-      { name: 'Deer Park Wines And Spirits', city: 'Aptos', state: 'California', type: 'Retail' },
-      { name: 'Disco Ranch', city: 'Boonville', state: 'California', type: 'Retail' },
-      { name: 'Half Moon Bay Cheese Company', city: 'Half Moon Bay', state: 'California', type: 'Retail' },
-      { name: 'Madison', city: 'Los Angeles', state: 'California', type: 'Retail' },
-      { name: 'Olive Wine And Liquor', city: 'Burbank', state: 'California', type: 'Retail' },
-      { name: 'Solano Cellars', city: 'Berkeley', state: 'California', type: 'Retail' },
-      { name: '11th & Bay Southern Table', city: 'Columbus', state: 'Georgia', type: 'Restaurant' },
-      { name: 'Avize', city: 'Atlanta', state: 'Georgia', type: 'Restaurant' },
-      { name: 'Barcelona Vinoteca', city: 'Atlanta', state: 'Georgia', type: 'Restaurant' },
-      { name: 'Bread & Butterfly', city: 'Atlanta', state: 'Georgia', type: 'Restaurant' },
-      { name: 'Druid Hills Golf Club Inc', city: 'Atlanta', state: 'Georgia', type: 'Restaurant' },
-      { name: 'Elemental Spirits Co', city: 'Atlanta', state: 'Georgia', type: 'Retail' },
-      { name: "Kelly's Market", city: 'Decatur', state: 'Georgia', type: 'Retail' },
-      { name: "Liam's Restaurant", city: 'Thomasville', state: 'Georgia', type: 'Restaurant' },
-      { name: 'New York Butcher Shoppe', city: 'Columbus', state: 'Georgia', type: 'Retail' },
-      { name: 'The Bottle Shop', city: 'Columbus', state: 'Georgia', type: 'Retail' },
-      { name: 'Wahoo Wine & Provisions', city: 'Decatur', state: 'Georgia', type: 'Restaurant' },
-      { name: 'Brush Sushi', city: 'Atlanta', state: 'Georgia', type: 'Restaurant' },
-      { name: 'Candler Park Market', city: 'Atlanta', state: 'Georgia', type: 'Retail' },
-      { name: 'Citi Wine And Spirits', city: 'Atlanta', state: 'Georgia', type: 'Retail' },
-      { name: "My Friend's Bottle Shop", city: 'Atlanta', state: 'Georgia', type: 'Retail' },
-      { name: 'North Creek', city: 'Atlanta', state: 'Georgia', type: 'Restaurant' },
-      { name: 'Oakhurst Market', city: 'Decatur', state: 'Georgia', type: 'Retail' },
-      { name: "Sidd's Liquor Store", city: 'Marietta', state: 'Georgia', type: 'Retail' },
-      { name: 'Suntrust Park', city: 'Atlanta', state: 'Georgia', type: 'Restaurant' },
-      { name: 'Wahoo Grill', city: 'Decatur', state: 'Georgia', type: 'Restaurant' },
-      { name: 'Cordelia', city: 'Brooklyn', state: 'New York', type: 'Restaurant' },
-      { name: "The Cellar D'Or", city: 'Ithaca', state: 'New York', type: 'Retail' },
-      { name: 'Manleys Liquor Store', city: 'New York', state: 'New York', type: 'Retail' },
-      { name: 'Musette Wine Bar', city: 'New York', state: 'New York', type: 'Restaurant' },
-      { name: 'Pound Ridge Wines & Spirits Llc', city: 'Pound Ridge', state: 'New York', type: 'Retail' },
-      { name: 'Matilda at the Henson', city: 'Catskills', state: 'New York', type: 'Restaurant' },
-      { name: 'With Others', city: 'Brooklyn', state: 'New York', type: 'Restaurant' },
-      { name: 'York Cellars', city: 'Brooklyn', state: 'New York', type: 'Retail' },
-      { name: 'Fox Hole Tavern', city: 'Philadelphia', state: 'Pennsylvania', type: 'Restaurant' },
-      { name: 'Hermans', city: 'Philadelphia', state: 'Pennsylvania', type: 'Retail' },
-      { name: 'Bloomsday', city: 'Philadelphia', state: 'Pennsylvania', type: 'Restaurant' },
-      { name: 'Jaffa', city: 'Philadelphia', state: 'Pennsylvania', type: 'Restaurant' },
-      { name: 'Tria', city: 'Philadelphia', state: 'Pennsylvania', type: 'Restaurant' },
-      { name: 'La Fete', city: 'Wilmington', state: 'Delaware', type: 'Restaurant' },
-      { name: 'Bin 66', city: 'Rehoboth Beach', state: 'Delaware', type: 'Retail' },
-      { name: 'Swigg', city: 'Wilmington', state: 'Delaware', type: 'Retail' },
-      { name: "Frank's", city: 'Wilmington', state: 'Delaware', type: 'Retail' },
-      { name: 'Bardea Steak', city: 'Wilmington', state: 'Delaware', type: 'Restaurant' },
-      { name: 'Roost', city: 'Wilmington', state: 'Delaware', type: 'Restaurant' },
-      { name: 'Greenville Wine and Spirits', city: 'Wilmington', state: 'Delaware', type: 'Retail' },
-      { name: 'Black Olive', city: 'Baltimore', state: 'Maryland', type: 'Restaurant' },
-      { name: 'Milton Inn', city: 'Baltimore', state: 'Maryland', type: 'Restaurant' },
-      { name: 'Chain Bridge Cellars', city: 'McLean', state: 'Virginia', type: 'Retail' },
-      { name: "Johnny's", city: 'Baltimore', state: 'Maryland', type: 'Restaurant' },
-      { name: 'Sisu', city: 'Baltimore', state: 'Maryland', type: 'Restaurant' },
-      { name: 'Unwined Belleview', city: 'Alexandria', state: 'Virginia', type: 'Retail' },
-      { name: 'Stateline Liquors', city: 'Elkton', state: 'Maryland', type: 'Retail' }
-    ];
-
-    function renderStockistResults(matches, query) {
-      if (!stockistList) return;
-
-      stockistList.innerHTML = '';
-
-      if (!query) {
-        const prompt = document.createElement('p');
-        prompt.className = 'muted';
-        prompt.textContent = 'Search by city, state, or account name to reveal placements.';
-        stockistList.appendChild(prompt);
-        return;
-      }
-
-      if (!matches.length) {
-        const empty = document.createElement('p');
-        empty.className = 'muted';
-        empty.textContent = `No placements found for "${query}". Try a city or state instead.`;
-        stockistList.appendChild(empty);
-        return;
-      }
-
-      matches.forEach((placement) => {
-        const item = document.createElement('div');
-        item.className = 'stockist-item';
-
-        const details = document.createElement('span');
-        const name = document.createElement('strong');
-        name.textContent = placement.name;
-        details.appendChild(name);
-        details.appendChild(document.createElement('br'));
-        details.appendChild(document.createTextNode(`${placement.city}, ${placement.state}`));
-
-        const type = document.createElement('span');
-        type.textContent = placement.type;
-
-        item.append(details, type);
-        stockistList.append(item);
-      });
-    }
-
-    function searchStockists(query) {
-      const normalizedQuery = query.trim().toLowerCase();
-
-      if (!normalizedQuery) {
-        renderStockistResults([], '');
-        return;
-      }
-
-      const matches = stockistPlacements.filter((placement) => {
-        const haystack = [placement.name, placement.city, placement.state, placement.type].join(' ').toLowerCase();
-        return haystack.includes(normalizedQuery);
-      });
-
-      renderStockistResults(matches, query.trim());
-    }
-
+    /* AGE GATE */
     function openAgeGate() {
       if (!ageGate) return;
       ageGate.classList.add('is-visible');
@@ -576,72 +529,14 @@
 
     if (ageGate && ageGateEnter) {
       const isVerified = localStorage.getItem(AGE_GATE_STORAGE_KEY) === 'true';
-
-      if (!isVerified) {
-        openAgeGate();
-      }
-
+      if (!isVerified) openAgeGate();
       ageGateEnter.addEventListener('click', () => {
         localStorage.setItem(AGE_GATE_STORAGE_KEY, 'true');
         closeAgeGate();
       });
     }
 
-    function getJournalColumns() {
-      if (window.innerWidth <= 620) return 1;
-      if (window.innerWidth <= 1220) return 2;
-      return 3;
-    }
-
-    function getJournalPageCount() {
-      return Math.max(1, Math.ceil(slides.length / currentColumns));
-    }
-
-    function renderJournalDots() {
-      if (!journalDots) return;
-      const pageCount = getJournalPageCount();
-      journalDots.innerHTML = '';
-
-      for (let i = 0; i < pageCount; i += 1) {
-        const dot = document.createElement('span');
-        dot.className = 'journal-dot';
-        if (i === currentPage) {
-          dot.classList.add('active');
-        }
-        dot.addEventListener('click', () => goToPage(i));
-        journalDots.appendChild(dot);
-      }
-    }
-
-    function goToPage(index) {
-      const pageCount = getJournalPageCount();
-      currentPage = (index + pageCount) % pageCount;
-
-      if (track && trackWrap) {
-        const pageWidth = trackWrap.clientWidth;
-        track.style.transform = `translateX(-${currentPage * pageWidth}px)`;
-      }
-
-      journalDots?.querySelectorAll('.journal-dot').forEach((dot, i) => {
-        dot.classList.toggle('active', i === currentPage);
-      });
-    }
-
-    function syncJournalLayout() {
-      currentColumns = getJournalColumns();
-      const pageCount = getJournalPageCount();
-      if (currentPage >= pageCount) {
-        currentPage = pageCount - 1;
-      }
-      renderJournalDots();
-      goToPage(currentPage);
-    }
-
-    prev.addEventListener('click', () => goToPage(currentPage - 1));
-    next.addEventListener('click', () => goToPage(currentPage + 1));
-    window.addEventListener('resize', syncJournalLayout);
-    syncJournalLayout();
-
+    /* CART HELPERS */
     function updateCartStatus(message, state) {
       if (!cartStatus) return;
       cartStatus.textContent = message || '';
@@ -654,8 +549,8 @@
 
     function setCartBusy(isBusy) {
       cartBusy = isBusy;
-      addToCartButtons.forEach((button) => {
-        button.setAttribute('aria-disabled', isBusy ? 'true' : 'false');
+      document.querySelectorAll('.shop-add-btn').forEach((btn) => {
+        btn.disabled = isBusy;
       });
     }
 
@@ -664,6 +559,19 @@
         style: 'currency',
         currency: currencyCode || 'USD'
       }).format(Number(amount || 0));
+    }
+
+    function normalizeCheckoutUrl(checkoutUrl) {
+      if (!checkoutUrl) return '#';
+
+      try {
+        const url = new URL(checkoutUrl);
+        url.protocol = 'https:';
+        url.hostname = SHOPIFY_DOMAIN;
+        return url.toString();
+      } catch (error) {
+        return checkoutUrl;
+      }
     }
 
     function openCart() {
@@ -720,7 +628,7 @@
       }
 
       if (cart?.checkoutUrl) {
-        cartCheckout.href = cart.checkoutUrl;
+        cartCheckout.href = normalizeCheckoutUrl(cart.checkoutUrl);
         cartCheckout.setAttribute('aria-disabled', 'false');
       } else {
         cartCheckout.href = '#';
@@ -728,6 +636,7 @@
       }
     }
 
+    /* STOREFRONT API */
     async function storefrontRequest(query, variables = {}) {
       const response = await fetch(SHOPIFY_API_URL, {
         method: 'POST',
@@ -741,33 +650,47 @@
       const result = await response.json();
 
       if (!response.ok || result.errors?.length) {
-        const messages = result.errors?.map((error) => error.message).join(', ') || 'Unable to reach Shopify.';
+        const messages = result.errors?.map((e) => e.message).join(', ') || 'Unable to reach Shopify.';
         throw new Error(messages);
       }
 
       return result.data;
     }
 
-    async function fetchProductVariantByHandle(handle) {
+    async function fetchAllProducts() {
       const query = `
-        query ProductByHandle($handle: String!) {
-          product(handle: $handle) {
-            title
-            selectedOrFirstAvailableVariant {
-              id
+        query Products {
+          products(first: 24) {
+            edges {
+              node {
+                id
+                title
+                handle
+                description
+                productType
+                tags
+                priceRange {
+                  minVariantPrice {
+                    amount
+                    currencyCode
+                  }
+                }
+                featuredImage {
+                  url
+                  altText
+                }
+                selectedOrFirstAvailableVariant {
+                  id
+                  availableForSale
+                }
+              }
             }
           }
         }
       `;
 
-      const data = await storefrontRequest(query, { handle });
-      const variantId = data?.product?.selectedOrFirstAvailableVariant?.id;
-
-      if (!variantId) {
-        throw new Error('This bottle is not available for purchase yet.');
-      }
-
-      return variantId;
+      const data = await storefrontRequest(query);
+      return data?.products?.edges?.map(({ node }) => node) || [];
     }
 
     async function createCart() {
@@ -779,47 +702,32 @@
               checkoutUrl
               totalQuantity
               cost {
-                subtotalAmount {
-                  amount
-                  currencyCode
-                }
+                subtotalAmount { amount currencyCode }
               }
               lines(first: 20) {
                 edges {
                   node {
                     id
                     quantity
-                    cost {
-                      totalAmount {
-                        amount
-                        currencyCode
-                      }
-                    }
+                    cost { totalAmount { amount currencyCode } }
                     merchandise {
                       ... on ProductVariant {
                         id
-                        product {
-                          title
-                        }
+                        product { title }
                       }
                     }
                   }
                 }
               }
             }
-            userErrors {
-              message
-            }
+            userErrors { message }
           }
         }
       `;
 
       const data = await storefrontRequest(mutation);
       const userErrors = data?.cartCreate?.userErrors || [];
-
-      if (userErrors.length) {
-        throw new Error(userErrors.map((error) => error.message).join(', '));
-      }
+      if (userErrors.length) throw new Error(userErrors.map((e) => e.message).join(', '));
 
       const cart = data?.cartCreate?.cart;
       localStorage.setItem(SHOPIFY_CART_STORAGE_KEY, cart.id);
@@ -834,28 +742,18 @@
             checkoutUrl
             totalQuantity
             cost {
-              subtotalAmount {
-                amount
-                currencyCode
-              }
+              subtotalAmount { amount currencyCode }
             }
             lines(first: 20) {
               edges {
                 node {
                   id
                   quantity
-                  cost {
-                    totalAmount {
-                      amount
-                      currencyCode
-                    }
-                  }
+                  cost { totalAmount { amount currencyCode } }
                   merchandise {
                     ... on ProductVariant {
                       id
-                      product {
-                        title
-                      }
+                      product { title }
                     }
                   }
                 }
@@ -882,37 +780,25 @@
               checkoutUrl
               totalQuantity
               cost {
-                subtotalAmount {
-                  amount
-                  currencyCode
-                }
+                subtotalAmount { amount currencyCode }
               }
               lines(first: 20) {
                 edges {
                   node {
                     id
                     quantity
-                    cost {
-                      totalAmount {
-                        amount
-                        currencyCode
-                      }
-                    }
+                    cost { totalAmount { amount currencyCode } }
                     merchandise {
                       ... on ProductVariant {
                         id
-                        product {
-                          title
-                        }
+                        product { title }
                       }
                     }
                   }
                 }
               }
             }
-            userErrors {
-              message
-            }
+            userErrors { message }
           }
         }
       `;
@@ -923,10 +809,7 @@
       });
 
       const userErrors = data?.cartLinesAdd?.userErrors || [];
-
-      if (userErrors.length) {
-        throw new Error(userErrors.map((error) => error.message).join(', '));
-      }
+      if (userErrors.length) throw new Error(userErrors.map((e) => e.message).join(', '));
 
       return data?.cartLinesAdd?.cart;
     }
@@ -942,37 +825,25 @@
               checkoutUrl
               totalQuantity
               cost {
-                subtotalAmount {
-                  amount
-                  currencyCode
-                }
+                subtotalAmount { amount currencyCode }
               }
               lines(first: 20) {
                 edges {
                   node {
                     id
                     quantity
-                    cost {
-                      totalAmount {
-                        amount
-                        currencyCode
-                      }
-                    }
+                    cost { totalAmount { amount currencyCode } }
                     merchandise {
                       ... on ProductVariant {
                         id
-                        product {
-                          title
-                        }
+                        product { title }
                       }
                     }
                   }
                 }
               }
             }
-            userErrors {
-              message
-            }
+            userErrors { message }
           }
         }
       `;
@@ -983,17 +854,13 @@
       });
 
       const userErrors = data?.cartLinesRemove?.userErrors || [];
-      if (userErrors.length) {
-        throw new Error(userErrors.map((error) => error.message).join(', '));
-      }
+      if (userErrors.length) throw new Error(userErrors.map((e) => e.message).join(', '));
 
       return data?.cartLinesRemove?.cart;
     }
 
     async function updateCartLineQuantity(lineId, quantity) {
-      if (quantity <= 0) {
-        return removeCartLine(lineId);
-      }
+      if (quantity <= 0) return removeCartLine(lineId);
 
       const mutation = `
         mutation CartLinesUpdate($cartId: ID!, $lines: [CartLineUpdateInput!]!) {
@@ -1003,37 +870,25 @@
               checkoutUrl
               totalQuantity
               cost {
-                subtotalAmount {
-                  amount
-                  currencyCode
-                }
+                subtotalAmount { amount currencyCode }
               }
               lines(first: 20) {
                 edges {
                   node {
                     id
                     quantity
-                    cost {
-                      totalAmount {
-                        amount
-                        currencyCode
-                      }
-                    }
+                    cost { totalAmount { amount currencyCode } }
                     merchandise {
                       ... on ProductVariant {
                         id
-                        product {
-                          title
-                        }
+                        product { title }
                       }
                     }
                   }
                 }
               }
             }
-            userErrors {
-              message
-            }
+            userErrors { message }
           }
         }
       `;
@@ -1044,9 +899,7 @@
       });
 
       const userErrors = data?.cartLinesUpdate?.userErrors || [];
-      if (userErrors.length) {
-        throw new Error(userErrors.map((e) => e.message).join(', '));
-      }
+      if (userErrors.length) throw new Error(userErrors.map((e) => e.message).join(', '));
 
       return data?.cartLinesUpdate?.cart;
     }
@@ -1054,17 +907,10 @@
     async function initializeCart() {
       try {
         const storedCartId = localStorage.getItem(SHOPIFY_CART_STORAGE_KEY);
-
-        if (!storedCartId) {
-          renderCart(null);
-          return;
-        }
+        if (!storedCartId) { renderCart(null); return; }
 
         shopifyCart = await getCart(storedCartId);
-
-        if (!shopifyCart) {
-          localStorage.removeItem(SHOPIFY_CART_STORAGE_KEY);
-        }
+        if (!shopifyCart) localStorage.removeItem(SHOPIFY_CART_STORAGE_KEY);
 
         renderCart(shopifyCart);
       } catch (error) {
@@ -1073,8 +919,145 @@
       }
     }
 
+    /* PRODUCT RENDERING */
+    function buildProductCard(product) {
+      const variant = product.selectedOrFirstAvailableVariant;
+      const price = product.priceRange?.minVariantPrice;
+      const available = variant?.availableForSale !== false;
+      const variantId = variant?.id || '';
+      const image = product.featuredImage;
+
+      const card = document.createElement('article');
+      card.className = 'shop-card';
+      card.dataset.type = (product.productType || '').toLowerCase();
+      card.dataset.tags = (product.tags || []).join(' ').toLowerCase();
+      card.dataset.handle = (product.handle || '').toLowerCase();
+
+      const imageHtml = image
+        ? `<img class="shop-card-image" src="${image.url}" alt="${image.altText || product.title}" loading="lazy">`
+        : `<div class="shop-card-image-placeholder"><div class="shop-bottle-placeholder"></div></div>`;
+
+      card.innerHTML = `
+        <div class="shop-card-image-wrap">${imageHtml}</div>
+        <div class="shop-card-meta">${product.productType || 'Alta Heights'}</div>
+        <h2 class="serif">${product.title}</h2>
+        <p class="shop-card-desc">${product.description || ''}</p>
+        <div class="shop-card-footer">
+          <span class="shop-card-price">${price ? formatMoney(price.amount, price.currencyCode) : '—'}</span>
+          <div class="shop-card-actions">
+            <a href="https://${SHOPIFY_DOMAIN}/products/${product.handle}" target="_blank" rel="noopener noreferrer" class="shop-details-link">Nitty Gritty</a>
+            <button
+              class="shop-add-btn"
+              type="button"
+              data-variant-id="${variantId}"
+              ${!available ? 'disabled' : ''}
+            >${available ? 'Add to Pack' : 'Sold Out'}</button>
+          </div>
+        </div>
+      `;
+
+      return card;
+    }
+
+    function renderProducts(products) {
+      shopGrid.innerHTML = '';
+
+      if (!products.length) {
+        shopGrid.innerHTML = `
+          <div class="shop-state">
+            <span class="shop-state-title">Nothing here yet.</span>
+            Check back soon — we're stocking the shelves.
+          </div>
+        `;
+        return;
+      }
+
+      products.forEach((product) => {
+        shopGrid.appendChild(buildProductCard(product));
+      });
+
+      /* wire up add-to-cart buttons */
+      shopGrid.querySelectorAll('.shop-add-btn').forEach((btn) => {
+        btn.addEventListener('click', async () => {
+          if (cartBusy) return;
+          const variantId = btn.dataset.variantId;
+          if (!variantId) return;
+
+          try {
+            setCartBusy(true);
+            updateCartStatus('Adding bottle to cart...', 'warning');
+            shopifyCart = await addVariantToCart(variantId, 1);
+            renderCart(shopifyCart);
+            updateCartStatus('Added to cart.', 'success');
+            openCart();
+          } catch (error) {
+            updateCartStatus(error.message || 'Unable to add this bottle right now.', 'error');
+            openCart();
+          } finally {
+            setCartBusy(false);
+          }
+        });
+      });
+
+      if (requestedProductHandle) {
+        const requestedCard = shopGrid.querySelector(`[data-handle="${requestedProductHandle}"]`);
+
+        if (requestedCard) {
+          requestedCard.classList.add('is-focused');
+          window.requestAnimationFrame(() => {
+            requestedCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          });
+        }
+      }
+    }
+
+    function filterProducts(products, filter) {
+      if (!filter || filter === 'all') return products;
+
+      return products.filter((product) => {
+        const type = (product.productType || '').toLowerCase();
+        const tags = (product.tags || []).join(' ').toLowerCase();
+        return type.includes(filter) || tags.includes(filter);
+      });
+    }
+
+    function setActiveFilterButton(filter) {
+      document.querySelectorAll('.shop-filter-btn').forEach((button) => {
+        button.classList.toggle('active', button.dataset.filter === filter);
+      });
+    }
+
+    async function loadShop() {
+      try {
+        allProducts = await fetchAllProducts();
+        const initialProducts = requestedProductHandle
+          ? allProducts
+          : filterProducts(allProducts, requestedFilter);
+        setActiveFilterButton(requestedProductHandle ? 'all' : requestedFilter);
+        renderProducts(initialProducts);
+      } catch (error) {
+        shopGrid.innerHTML = `
+          <div class="shop-state">
+            <span class="shop-state-title">Something went wrong.</span>
+            ${error.message || 'Unable to load products. Please refresh and try again.'}
+          </div>
+        `;
+      }
+    }
+
+    /* FILTER */
+    document.querySelectorAll('.shop-filter-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const filter = btn.dataset.filter;
+        setActiveFilterButton(filter);
+        const filtered = filterProducts(allProducts, filter);
+        renderProducts(filtered);
+      });
+    });
+
+    /* CART EVENTS */
     if (cartTrigger && cartOverlay && cartDrawer && cartClose) {
-      cartTrigger.addEventListener('click', async (event) => {
+      cartTrigger.addEventListener('click', (event) => {
         event.preventDefault();
         openCart();
       });
@@ -1105,162 +1088,13 @@
       });
 
       document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape') {
-          closeCart();
-        }
+        if (event.key === 'Escape') closeCart();
       });
     }
-
-    addToCartButtons.forEach((button) => {
-      button.addEventListener('click', async (event) => {
-        event.preventDefault();
-
-        if (cartBusy) return;
-
-        const handle = button.dataset.shopifyHandle;
-        if (!handle) return;
-
-        try {
-          setCartBusy(true);
-          updateCartStatus('Adding bottle to cart...', 'warning');
-          const variantId = await fetchProductVariantByHandle(handle);
-          shopifyCart = await addVariantToCart(variantId, 1);
-          renderCart(shopifyCart);
-          updateCartStatus('Added to cart.', 'success');
-          openCart();
-        } catch (error) {
-          updateCartStatus(error.message || 'Unable to add this bottle right now.', 'error');
-          openCart();
-        } finally {
-          setCartBusy(false);
-        }
-      });
-    });
 
     renderCart(null);
     initializeCart();
-
-    if (stockistSearchForm && stockistSearchInput) {
-      renderStockistResults([], '');
-
-      stockistSearchForm.addEventListener('submit', (event) => {
-        event.preventDefault();
-        searchStockists(stockistSearchInput.value);
-      });
-
-      stockistSearchInput.addEventListener('input', () => {
-        searchStockists(stockistSearchInput.value);
-      });
-    }
-
-    if (mailingListForm && mailingListStatus) {
-      const formLoadedAtInput = document.querySelector('#form-loaded-at');
-      let signupRequestId = 0;
-
-      function updateMailingListStatus(message, state) {
-        mailingListStatus.textContent = message || '';
-        if (state) {
-          mailingListStatus.dataset.state = state;
-        } else {
-          delete mailingListStatus.dataset.state;
-        }
-      }
-
-      function setFreshLoadedAt() {
-        if (formLoadedAtInput) {
-          formLoadedAtInput.value = String(Date.now());
-        }
-      }
-
-      function submitSignup(payload) {
-        return new Promise((resolve, reject) => {
-          signupRequestId += 1;
-          const callbackName = `mailingListSignupCallback_${signupRequestId}`;
-          const script = document.createElement('script');
-          const timeout = window.setTimeout(() => {
-            cleanup();
-            reject(new Error('Signup request timed out. Please try again.'));
-          }, 10000);
-
-          function cleanup() {
-            window.clearTimeout(timeout);
-            if (window[callbackName]) {
-              delete window[callbackName];
-            }
-            script.remove();
-          }
-
-          window[callbackName] = (response) => {
-            cleanup();
-            resolve(response || {});
-          };
-
-          payload.set('callback', callbackName);
-          script.src = `${MAILING_LIST_ENDPOINT}?${payload.toString()}`;
-          script.onerror = () => {
-            cleanup();
-            reject(new Error('Unable to reach the signup service.'));
-          };
-
-          document.body.appendChild(script);
-        });
-      }
-
-      setFreshLoadedAt();
-
-      mailingListForm.addEventListener('submit', async (event) => {
-        event.preventDefault();
-
-        if (!MAILING_LIST_ENDPOINT) {
-          updateMailingListStatus('Add your Google Apps Script web app URL to enable signups.', 'error');
-          return;
-        }
-
-        const submitButton = mailingListForm.querySelector('button[type="submit"]');
-        const formData = new FormData(mailingListForm);
-        const honeypot = String(formData.get('company') || '').trim();
-        const loadedAt = Number(formData.get('form_loaded_at') || 0);
-        const elapsedMs = Date.now() - loadedAt;
-
-        if (honeypot) {
-          updateMailingListStatus('Thanks, you are on the list.', 'success');
-          mailingListForm.reset();
-          setFreshLoadedAt();
-          return;
-        }
-
-        if (!loadedAt || elapsedMs < 3000) {
-          updateMailingListStatus('Please wait a moment and try again.', 'warning');
-          return;
-        }
-
-        const payload = new URLSearchParams({
-          name: String(formData.get('name') || '').trim(),
-          email: String(formData.get('email') || '').trim(),
-          company: honeypot,
-          form_loaded_at: String(loadedAt)
-        });
-
-        updateMailingListStatus('Submitting...', 'warning');
-        submitButton.disabled = true;
-
-        try {
-          const result = await submitSignup(payload);
-
-          if (!result.success) {
-            throw new Error(result.message || 'Something went wrong. Please try again.');
-          }
-
-          mailingListForm.reset();
-          setFreshLoadedAt();
-          updateMailingListStatus(result.message || 'Thanks, you are on the list.', 'success');
-        } catch (error) {
-          updateMailingListStatus(error.message || 'Something went wrong. Please try again.', 'error');
-        } finally {
-          submitButton.disabled = false;
-        }
-      });
-    }
+    loadShop();
   </script>
 </body>
 </html>
