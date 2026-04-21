@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alta Heights / Shop</title>
+  <meta
+    name="description"
+    content="Shop Alta Heights — California Alpine Wine. Order online and drink independent."
+  />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* SHOP PAGE SPECIFIC */
+    .shop-hero {
+      min-height: 320px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .shop-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(23,22,20,0.62), rgba(23,22,20,0.12));
+      z-index: 1;
+    }
+
+    .shop-hero-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 30%;
+      z-index: 0;
+    }
+
+    .shop-hero-inner {
+      position: relative;
+      z-index: 2;
+      width: min(calc(100% - 28px), var(--max));
+      margin: 0 auto;
+      padding: 28px 0;
+      color: var(--white);
+    }
+
+    .shop-hero-inner h1 {
+      margin: 12px 0 0;
+      font-size: clamp(2.8rem, 7vw, 6rem);
+      line-height: 0.88;
+      text-transform: uppercase;
+    }
+
+    .shop-section {
+      padding: 32px 0 60px;
+    }
+
+    .shop-filters {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+
+    .shop-filter-btn {
+      padding: 6px 0;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-family: "Klumpp", "Courier New", Courier, monospace;
+      color: var(--faded);
+      background: transparent;
+      border: 0;
+      border-bottom: 1px solid transparent;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .shop-filter-btn.active,
+    .shop-filter-btn:hover {
+      color: var(--blue);
+      border-bottom-color: var(--blue);
+    }
+
+    .shop-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .shop-card {
+      display: flex;
+      flex-direction: column;
+      padding: 24px 20px 28px;
+      border-right: 1px solid var(--line-soft);
+      border-bottom: 1px solid var(--line-soft);
+    }
+
+    .shop-card.is-focused {
+      background: rgba(0, 81, 139, 0.06);
+      box-shadow: inset 0 0 0 1px rgba(0, 81, 139, 0.22);
+    }
+
+    .shop-card:nth-child(3n) {
+      border-right: 0;
+    }
+
+    .shop-card-image-wrap {
+      aspect-ratio: 3 / 3.6;
+      overflow: hidden;
+      background: var(--paper);
+      margin-bottom: 18px;
+      position: relative;
+    }
+
+    .shop-card-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .shop-card:hover .shop-card-image {
+      transform: scale(1.03);
+    }
+
+    .shop-card-image-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .shop-bottle-placeholder {
+      width: 42px;
+      height: 130px;
+      border-radius: 16px 16px 8px 8px;
+      background: linear-gradient(180deg, #404748 0%, #161919 80%);
+      position: relative;
+      box-shadow: 0 8px 14px rgba(23,22,20,0.08);
+    }
+
+    .shop-bottle-placeholder::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: -20px;
+      transform: translateX(-50%);
+      width: 12px;
+      height: 26px;
+      background: #1d2122;
+      border-radius: 3px 3px 2px 2px;
+    }
+
+    .shop-bottle-placeholder::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50px;
+      transform: translateX(-50%);
+      width: 26px;
+      height: 36px;
+      background: #f3eee4;
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .shop-card-meta {
+      font-family: "Klumpp", "Courier New", Courier, monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--blue);
+      margin-bottom: 6px;
+    }
+
+    .shop-card h2 {
+      margin: 0 0 8px;
+      font-size: 1.9rem;
+      line-height: 0.92;
+      text-transform: uppercase;
+    }
+
+    .shop-card-desc {
+      font-size: 13px;
+      color: var(--faded);
+      line-height: 1.5;
+      flex: 1;
+      margin-bottom: 20px;
+    }
+
+    .shop-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line-soft);
+    }
+
+    .shop-card-price {
+      font-family: "SK Payidar Light", Arial, Helvetica, sans-serif;
+      font-size: 14px;
+      color: var(--ink);
+      letter-spacing: 0.04em;
+    }
+
+    .shop-card-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .shop-add-btn {
+      font-family: "Klumpp", "Courier New", Courier, monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--error);
+      background: var(--error-soft);
+      border: 1px solid rgba(208, 93, 39, 0.32);
+      padding: 0 14px;
+      min-height: 36px;
+      cursor: pointer;
+      transition: color 0.2s, background 0.2s, border-color 0.2s;
+      display: flex;
+      align-items: center;
+    }
+
+    .shop-add-btn:hover:not(:disabled) {
+      color: var(--white);
+      background: var(--error);
+      border-color: var(--error);
+    }
+
+    .shop-add-btn:disabled {
+      color: var(--faded);
+      background: transparent;
+      border-color: var(--line);
+      cursor: not-allowed;
+    }
+
+    .shop-details-link {
+      font-family: "Klumpp", "Courier New", Courier, monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--faded);
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 1px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .shop-details-link:hover {
+      color: var(--error);
+      border-bottom-color: var(--error);
+    }
+
+    /* LOADING / EMPTY / ERROR STATES */
+    .shop-state {
+      grid-column: 1 / -1;
+      padding: 60px 0;
+      text-align: center;
+      color: var(--faded);
+      font-family: "Klumpp", "Courier New", Courier, monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .shop-state-title {
+      font-family: "SK Payidar Bold", Georgia, serif;
+      font-size: 2rem;
+      color: var(--ink);
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .shop-loading-dots {
+      display: inline-flex;
+      gap: 6px;
+      margin-top: 16px;
+    }
+
+    .shop-loading-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--blue);
+      animation: shop-pulse 1.2s ease-in-out infinite;
+    }
+
+    .shop-loading-dot:nth-child(2) { animation-delay: 0.2s; }
+    .shop-loading-dot:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes shop-pulse {
+      0%, 80%, 100% { opacity: 0.2; transform: scale(0.8); }
+      40% { opacity: 1; transform: scale(1); }
+    }
+
+    @media (max-width: 1220px) {
+      .shop-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 860px) {
+      .shop-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .shop-card:nth-child(3n) {
+        border-right: 1px solid var(--line-soft);
+      }
+
+      .shop-card:nth-child(2n) {
+        border-right: 0;
+      }
+
+      .shop-hero {
+        min-height: 240px;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .shop-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .shop-card,
+      .shop-card:nth-child(3n),
+      .shop-card:nth-child(2n) {
+        border-right: 0;
+      }
+
+      .shop-hero {
+        min-height: 200px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="age-gate" id="age-gate" aria-hidden="true">
+    <div class="age-gate-card" role="dialog" aria-modal="true" aria-labelledby="age-gate-title">
+      <span class="tag mono">21+ Only</span>
+      <h2 class="serif" id="age-gate-title">Please confirm you are 21 or older to enter.</h2>
+      <p class="muted">Alta Heights is a wine site. By entering, you confirm you are of legal drinking age in your location.</p>
+      <div class="age-gate-actions">
+        <button class="btn mono age-gate-enter" id="age-gate-enter" type="button">I Am 21+</button>
+        <a class="btn mono age-gate-exit" href="https://www.google.com">Exit</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="wrap nav">
+      <div class="brand">
+        <a href="https://altaheightswine.com" class="brand-title serif">Alta Heights</a>
+        <div class="brand-sub mono">California Alpine Wine / Shop</div>
+      </div>
+
+      <nav class="nav-links mono" aria-label="Primary navigation">
+        <a href="https://altaheightswine.com">Home</a>
+        <a href="https://altaheightswine.com/#wines">Wines</a>
+        <a href="https://altaheightswine.com/#journal">Journal</a>
+        <a href="https://altaheightswine.com/about.html">About</a>
+        <a href="https://altaheightswine.com/trade.html">Trade</a>
+        <a href="#cart" id="cart-trigger" aria-controls="site-cart" aria-expanded="false">Cart <span id="cart-count">[0]</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="shop-hero">
+      <img src="images/MtTam1.jpeg" alt="Mountain landscape" class="shop-hero-bg">
+      <div class="shop-hero-inner">
+        <div class="mono small" style="color: rgba(255,253,248,0.7);">Shop / All Bottles</div>
+        <h1 class="serif">Drink Independent.</h1>
+      </div>
+    </div>
+
+    <section class="shop-section">
+      <div class="wrap">
+        <div class="shop-filters">
+          <span class="tag mono" style="border: 0; padding: 0; margin-right: 6px;">Filter</span>
+          <button class="shop-filter-btn active" data-filter="all" type="button">All</button>
+          <button class="shop-filter-btn" data-filter="white" type="button">White</button>
+          <button class="shop-filter-btn" data-filter="red" type="button">Red</button>
+          <button class="shop-filter-btn" data-filter="rosé" type="button">Rosé</button>
+        </div>
+
+        <div class="shop-grid" id="shop-grid">
+          <div class="shop-state" id="shop-loading">
+            <span class="shop-state-title">Loading the cellar.</span>
+            <div class="shop-loading-dots">
+              <span class="shop-loading-dot"></span>
+              <span class="shop-loading-dot"></span>
+              <span class="shop-loading-dot"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="cart-overlay" id="cart-overlay" hidden></div>
+  <aside class="cart-drawer" id="site-cart" aria-hidden="true" aria-labelledby="cart-title">
+    <div class="cart-drawer-header">
+      <div>
+        <div class="tag mono">Cart</div>
+        <h2 class="serif" id="cart-title">Your Bottle List</h2>
+      </div>
+      <button class="cart-close" id="cart-close" type="button" aria-label="Close cart">&times;</button>
+    </div>
+
+    <div class="cart-status mono small" id="cart-status" aria-live="polite"></div>
+    <div class="cart-empty muted" id="cart-empty">Your cart is empty. Add a bottle from the list to begin.</div>
+    <div class="cart-lines" id="cart-lines"></div>
+
+    <div class="cart-footer">
+      <div class="cart-summary">
+        <span class="mono small">Subtotal</span>
+        <strong id="cart-subtotal">$0.00</strong>
+      </div>
+      <a class="btn mono cart-checkout" id="cart-checkout" href="#" target="_blank" rel="noopener noreferrer" aria-disabled="true">Checkout</a>
+    </div>
+  </aside>
+
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-box">
+          <div class="brand-title serif">Alta Heights</div>
+          <div class="brand-sub mono">California Alpine Wine</div>
+          <p class="muted">
+            A love letter to the rugged mountain frontiers of California and the spirit of exploration.
+          </p>
+        </div>
+
+        <div class="footer-box">
+          <h4 class="mono">Index</h4>
+          <div class="footer-links mono small">
+            <a href="https://altaheightswine.com">Home</a>
+            <a href="https://altaheightswine.com/#wines">Wine List</a>
+            <a href="https://altaheightswine.com/#journal">Journal</a>
+            <a href="https://altaheightswine.com/#find">Find It</a>
+          </div>
+        </div>
+
+        <div class="footer-box">
+          <h4 class="mono">Other Pages</h4>
+          <div class="footer-links mono small">
+            <a href="https://altaheightswine.com/about.html">About</a>
+            <a href="https://altaheightswine.com/trade.html">Trade</a>
+            <a href="mailto:hello@altaheightswine.com">Contact</a>
+            <a href="https://www.instagram.com/altaheightswine/" target="_blank" rel="noopener noreferrer">Instagram</a>
+          </div>
+        </div>
+
+        <div class="footer-box">
+          <h4 class="mono">Issue Notes</h4>
+          <div class="footer-links mono small">
+            <span>route archive</span>
+            <span>weather logs</span>
+            <span>elevation markers</span>
+            <span>please enjoy responsibly</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom mono">
+        <span>© 2026 Alta Heights</span>
+        <span>Shop / Issue 01</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const SHOPIFY_DOMAIN = 'model-store-9670.myshopify.com';
+    const SHOPIFY_STOREFRONT_TOKEN = 'c719c0ff58ad08733d78f86785c95857';
+    const SHOPIFY_API_URL = `https://${SHOPIFY_DOMAIN}/api/2026-01/graphql.json`;
+    const SHOPIFY_CART_STORAGE_KEY = 'altaHeightsShopifyCartId';
+    const AGE_GATE_STORAGE_KEY = 'altaHeightsAgeVerified';
+
+    const cartTrigger = document.querySelector('#cart-trigger');
+    const cartCount = document.querySelector('#cart-count');
+    const cartOverlay = document.querySelector('#cart-overlay');
+    const cartDrawer = document.querySelector('#site-cart');
+    const cartClose = document.querySelector('#cart-close');
+    const cartStatus = document.querySelector('#cart-status');
+    const cartEmpty = document.querySelector('#cart-empty');
+    const cartLines = document.querySelector('#cart-lines');
+    const cartSubtotal = document.querySelector('#cart-subtotal');
+    const cartCheckout = document.querySelector('#cart-checkout');
+    const shopGrid = document.querySelector('#shop-grid');
+    const ageGate = document.querySelector('#age-gate');
+    const ageGateEnter = document.querySelector('#age-gate-enter');
+    let shopifyCart = null;
+    let cartBusy = false;
+    let allProducts = [];
+    const shopParams = new URLSearchParams(window.location.search);
+    const requestedProductHandle = (shopParams.get('product') || '').toLowerCase();
+    const requestedFilter = (shopParams.get('filter') || 'all').toLowerCase();
+
+    /* AGE GATE */
+    function openAgeGate() {
+      if (!ageGate) return;
+      ageGate.classList.add('is-visible');
+      ageGate.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('age-gate-open');
+    }
+
+    function closeAgeGate() {
+      if (!ageGate) return;
+      ageGate.classList.remove('is-visible');
+      ageGate.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('age-gate-open');
+    }
+
+    if (ageGate && ageGateEnter) {
+      const isVerified = localStorage.getItem(AGE_GATE_STORAGE_KEY) === 'true';
+      if (!isVerified) openAgeGate();
+      ageGateEnter.addEventListener('click', () => {
+        localStorage.setItem(AGE_GATE_STORAGE_KEY, 'true');
+        closeAgeGate();
+      });
+    }
+
+    /* CART HELPERS */
+    function updateCartStatus(message, state) {
+      if (!cartStatus) return;
+      cartStatus.textContent = message || '';
+      if (state) {
+        cartStatus.dataset.state = state;
+      } else {
+        delete cartStatus.dataset.state;
+      }
+    }
+
+    function setCartBusy(isBusy) {
+      cartBusy = isBusy;
+      document.querySelectorAll('.shop-add-btn').forEach((btn) => {
+        btn.disabled = isBusy;
+      });
+    }
+
+    function formatMoney(amount, currencyCode) {
+      return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: currencyCode || 'USD'
+      }).format(Number(amount || 0));
+    }
+
+    function openCart() {
+      if (!cartDrawer || !cartOverlay || !cartTrigger) return;
+      cartDrawer.classList.add('is-open');
+      cartDrawer.setAttribute('aria-hidden', 'false');
+      cartOverlay.hidden = false;
+      cartTrigger.setAttribute('aria-expanded', 'true');
+      document.body.classList.add('cart-open');
+    }
+
+    function closeCart() {
+      if (!cartDrawer || !cartOverlay || !cartTrigger) return;
+      cartDrawer.classList.remove('is-open');
+      cartDrawer.setAttribute('aria-hidden', 'true');
+      cartOverlay.hidden = true;
+      cartTrigger.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('cart-open');
+    }
+
+    function renderCart(cart) {
+      if (!cartCount || !cartLines || !cartEmpty || !cartSubtotal || !cartCheckout) return;
+
+      const totalQuantity = cart?.totalQuantity || 0;
+      const subtotalAmount = cart?.cost?.subtotalAmount?.amount || 0;
+      const currencyCode = cart?.cost?.subtotalAmount?.currencyCode || 'USD';
+      const lines = cart?.lines?.edges || [];
+
+      cartCount.textContent = `[${totalQuantity}]`;
+      cartSubtotal.textContent = formatMoney(subtotalAmount, currencyCode);
+      cartLines.innerHTML = '';
+      cartEmpty.hidden = totalQuantity > 0;
+
+      if (totalQuantity > 0) {
+        lines.forEach(({ node }) => {
+          const line = document.createElement('div');
+          line.className = 'cart-line';
+          line.innerHTML = `
+            <div class="cart-line-head">
+              <div class="cart-line-title">${node.merchandise.product.title}</div>
+              <div class="cart-line-price">${formatMoney(node.cost.totalAmount.amount, node.cost.totalAmount.currencyCode)}</div>
+            </div>
+            <div class="cart-line-meta">
+              <div class="cart-qty-wrap">
+                <button class="cart-qty-btn" type="button" data-line-id="${node.id}" data-qty="${node.quantity - 1}" aria-label="Decrease quantity">−</button>
+                <span class="cart-line-qty mono small">${node.quantity}</span>
+                <button class="cart-qty-btn" type="button" data-line-id="${node.id}" data-qty="${node.quantity + 1}" aria-label="Increase quantity">+</button>
+              </div>
+              <button class="cart-remove mono small" type="button" data-line-id="${node.id}">Remove</button>
+            </div>
+          `;
+          cartLines.appendChild(line);
+        });
+      }
+
+      if (cart?.checkoutUrl) {
+        cartCheckout.href = cart.checkoutUrl;
+        cartCheckout.setAttribute('aria-disabled', 'false');
+      } else {
+        cartCheckout.href = '#';
+        cartCheckout.setAttribute('aria-disabled', 'true');
+      }
+    }
+
+    /* STOREFRONT API */
+    async function storefrontRequest(query, variables = {}) {
+      const response = await fetch(SHOPIFY_API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Shopify-Storefront-Access-Token': SHOPIFY_STOREFRONT_TOKEN
+        },
+        body: JSON.stringify({ query, variables })
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || result.errors?.length) {
+        const messages = result.errors?.map((e) => e.message).join(', ') || 'Unable to reach Shopify.';
+        throw new Error(messages);
+      }
+
+      return result.data;
+    }
+
+    async function fetchAllProducts() {
+      const query = `
+        query Products {
+          products(first: 24) {
+            edges {
+              node {
+                id
+                title
+                handle
+                description
+                productType
+                tags
+                priceRange {
+                  minVariantPrice {
+                    amount
+                    currencyCode
+                  }
+                }
+                featuredImage {
+                  url
+                  altText
+                }
+                selectedOrFirstAvailableVariant {
+                  id
+                  availableForSale
+                }
+              }
+            }
+          }
+        }
+      `;
+
+      const data = await storefrontRequest(query);
+      return data?.products?.edges?.map(({ node }) => node) || [];
+    }
+
+    async function createCart() {
+      const mutation = `
+        mutation CartCreate {
+          cartCreate {
+            cart {
+              id
+              checkoutUrl
+              totalQuantity
+              cost {
+                subtotalAmount { amount currencyCode }
+              }
+              lines(first: 20) {
+                edges {
+                  node {
+                    id
+                    quantity
+                    cost { totalAmount { amount currencyCode } }
+                    merchandise {
+                      ... on ProductVariant {
+                        id
+                        product { title }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            userErrors { message }
+          }
+        }
+      `;
+
+      const data = await storefrontRequest(mutation);
+      const userErrors = data?.cartCreate?.userErrors || [];
+      if (userErrors.length) throw new Error(userErrors.map((e) => e.message).join(', '));
+
+      const cart = data?.cartCreate?.cart;
+      localStorage.setItem(SHOPIFY_CART_STORAGE_KEY, cart.id);
+      return cart;
+    }
+
+    async function getCart(cartId) {
+      const query = `
+        query CartQuery($cartId: ID!) {
+          cart(id: $cartId) {
+            id
+            checkoutUrl
+            totalQuantity
+            cost {
+              subtotalAmount { amount currencyCode }
+            }
+            lines(first: 20) {
+              edges {
+                node {
+                  id
+                  quantity
+                  cost { totalAmount { amount currencyCode } }
+                  merchandise {
+                    ... on ProductVariant {
+                      id
+                      product { title }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      `;
+
+      const data = await storefrontRequest(query, { cartId });
+      return data?.cart || null;
+    }
+
+    async function addVariantToCart(variantId, quantity = 1) {
+      if (!shopifyCart?.id) {
+        shopifyCart = await createCart();
+      }
+
+      const mutation = `
+        mutation CartLinesAdd($cartId: ID!, $lines: [CartLineInput!]!) {
+          cartLinesAdd(cartId: $cartId, lines: $lines) {
+            cart {
+              id
+              checkoutUrl
+              totalQuantity
+              cost {
+                subtotalAmount { amount currencyCode }
+              }
+              lines(first: 20) {
+                edges {
+                  node {
+                    id
+                    quantity
+                    cost { totalAmount { amount currencyCode } }
+                    merchandise {
+                      ... on ProductVariant {
+                        id
+                        product { title }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            userErrors { message }
+          }
+        }
+      `;
+
+      const data = await storefrontRequest(mutation, {
+        cartId: shopifyCart.id,
+        lines: [{ merchandiseId: variantId, quantity }]
+      });
+
+      const userErrors = data?.cartLinesAdd?.userErrors || [];
+      if (userErrors.length) throw new Error(userErrors.map((e) => e.message).join(', '));
+
+      return data?.cartLinesAdd?.cart;
+    }
+
+    async function removeCartLine(lineId) {
+      if (!shopifyCart?.id) return;
+
+      const mutation = `
+        mutation CartLinesRemove($cartId: ID!, $lineIds: [ID!]!) {
+          cartLinesRemove(cartId: $cartId, lineIds: $lineIds) {
+            cart {
+              id
+              checkoutUrl
+              totalQuantity
+              cost {
+                subtotalAmount { amount currencyCode }
+              }
+              lines(first: 20) {
+                edges {
+                  node {
+                    id
+                    quantity
+                    cost { totalAmount { amount currencyCode } }
+                    merchandise {
+                      ... on ProductVariant {
+                        id
+                        product { title }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            userErrors { message }
+          }
+        }
+      `;
+
+      const data = await storefrontRequest(mutation, {
+        cartId: shopifyCart.id,
+        lineIds: [lineId]
+      });
+
+      const userErrors = data?.cartLinesRemove?.userErrors || [];
+      if (userErrors.length) throw new Error(userErrors.map((e) => e.message).join(', '));
+
+      return data?.cartLinesRemove?.cart;
+    }
+
+    async function updateCartLineQuantity(lineId, quantity) {
+      if (quantity <= 0) return removeCartLine(lineId);
+
+      const mutation = `
+        mutation CartLinesUpdate($cartId: ID!, $lines: [CartLineUpdateInput!]!) {
+          cartLinesUpdate(cartId: $cartId, lines: $lines) {
+            cart {
+              id
+              checkoutUrl
+              totalQuantity
+              cost {
+                subtotalAmount { amount currencyCode }
+              }
+              lines(first: 20) {
+                edges {
+                  node {
+                    id
+                    quantity
+                    cost { totalAmount { amount currencyCode } }
+                    merchandise {
+                      ... on ProductVariant {
+                        id
+                        product { title }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            userErrors { message }
+          }
+        }
+      `;
+
+      const data = await storefrontRequest(mutation, {
+        cartId: shopifyCart.id,
+        lines: [{ id: lineId, quantity }]
+      });
+
+      const userErrors = data?.cartLinesUpdate?.userErrors || [];
+      if (userErrors.length) throw new Error(userErrors.map((e) => e.message).join(', '));
+
+      return data?.cartLinesUpdate?.cart;
+    }
+
+    async function initializeCart() {
+      try {
+        const storedCartId = localStorage.getItem(SHOPIFY_CART_STORAGE_KEY);
+        if (!storedCartId) { renderCart(null); return; }
+
+        shopifyCart = await getCart(storedCartId);
+        if (!shopifyCart) localStorage.removeItem(SHOPIFY_CART_STORAGE_KEY);
+
+        renderCart(shopifyCart);
+      } catch (error) {
+        updateCartStatus(error.message || 'Unable to load your cart.', 'error');
+        renderCart(null);
+      }
+    }
+
+    /* PRODUCT RENDERING */
+    function buildProductCard(product) {
+      const variant = product.selectedOrFirstAvailableVariant;
+      const price = product.priceRange?.minVariantPrice;
+      const available = variant?.availableForSale !== false;
+      const variantId = variant?.id || '';
+      const image = product.featuredImage;
+
+      const card = document.createElement('article');
+      card.className = 'shop-card';
+      card.dataset.type = (product.productType || '').toLowerCase();
+      card.dataset.tags = (product.tags || []).join(' ').toLowerCase();
+      card.dataset.handle = (product.handle || '').toLowerCase();
+
+      const imageHtml = image
+        ? `<img class="shop-card-image" src="${image.url}" alt="${image.altText || product.title}" loading="lazy">`
+        : `<div class="shop-card-image-placeholder"><div class="shop-bottle-placeholder"></div></div>`;
+
+      card.innerHTML = `
+        <div class="shop-card-image-wrap">${imageHtml}</div>
+        <div class="shop-card-meta">${product.productType || 'Alta Heights'}</div>
+        <h2 class="serif">${product.title}</h2>
+        <p class="shop-card-desc">${product.description || ''}</p>
+        <div class="shop-card-footer">
+          <span class="shop-card-price">${price ? formatMoney(price.amount, price.currencyCode) : '—'}</span>
+          <div class="shop-card-actions">
+            <a href="https://${SHOPIFY_DOMAIN}/products/${product.handle}" target="_blank" rel="noopener noreferrer" class="shop-details-link">Nitty Gritty</a>
+            <button
+              class="shop-add-btn"
+              type="button"
+              data-variant-id="${variantId}"
+              ${!available ? 'disabled' : ''}
+            >${available ? 'Add to Pack' : 'Sold Out'}</button>
+          </div>
+        </div>
+      `;
+
+      return card;
+    }
+
+    function renderProducts(products) {
+      shopGrid.innerHTML = '';
+
+      if (!products.length) {
+        shopGrid.innerHTML = `
+          <div class="shop-state">
+            <span class="shop-state-title">Nothing here yet.</span>
+            Check back soon — we're stocking the shelves.
+          </div>
+        `;
+        return;
+      }
+
+      products.forEach((product) => {
+        shopGrid.appendChild(buildProductCard(product));
+      });
+
+      /* wire up add-to-cart buttons */
+      shopGrid.querySelectorAll('.shop-add-btn').forEach((btn) => {
+        btn.addEventListener('click', async () => {
+          if (cartBusy) return;
+          const variantId = btn.dataset.variantId;
+          if (!variantId) return;
+
+          try {
+            setCartBusy(true);
+            updateCartStatus('Adding bottle to cart...', 'warning');
+            shopifyCart = await addVariantToCart(variantId, 1);
+            renderCart(shopifyCart);
+            updateCartStatus('Added to cart.', 'success');
+            openCart();
+          } catch (error) {
+            updateCartStatus(error.message || 'Unable to add this bottle right now.', 'error');
+            openCart();
+          } finally {
+            setCartBusy(false);
+          }
+        });
+      });
+
+      if (requestedProductHandle) {
+        const requestedCard = shopGrid.querySelector(`[data-handle="${requestedProductHandle}"]`);
+
+        if (requestedCard) {
+          requestedCard.classList.add('is-focused');
+          window.requestAnimationFrame(() => {
+            requestedCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          });
+        }
+      }
+    }
+
+    function filterProducts(products, filter) {
+      if (!filter || filter === 'all') return products;
+
+      return products.filter((product) => {
+        const type = (product.productType || '').toLowerCase();
+        const tags = (product.tags || []).join(' ').toLowerCase();
+        return type.includes(filter) || tags.includes(filter);
+      });
+    }
+
+    function setActiveFilterButton(filter) {
+      document.querySelectorAll('.shop-filter-btn').forEach((button) => {
+        button.classList.toggle('active', button.dataset.filter === filter);
+      });
+    }
+
+    async function loadShop() {
+      try {
+        allProducts = await fetchAllProducts();
+        const initialProducts = requestedProductHandle
+          ? allProducts
+          : filterProducts(allProducts, requestedFilter);
+        setActiveFilterButton(requestedProductHandle ? 'all' : requestedFilter);
+        renderProducts(initialProducts);
+      } catch (error) {
+        shopGrid.innerHTML = `
+          <div class="shop-state">
+            <span class="shop-state-title">Something went wrong.</span>
+            ${error.message || 'Unable to load products. Please refresh and try again.'}
+          </div>
+        `;
+      }
+    }
+
+    /* FILTER */
+    document.querySelectorAll('.shop-filter-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const filter = btn.dataset.filter;
+        setActiveFilterButton(filter);
+        const filtered = filterProducts(allProducts, filter);
+        renderProducts(filtered);
+      });
+    });
+
+    /* CART EVENTS */
+    if (cartTrigger && cartOverlay && cartDrawer && cartClose) {
+      cartTrigger.addEventListener('click', (event) => {
+        event.preventDefault();
+        openCart();
+      });
+
+      cartClose.addEventListener('click', closeCart);
+      cartOverlay.addEventListener('click', closeCart);
+
+      cartLines?.addEventListener('click', async (event) => {
+        const removeButton = event.target.closest('.cart-remove');
+        const qtyButton = event.target.closest('.cart-qty-btn');
+        if ((!removeButton && !qtyButton) || cartBusy) return;
+
+        try {
+          setCartBusy(true);
+          updateCartStatus('Updating cart...', 'warning');
+          if (removeButton) {
+            shopifyCart = await removeCartLine(removeButton.dataset.lineId);
+          } else {
+            shopifyCart = await updateCartLineQuantity(qtyButton.dataset.lineId, parseInt(qtyButton.dataset.qty, 10));
+          }
+          renderCart(shopifyCart);
+          updateCartStatus('Cart updated.', 'success');
+        } catch (error) {
+          updateCartStatus(error.message || 'Unable to update your cart.', 'error');
+        } finally {
+          setCartBusy(false);
+        }
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') closeCart();
+      });
+    }
+
+    renderCart(null);
+    initializeCart();
+    loadShop();
+  </script>
+</body>
+</html>
