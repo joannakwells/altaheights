@@ -426,7 +426,6 @@
           <button class="shop-filter-btn" data-filter="white" type="button">White</button>
           <button class="shop-filter-btn" data-filter="red" type="button">Red</button>
           <button class="shop-filter-btn" data-filter="rose" type="button">Rose</button>
-          <button class="shop-filter-btn" data-filter="sparkling" type="button">Sparkling</button>
         </div>
 
         <div class="shop-grid" id="shop-grid">
@@ -602,6 +601,27 @@
         style: 'currency',
         currency: currencyCode || 'USD'
       }).format(Number(amount || 0));
+    }
+
+    function getProductCategory(product) {
+      const title = (product?.title || '').toLowerCase();
+      const type = (product?.productType || '').toLowerCase();
+      const tags = (product?.tags || []).join(' ').toLowerCase();
+      const source = `${title} ${type} ${tags}`;
+
+      if (source.includes('pinot noir') || source.includes('cabernet') || source.includes('red')) {
+        return 'red';
+      }
+
+      if (source.includes('chardonnay') || source.includes('white')) {
+        return 'white';
+      }
+
+      if (source.includes('rose') || source.includes('ros') || source.includes('rose-wine')) {
+        return 'rose';
+      }
+
+      return type || 'wine';
     }
 
     function openCart() {
@@ -958,10 +978,12 @@
       const available = variant?.availableForSale !== false;
       const variantId = variant?.id || '';
       const image = product.featuredImage;
+      const productCategory = getProductCategory(product);
+      const productLabel = productCategory.charAt(0).toUpperCase() + productCategory.slice(1);
 
       const card = document.createElement('article');
       card.className = 'shop-card';
-      card.dataset.type = (product.productType || '').toLowerCase();
+      card.dataset.type = productCategory;
       card.dataset.tags = (product.tags || []).join(' ').toLowerCase();
       card.dataset.handle = (product.handle || '').toLowerCase();
 
@@ -971,7 +993,7 @@
 
       card.innerHTML = `
         <div class="shop-card-image-wrap">${imageHtml}</div>
-        <div class="shop-card-meta">${product.productType || 'Alta Heights'}</div>
+        <div class="shop-card-meta">${productLabel}</div>
         <h2 class="serif">${product.title}</h2>
         <p class="shop-card-desc">${product.description || ''}</p>
         <div class="shop-card-footer">
@@ -1045,7 +1067,7 @@
       if (!filter || filter === 'all') return products;
 
       return products.filter((product) => {
-        const type = (product.productType || '').toLowerCase();
+        const type = getProductCategory(product);
         const tags = (product.tags || []).join(' ').toLowerCase();
         return type.includes(filter) || tags.includes(filter);
       });
