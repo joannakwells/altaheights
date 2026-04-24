@@ -6,11 +6,10 @@
   <title>Alta Heights / Shop</title>
   <meta
     name="description"
-    content="Shop Alta Heights — California Alpine Wine. Order online and drink independent."
+    content="Shop Alta Heights online with a headless Shopify storefront for California Alpine wines."
   />
   <link rel="stylesheet" href="styles.css" />
   <style>
-    /* SHOP PAGE SPECIFIC */
     .shop-hero {
       min-height: 320px;
       position: relative;
@@ -264,7 +263,6 @@
       border-bottom-color: var(--error);
     }
 
-    /* LOADING / EMPTY / ERROR STATES */
     .shop-state {
       grid-column: 1 / -1;
       padding: 60px 0;
@@ -306,12 +304,6 @@
     @keyframes shop-pulse {
       0%, 80%, 100% { opacity: 0.2; transform: scale(0.8); }
       40% { opacity: 1; transform: scale(1); }
-    }
-
-    @media (max-width: 1220px) {
-      .shop-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
     }
 
     @media (max-width: 860px) {
@@ -372,7 +364,7 @@
       <nav class="nav-links mono" aria-label="Primary navigation">
         <a href="https://altaheightswine.com">Home</a>
         <a href="https://altaheightswine.com/#wines">Wines</a>
-        <a href="https://altaheightswine.com/#journal">Journal</a>
+        <a href="https://altaheightswine.com/wine-notes.html">Wine Notes</a>
         <a href="https://altaheightswine.com/about.html">About</a>
         <a href="https://altaheightswine.com/trade.html">Trade</a>
         <a href="#cart" id="cart-trigger" aria-controls="site-cart" aria-expanded="false">Cart <span id="cart-count">[0]</span></a>
@@ -384,7 +376,7 @@
     <div class="shop-hero">
       <img src="images/MtTam1.jpeg" alt="Mountain landscape" class="shop-hero-bg">
       <div class="shop-hero-inner">
-        <div class="mono small" style="color: rgba(255,253,248,0.7);">Shop / All Bottles</div>
+        <div class="mono small" style="color: rgba(255,253,248,0.7);">Headless Store / All Bottles</div>
         <h1 class="serif">Drink Independent.</h1>
       </div>
     </div>
@@ -396,7 +388,8 @@
           <button class="shop-filter-btn active" data-filter="all" type="button">All</button>
           <button class="shop-filter-btn" data-filter="white" type="button">White</button>
           <button class="shop-filter-btn" data-filter="red" type="button">Red</button>
-          <button class="shop-filter-btn" data-filter="rosé" type="button">Rosé</button>
+          <button class="shop-filter-btn" data-filter="rose" type="button">Rose</button>
+          <button class="shop-filter-btn" data-filter="sparkling" type="button">Sparkling</button>
         </div>
 
         <div class="shop-grid" id="shop-grid">
@@ -460,10 +453,10 @@
         <div class="footer-box">
           <h4 class="mono">Other Pages</h4>
           <div class="footer-links mono small">
+            <a href="https://altaheightswine.com/wine-notes.html">Wine Notes</a>
             <a href="https://altaheightswine.com/about.html">About</a>
             <a href="https://altaheightswine.com/trade.html">Trade</a>
             <a href="mailto:hello@altaheightswine.com">Contact</a>
-            <a href="https://www.instagram.com/altaheightswine/" target="_blank" rel="noopener noreferrer">Instagram</a>
           </div>
         </div>
 
@@ -512,7 +505,6 @@
     const requestedProductHandle = (shopParams.get('product') || '').toLowerCase();
     const requestedFilter = (shopParams.get('filter') || 'all').toLowerCase();
 
-    /* AGE GATE */
     function openAgeGate() {
       if (!ageGate) return;
       ageGate.classList.add('is-visible');
@@ -536,7 +528,6 @@
       });
     }
 
-    /* CART HELPERS */
     function updateCartStatus(message, state) {
       if (!cartStatus) return;
       cartStatus.textContent = message || '';
@@ -559,6 +550,19 @@
         style: 'currency',
         currency: currencyCode || 'USD'
       }).format(Number(amount || 0));
+    }
+
+    function normalizeCheckoutUrl(checkoutUrl) {
+      if (!checkoutUrl) return '#';
+
+      try {
+        const url = new URL(checkoutUrl);
+        url.protocol = 'https:';
+        url.hostname = SHOPIFY_DOMAIN;
+        return url.toString();
+      } catch (error) {
+        return checkoutUrl;
+      }
     }
 
     function openCart() {
@@ -603,7 +607,7 @@
             </div>
             <div class="cart-line-meta">
               <div class="cart-qty-wrap">
-                <button class="cart-qty-btn" type="button" data-line-id="${node.id}" data-qty="${node.quantity - 1}" aria-label="Decrease quantity">−</button>
+                <button class="cart-qty-btn" type="button" data-line-id="${node.id}" data-qty="${node.quantity - 1}" aria-label="Decrease quantity">-</button>
                 <span class="cart-line-qty mono small">${node.quantity}</span>
                 <button class="cart-qty-btn" type="button" data-line-id="${node.id}" data-qty="${node.quantity + 1}" aria-label="Increase quantity">+</button>
               </div>
@@ -615,7 +619,7 @@
       }
 
       if (cart?.checkoutUrl) {
-        cartCheckout.href = cart.checkoutUrl;
+        cartCheckout.href = normalizeCheckoutUrl(cart.checkoutUrl);
         cartCheckout.setAttribute('aria-disabled', 'false');
       } else {
         cartCheckout.href = '#';
@@ -623,7 +627,6 @@
       }
     }
 
-    /* STOREFRONT API */
     async function storefrontRequest(query, variables = {}) {
       const response = await fetch(SHOPIFY_API_URL, {
         method: 'POST',
@@ -637,7 +640,7 @@
       const result = await response.json();
 
       if (!response.ok || result.errors?.length) {
-        const messages = result.errors?.map((e) => e.message).join(', ') || 'Unable to reach Shopify.';
+        const messages = result.errors?.map((error) => error.message).join(', ') || 'Unable to reach Shopify.';
         throw new Error(messages);
       }
 
@@ -714,7 +717,7 @@
 
       const data = await storefrontRequest(mutation);
       const userErrors = data?.cartCreate?.userErrors || [];
-      if (userErrors.length) throw new Error(userErrors.map((e) => e.message).join(', '));
+      if (userErrors.length) throw new Error(userErrors.map((error) => error.message).join(', '));
 
       const cart = data?.cartCreate?.cart;
       localStorage.setItem(SHOPIFY_CART_STORAGE_KEY, cart.id);
@@ -796,7 +799,7 @@
       });
 
       const userErrors = data?.cartLinesAdd?.userErrors || [];
-      if (userErrors.length) throw new Error(userErrors.map((e) => e.message).join(', '));
+      if (userErrors.length) throw new Error(userErrors.map((error) => error.message).join(', '));
 
       return data?.cartLinesAdd?.cart;
     }
@@ -841,7 +844,7 @@
       });
 
       const userErrors = data?.cartLinesRemove?.userErrors || [];
-      if (userErrors.length) throw new Error(userErrors.map((e) => e.message).join(', '));
+      if (userErrors.length) throw new Error(userErrors.map((error) => error.message).join(', '));
 
       return data?.cartLinesRemove?.cart;
     }
@@ -886,7 +889,7 @@
       });
 
       const userErrors = data?.cartLinesUpdate?.userErrors || [];
-      if (userErrors.length) throw new Error(userErrors.map((e) => e.message).join(', '));
+      if (userErrors.length) throw new Error(userErrors.map((error) => error.message).join(', '));
 
       return data?.cartLinesUpdate?.cart;
     }
@@ -894,7 +897,10 @@
     async function initializeCart() {
       try {
         const storedCartId = localStorage.getItem(SHOPIFY_CART_STORAGE_KEY);
-        if (!storedCartId) { renderCart(null); return; }
+        if (!storedCartId) {
+          renderCart(null);
+          return;
+        }
 
         shopifyCart = await getCart(storedCartId);
         if (!shopifyCart) localStorage.removeItem(SHOPIFY_CART_STORAGE_KEY);
@@ -906,7 +912,6 @@
       }
     }
 
-    /* PRODUCT RENDERING */
     function buildProductCard(product) {
       const variant = product.selectedOrFirstAvailableVariant;
       const price = product.priceRange?.minVariantPrice;
@@ -930,7 +935,7 @@
         <h2 class="serif">${product.title}</h2>
         <p class="shop-card-desc">${product.description || ''}</p>
         <div class="shop-card-footer">
-          <span class="shop-card-price">${price ? formatMoney(price.amount, price.currencyCode) : '—'}</span>
+          <span class="shop-card-price">${price ? formatMoney(price.amount, price.currencyCode) : '-'}</span>
           <div class="shop-card-actions">
             <a href="https://${SHOPIFY_DOMAIN}/products/${product.handle}" target="_blank" rel="noopener noreferrer" class="shop-details-link">Nitty Gritty</a>
             <button
@@ -963,7 +968,6 @@
         shopGrid.appendChild(buildProductCard(product));
       });
 
-      /* wire up add-to-cart buttons */
       shopGrid.querySelectorAll('.shop-add-btn').forEach((btn) => {
         btn.addEventListener('click', async () => {
           if (cartBusy) return;
@@ -988,7 +992,6 @@
 
       if (requestedProductHandle) {
         const requestedCard = shopGrid.querySelector(`[data-handle="${requestedProductHandle}"]`);
-
         if (requestedCard) {
           requestedCard.classList.add('is-focused');
           window.requestAnimationFrame(() => {
@@ -1032,7 +1035,6 @@
       }
     }
 
-    /* FILTER */
     document.querySelectorAll('.shop-filter-btn').forEach((btn) => {
       btn.addEventListener('click', () => {
         const filter = btn.dataset.filter;
@@ -1042,7 +1044,6 @@
       });
     });
 
-    /* CART EVENTS */
     if (cartTrigger && cartOverlay && cartDrawer && cartClose) {
       cartTrigger.addEventListener('click', (event) => {
         event.preventDefault();
