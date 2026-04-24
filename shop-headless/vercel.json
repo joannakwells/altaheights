@@ -1,0 +1,17 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "rewrites": [
+    {
+      "source": "/cart/:path*",
+      "destination": "https://model-store-9670.myshopify.com/cart/:path*"
+    },
+    {
+      "source": "/account/:path*",
+      "destination": "https://model-store-9670.myshopify.com/account/:path*"
+    },
+    {
+      "source": "/orders/:path*",
+      "destination": "https://model-store-9670.myshopify.com/orders/:path*"
+    }
+  ]
+}

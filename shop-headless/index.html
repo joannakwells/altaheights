@@ -552,19 +552,6 @@
       }).format(Number(amount || 0));
     }
 
-    function normalizeCheckoutUrl(checkoutUrl) {
-      if (!checkoutUrl) return '#';
-
-      try {
-        const url = new URL(checkoutUrl);
-        url.protocol = 'https:';
-        url.hostname = SHOPIFY_DOMAIN;
-        return url.toString();
-      } catch (error) {
-        return checkoutUrl;
-      }
-    }
-
     function openCart() {
       if (!cartDrawer || !cartOverlay || !cartTrigger) return;
       cartDrawer.classList.add('is-open');
@@ -619,7 +606,8 @@
       }
 
       if (cart?.checkoutUrl) {
-        cartCheckout.href = normalizeCheckoutUrl(cart.checkoutUrl);
+        // Shopify returns the checkout/cart host it expects for this cart flow.
+        cartCheckout.href = cart.checkoutUrl;
         cartCheckout.setAttribute('aria-disabled', 'false');
       } else {
         cartCheckout.href = '#';
