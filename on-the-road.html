@@ -18,7 +18,7 @@
     }
 
     .di-cta .wrap {
-      max-width: 640px;
+      max-width: 1100px;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
@@ -55,6 +55,10 @@
       max-width: 40ch;
     }
 
+    .road-intro-copy {
+      max-width: 40ch;
+    }
+
     .di-cta-actions {
       display: flex;
       gap: 20px;
@@ -79,17 +83,13 @@
       opacity: 0.7;
     }
 
-    .road-table-section {
-      padding: 0 0 clamp(56px, 8vw, 92px);
-      background: var(--paper);
-    }
-
     .road-table-wrap {
-      max-width: 1100px;
-      margin: 0 auto;
+      width: 100%;
+      margin: 8px auto 0;
       border: 1px solid var(--line);
       overflow: hidden;
       background: rgba(255, 253, 248, 0.72);
+      text-align: left;
     }
 
     .road-table {
@@ -134,6 +134,24 @@
     }
 
     @media (max-width: 820px) {
+      .di-cta {
+        padding: 36px 0 56px;
+      }
+
+      .di-cta .wrap {
+        gap: 16px;
+      }
+
+      .di-cta-actions {
+        width: 100%;
+        gap: 14px;
+      }
+
+      .di-cta-actions .btn {
+        width: 100%;
+        justify-content: center;
+      }
+
       .road-table thead {
         display: none;
       }
@@ -178,6 +196,30 @@
         color: var(--faded);
       }
     }
+
+    @media (max-width: 600px) {
+      .di-cta .wrap {
+        align-items: stretch;
+      }
+
+      .di-cta h1 {
+        font-size: clamp(2.4rem, 14vw, 3.5rem);
+      }
+
+      .road-intro-copy {
+        max-width: none;
+      }
+
+      .road-table-wrap {
+        margin-top: 4px;
+      }
+
+      .road-table tbody td,
+      .road-table thead th {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -217,18 +259,10 @@
       <div class="wrap">
         <div class="di-cta-kicker">ON THE ROAD / Alta Heights</div>
         <h1>On the Road</h1>
-        <p>
+        <p class="road-intro-copy">
           We built this page as a home base for future dates, gatherings, and dispatches from the field. Check back soon for the next stop.
         </p>
-        <div class="di-cta-actions mono">
-          <a href="index.html#journal" class="btn btn-large btn-primary">Back to Journal</a>
-          <a href="mailto:hello@altaheightswine.com" class="btn btn-large">let's party</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="road-table-section">
-      <div class="wrap road-table-wrap">
+        <div class="road-table-wrap">
         <table class="road-table">
           <thead>
             <tr>
@@ -249,6 +283,11 @@
             </tr>
           </tbody>
         </table>
+        </div>
+        <div class="di-cta-actions mono">
+          <a href="index.html#journal" class="btn btn-large btn-primary">Back to Journal</a>
+          <a href="mailto:hello@altaheightswine.com" class="btn btn-large">let's party</a>
+        </div>
       </div>
     </section>
   </main>
@@ -300,15 +339,6 @@
           </div>
         </div>
 
-        <div class="footer-box">
-          <h4 class="mono">Route Notes</h4>
-          <p class="muted">Home base for journal entries, mountain wine, and the next stop down the road.</p>
-        </div>
-
-        <div class="footer-box">
-          <h4 class="mono">Issue Notes</h4>
-          <p class="muted">Route archive. Weather logs. Elevation markers. Please enjoy responsibly.</p>
-        </div>
       </div>
 
       <div class="footer-bottom mono">
