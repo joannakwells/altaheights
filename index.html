@@ -668,32 +668,34 @@
     }
 
     function openCart() {
-      if (!cartDrawer || !cartOverlay || !cartTrigger) return;
+      if (!cartDrawer || !cartOverlay) return;
       cartDrawer.classList.add('is-open');
       cartDrawer.setAttribute('aria-hidden', 'false');
       cartOverlay.hidden = false;
-      cartTrigger.setAttribute('aria-expanded', 'true');
+      cartTrigger?.setAttribute('aria-expanded', 'true');
       document.body.classList.add('cart-open');
     }
 
     function closeCart() {
-      if (!cartDrawer || !cartOverlay || !cartTrigger) return;
+      if (!cartDrawer || !cartOverlay) return;
       cartDrawer.classList.remove('is-open');
       cartDrawer.setAttribute('aria-hidden', 'true');
       cartOverlay.hidden = true;
-      cartTrigger.setAttribute('aria-expanded', 'false');
+      cartTrigger?.setAttribute('aria-expanded', 'false');
       document.body.classList.remove('cart-open');
     }
 
     function renderCart(cart) {
-      if (!cartCount || !cartLines || !cartEmpty || !cartSubtotal || !cartCheckout) return;
+      if (!cartLines || !cartEmpty || !cartSubtotal || !cartCheckout) return;
 
       const totalQuantity = cart?.totalQuantity || 0;
       const subtotalAmount = cart?.cost?.subtotalAmount?.amount || 0;
       const currencyCode = cart?.cost?.subtotalAmount?.currencyCode || 'USD';
       const lines = cart?.lines?.edges || [];
 
-      cartCount.textContent = `[${totalQuantity}]`;
+      if (cartCount) {
+        cartCount.textContent = `[${totalQuantity}]`;
+      }
       cartSubtotal.textContent = formatMoney(subtotalAmount, currencyCode);
       cartLines.innerHTML = '';
       cartEmpty.hidden = totalQuantity > 0;
@@ -1074,8 +1076,8 @@
       }
     }
 
-    if (cartTrigger && cartOverlay && cartDrawer && cartClose) {
-      cartTrigger.addEventListener('click', async (event) => {
+    if (cartOverlay && cartDrawer && cartClose) {
+      cartTrigger?.addEventListener('click', async (event) => {
         event.preventDefault();
         openCart();
       });
