@@ -2139,8 +2139,10 @@ input:focus-visible {
 }
 
 .stats-label {
+  font-family: "SK Payidar Light", Arial, Helvetica, sans-serif;
   font-size: clamp(0.9rem, 1.4vw, 1.2rem);
   letter-spacing: 0.06em;
+  line-height: 1.25;
   text-transform: uppercase;
   color: var(--faded);
 }
