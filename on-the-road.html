@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alta Heights / On the Road</title>
+  <meta
+    name="description"
+    content="On the Road by Alta Heights. A journal dispatch for where we'll be pouring, gathering, and heading next."
+  />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .di-pullquote {
+      padding: clamp(72px, 10vw, 128px) 0 clamp(44px, 6vw, 72px);
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+      text-align: center;
+    }
+
+    .di-pullquote .wrap {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .di-pullquote blockquote {
+      margin: 0;
+      padding: 0;
+    }
+
+    .di-pullquote blockquote p {
+      font-family: "SK Payidar Bold", Georgia, serif;
+      font-size: clamp(2rem, 5vw, 4.2rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+      margin: 0 0 32px;
+    }
+
+    .di-pullquote cite {
+      font-family: "Klumpp", monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--faded);
+      font-style: normal;
+    }
+
+    .di-pullquote-copy {
+      max-width: 700px;
+      margin: 28px auto 0;
+      font-size: clamp(1rem, 1.7vw, 1.12rem);
+      line-height: 1.65;
+      color: var(--faded);
+    }
+
+    .di-cta {
+      padding: clamp(48px, 7vw, 80px) 0;
+      background: var(--paper);
+      text-align: center;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .di-cta .wrap {
+      max-width: 640px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .di-cta-kicker {
+      font-family: "Klumpp", monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--faded);
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 10px;
+      align-self: stretch;
+      text-align: center;
+    }
+
+    .di-cta h1,
+    .di-cta h2 {
+      font-family: "SK Payidar Bold", Georgia, serif;
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      line-height: 1.0;
+      letter-spacing: -0.04em;
+      margin: 0;
+    }
+
+    .di-cta p {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: var(--faded);
+      margin: 0;
+      max-width: 40ch;
+    }
+
+    .di-cta-actions {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn-large {
+      font-size: 13px;
+      min-height: 48px;
+      padding: 0 8px;
+      letter-spacing: 0.12em;
+    }
+
+    .btn-primary {
+      color: var(--error);
+      border-bottom-color: var(--error);
+    }
+
+    .btn-primary:hover {
+      color: var(--error);
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+  <div class="age-gate" id="age-gate" aria-hidden="true">
+    <div class="age-gate-card" role="dialog" aria-modal="true" aria-labelledby="age-gate-title">
+      <span class="tag mono">21+ Only</span>
+      <h2 class="serif" id="age-gate-title">Please confirm you are 21 or older to enter.</h2>
+      <p class="muted">Alta Heights is a wine site. By entering, you confirm you are of legal drinking age in your location.</p>
+      <div class="age-gate-actions">
+        <button class="btn mono age-gate-enter" id="age-gate-enter" type="button">I Am 21+</button>
+        <a class="btn mono age-gate-exit" href="https://www.google.com">Exit</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="nav nav-bleed">
+      <div class="brand">
+        <a href="index.html"><img src="images/ALTA_23_Logos_Orange_Primary Horiz copy.png" alt="Alta Heights" class="brand-logo"></a>
+        <div class="brand-sub mono">California Alpine Wine / On the Road</div>
+      </div>
+
+      <nav class="nav-links mono" aria-label="Primary navigation">
+        <a href="index.html">Home</a>
+        <a href="index.html#journal">Journal</a>
+        <a href="about.html">About</a>
+        <a href="trade.html">Trade</a>
+        <a href="#cart" id="cart-trigger" aria-controls="site-cart" aria-expanded="false">Cart <span id="cart-count">[0]</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="di-pullquote">
+      <div class="wrap">
+        <blockquote>
+          <p>Find us where the road bends uphill and the bottles come out cold.</p>
+          <cite>On the Road / Alta Heights</cite>
+        </blockquote>
+        <p class="di-pullquote-copy">
+          This is the running journal entry for where Alta Heights is headed next. Pop-ups, pours, field stops, and mountain detours all land here. If you are looking for the next place to catch us in the wild, you are in the right spot.
+        </p>
+      </div>
+    </section>
+
+    <section class="di-cta">
+      <div class="wrap">
+        <div class="di-cta-kicker">Route Copy / 02</div>
+        <h1>On the Road</h1>
+        <p>
+          We built this page as a home base for future dates, gatherings, and dispatches from the field. Check back soon for the next stop.
+        </p>
+        <div class="di-cta-actions mono">
+          <a href="index.html#journal" class="btn btn-large btn-primary">Back to Journal</a>
+          <a href="mailto:hello@altaheightswine.com" class="btn btn-large">Ask About the Next Pour</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="cart-overlay" id="cart-overlay" hidden></div>
+  <aside class="cart-drawer" id="site-cart" aria-hidden="true" aria-labelledby="cart-title">
+    <div class="cart-drawer-header">
+      <div>
+        <div class="tag mono">Cart</div>
+        <h2 class="serif" id="cart-title">Your Bottle List</h2>
+      </div>
+      <button class="cart-close" id="cart-close" type="button" aria-label="Close cart">&times;</button>
+    </div>
+
+    <div class="cart-status mono small" id="cart-status" aria-live="polite"></div>
+    <div class="cart-empty muted" id="cart-empty">Your cart is empty. Add a bottle from the wine list to begin.</div>
+    <div class="cart-lines" id="cart-lines"></div>
+
+    <div class="cart-footer">
+      <div class="cart-summary">
+        <span class="mono small">Subtotal</span>
+        <strong id="cart-subtotal">$0.00</strong>
+      </div>
+      <a class="btn mono cart-checkout" id="cart-checkout" href="#" target="_blank" rel="noopener noreferrer" aria-disabled="true">Checkout</a>
+    </div>
+  </aside>
+
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-box">
+          <div class="brand-title serif">Alta Heights</div>
+          <div class="brand-sub mono">California Alpine Wine</div>
+          <p class="muted">
+            A love letter to the rugged mountain frontiers of California and the spirit of exploration.
+          </p>
+        </div>
+
+        <div class="footer-box">
+          <h4 class="mono">Home</h4>
+          <div class="footer-links mono small">
+            <a href="index.html#mailing-list">Mailing List</a>
+            <a href="index.html#journal">Journal</a>
+            <a href="index.html#find">Find It</a>
+          </div>
+        </div>
+
+        <div class="footer-box">
+          <h4 class="mono">Other Pages</h4>
+          <div class="footer-links mono small">
+            <a href="about.html">About</a>
+            <a href="drink-independent.html">Drink Independent</a>
+            <a href="trade.html">Trade</a>
+            <a href="mailto:hello@altaheightswine.com">Contact</a>
+            <a href="https://www.instagram.com/altaheightswine/" target="_blank" rel="noopener noreferrer">Instagram</a>
+          </div>
+        </div>
+
+        <div class="footer-box">
+          <h4 class="mono">Issue Notes</h4>
+          <div class="footer-links mono small">
+            <span>route archive</span>
+            <span>weather logs</span>
+            <span>elevation markers</span>
+            <span>please enjoy responsibly</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom mono">
+        <span>© 2026 Alta Heights</span>
+        <span>Field Index / Issue 01</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const SHOPIFY_DOMAIN = 'model-store-9670.myshopify.com';
+    const SHOPIFY_STOREFRONT_TOKEN = 'c719c0ff58ad08733d78f86785c95857';
+    const SHOPIFY_API_URL = `https://${SHOPIFY_DOMAIN}/api/2026-01/graphql.json`;
+    const SHOPIFY_CART_STORAGE_KEY = 'altaHeightsShopifyCartId';
+    const AGE_GATE_STORAGE_KEY = 'altaHeightsAgeVerified';
+    const cartTrigger = document.querySelector('#cart-trigger');
+    const cartCount = document.querySelector('#cart-count');
+    const cartOverlay = document.querySelector('#cart-overlay');
+    const cartDrawer = document.querySelector('#site-cart');
+    const cartClose = document.querySelector('#cart-close');
+    const cartStatus = document.querySelector('#cart-status');
+    const cartEmpty = document.querySelector('#cart-empty');
+    const cartLines = document.querySelector('#cart-lines');
+    const cartSubtotal = document.querySelector('#cart-subtotal');
+    const cartCheckout = document.querySelector('#cart-checkout');
+    const ageGate = document.querySelector('#age-gate');
+    const ageGateEnter = document.querySelector('#age-gate-enter');
+
+    function openAgeGate() {
+      ageGate.removeAttribute('aria-hidden');
+      document.body.classList.add('age-gate-open');
+    }
+
+    function closeAgeGate() {
+      ageGate.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('age-gate-open');
+    }
+
+    if (!localStorage.getItem(AGE_GATE_STORAGE_KEY)) openAgeGate();
+
+    ageGateEnter?.addEventListener('click', () => {
+      localStorage.setItem(AGE_GATE_STORAGE_KEY, '1');
+      closeAgeGate();
+    });
+
+    function openCart() {
+      cartDrawer.removeAttribute('aria-hidden');
+      cartOverlay.removeAttribute('hidden');
+      document.body.classList.add('cart-open');
+      cartTrigger?.setAttribute('aria-expanded', 'true');
+    }
+
+    function closeCart() {
+      cartDrawer.setAttribute('aria-hidden', 'true');
+      cartOverlay.setAttribute('hidden', '');
+      document.body.classList.remove('cart-open');
+      cartTrigger?.setAttribute('aria-expanded', 'false');
+    }
+
+    cartTrigger?.addEventListener('click', event => {
+      event.preventDefault();
+      openCart();
+    });
+
+    cartClose?.addEventListener('click', closeCart);
+    cartOverlay?.addEventListener('click', closeCart);
+
+    function formatMoney(amount, currency) {
+      return new Intl.NumberFormat('en-US', { style: 'currency', currency }).format(amount);
+    }
+
+    async function getOrCreateCart() {
+      const id = localStorage.getItem(SHOPIFY_CART_STORAGE_KEY);
+      if (id) {
+        const response = await fetch(SHOPIFY_API_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Shopify-Storefront-Access-Token': SHOPIFY_STOREFRONT_TOKEN
+          },
+          body: JSON.stringify({
+            query: `{ cart(id:"${id}"){id checkoutUrl lines(first:20){edges{node{id quantity merchandise{...on ProductVariant{id title priceV2{amount currencyCode}product{title}}}}}} cost{totalAmount{amount currencyCode}}} }`
+          })
+        });
+        const { data } = await response.json();
+        if (data?.cart) return data.cart;
+      }
+
+      const response = await fetch(SHOPIFY_API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Shopify-Storefront-Access-Token': SHOPIFY_STOREFRONT_TOKEN
+        },
+        body: JSON.stringify({
+          query: `mutation { cartCreate { cart { id checkoutUrl lines(first:20){edges{node{id quantity merchandise{...on ProductVariant{id title priceV2{amount currencyCode}product{title}}}}}} cost{totalAmount{amount currencyCode}} } } }`
+        })
+      });
+      const { data } = await response.json();
+      const cart = data?.cartCreate?.cart;
+      if (cart) localStorage.setItem(SHOPIFY_CART_STORAGE_KEY, cart.id);
+      return cart;
+    }
+
+    async function renderCart(cart) {
+      const lines = cart?.lines?.edges || [];
+      cartCount.textContent = `[${lines.reduce((sum, edge) => sum + edge.node.quantity, 0)}]`;
+      cartEmpty.style.display = lines.length ? 'none' : '';
+      cartLines.innerHTML = lines.map(({ node }) => `
+        <div class="cart-line-item" data-line-id="${node.id}">
+          <div class="cart-line-info">
+            <div class="cart-line-title mono small">${node.merchandise.product.title}</div>
+            <div class="cart-line-price muted mono small">${formatMoney(node.merchandise.priceV2.amount, node.merchandise.priceV2.currencyCode)} × ${node.quantity}</div>
+          </div>
+          <button class="cart-remove btn mono small" data-line-id="${node.id}" aria-label="Remove item">×</button>
+        </div>`).join('');
+      cartSubtotal.textContent = cart?.cost?.totalAmount ? formatMoney(cart.cost.totalAmount.amount, cart.cost.totalAmount.currencyCode) : '$0.00';
+      if (cart?.checkoutUrl) {
+        cartCheckout.href = cart.checkoutUrl;
+        cartCheckout.removeAttribute('aria-disabled');
+      }
+
+      document.querySelectorAll('.cart-remove').forEach(button => {
+        button.addEventListener('click', async () => {
+          const lineId = button.dataset.lineId;
+          const cartState = await getOrCreateCart();
+          const response = await fetch(SHOPIFY_API_URL, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-Shopify-Storefront-Access-Token': SHOPIFY_STOREFRONT_TOKEN
+            },
+            body: JSON.stringify({
+              query: `mutation { cartLinesRemove(cartId:"${cartState.id}", lineIds:["${lineId}"]){ cart { id checkoutUrl lines(first:20){edges{node{id quantity merchandise{...on ProductVariant{id title priceV2{amount currencyCode}product{title}}}}}} cost{totalAmount{amount currencyCode}} } } }`
+            })
+          });
+          const { data } = await response.json();
+          renderCart(data?.cartLinesRemove?.cart);
+        });
+      });
+    }
+
+    getOrCreateCart().then(renderCart).catch(() => {});
+  </script>
+</body>
+</html>
