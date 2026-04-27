@@ -10,49 +10,6 @@
   />
   <link rel="stylesheet" href="styles.css" />
   <style>
-    .di-pullquote {
-      padding: clamp(72px, 10vw, 128px) 0 clamp(44px, 6vw, 72px);
-      background: var(--paper);
-      border-bottom: 1px solid var(--line);
-      text-align: center;
-    }
-
-    .di-pullquote .wrap {
-      max-width: 860px;
-      margin: 0 auto;
-    }
-
-    .di-pullquote blockquote {
-      margin: 0;
-      padding: 0;
-    }
-
-    .di-pullquote blockquote p {
-      font-family: "SK Payidar Bold", Georgia, serif;
-      font-size: clamp(2rem, 5vw, 4.2rem);
-      line-height: 1.05;
-      letter-spacing: -0.03em;
-      color: var(--ink);
-      margin: 0 0 32px;
-    }
-
-    .di-pullquote cite {
-      font-family: "Klumpp", monospace;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--faded);
-      font-style: normal;
-    }
-
-    .di-pullquote-copy {
-      max-width: 700px;
-      margin: 28px auto 0;
-      font-size: clamp(1rem, 1.7vw, 1.12rem);
-      line-height: 1.65;
-      color: var(--faded);
-    }
-
     .di-cta {
       padding: clamp(48px, 7vw, 80px) 0;
       background: var(--paper);
@@ -121,6 +78,106 @@
       color: var(--error);
       opacity: 0.7;
     }
+
+    .road-table-section {
+      padding: 0 0 clamp(56px, 8vw, 92px);
+      background: var(--paper);
+    }
+
+    .road-table-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      border: 1px solid var(--line);
+      overflow: hidden;
+      background: rgba(255, 253, 248, 0.72);
+    }
+
+    .road-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    .road-table thead th {
+      font-family: "Klumpp", monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--faded);
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(23, 22, 20, 0.03);
+      vertical-align: bottom;
+    }
+
+    .road-table tbody td {
+      padding: 22px 20px;
+      border-bottom: 1px solid var(--line);
+      font-size: 0.98rem;
+      line-height: 1.55;
+      color: var(--ink);
+      vertical-align: top;
+    }
+
+    .road-table tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .road-table-event {
+      font-family: "SK Payidar Bold", Georgia, serif;
+      font-size: 1.25rem;
+      letter-spacing: -0.02em;
+    }
+
+    .road-table-muted {
+      color: var(--faded);
+    }
+
+    @media (max-width: 820px) {
+      .road-table thead {
+        display: none;
+      }
+
+      .road-table,
+      .road-table tbody,
+      .road-table tr,
+      .road-table td {
+        display: block;
+        width: 100%;
+      }
+
+      .road-table tbody tr {
+        border-bottom: 1px solid var(--line);
+      }
+
+      .road-table tbody tr:last-child {
+        border-bottom: 0;
+      }
+
+      .road-table tbody td {
+        border-bottom: 0;
+        padding: 10px 20px 14px;
+      }
+
+      .road-table tbody td:first-child {
+        padding-top: 20px;
+      }
+
+      .road-table tbody td:last-child {
+        padding-bottom: 20px;
+      }
+
+      .road-table td::before {
+        content: attr(data-label);
+        display: block;
+        margin-bottom: 6px;
+        font-family: "Klumpp", monospace;
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        color: var(--faded);
+      }
+    }
   </style>
 </head>
 <body>
@@ -145,38 +202,53 @@
 
       <nav class="nav-links mono" aria-label="Primary navigation">
         <a href="index.html">Home</a>
-        <a href="index.html#journal">Journal</a>
         <a href="about.html">About</a>
+        <a href="drink-independent.html">Drink Independent</a>
         <a href="trade.html">Trade</a>
-        <a href="#cart" id="cart-trigger" aria-controls="site-cart" aria-expanded="false">Cart <span id="cart-count">[0]</span></a>
+        <a href="index.html#journal">Journal</a>
+        <a href="index.html#find">Find Us</a>
+        <a href="https://www.instagram.com/altaheightswine/" target="_blank" rel="noopener noreferrer">Instagram</a>
       </nav>
     </div>
   </header>
 
   <main>
-    <section class="di-pullquote">
-      <div class="wrap">
-        <blockquote>
-          <p>Find us where the road bends uphill and the bottles come out cold.</p>
-          <cite>On the Road / Alta Heights</cite>
-        </blockquote>
-        <p class="di-pullquote-copy">
-          This is the running journal entry for where Alta Heights is headed next. Pop-ups, pours, field stops, and mountain detours all land here. If you are looking for the next place to catch us in the wild, you are in the right spot.
-        </p>
-      </div>
-    </section>
-
     <section class="di-cta">
       <div class="wrap">
-        <div class="di-cta-kicker">Route Copy / 02</div>
+        <div class="di-cta-kicker">ON THE ROAD / Alta Heights</div>
         <h1>On the Road</h1>
         <p>
           We built this page as a home base for future dates, gatherings, and dispatches from the field. Check back soon for the next stop.
         </p>
         <div class="di-cta-actions mono">
           <a href="index.html#journal" class="btn btn-large btn-primary">Back to Journal</a>
-          <a href="mailto:hello@altaheightswine.com" class="btn btn-large">Ask About the Next Pour</a>
+          <a href="mailto:hello@altaheightswine.com" class="btn btn-large">let's party</a>
         </div>
+      </div>
+    </section>
+
+    <section class="road-table-section">
+      <div class="wrap road-table-wrap">
+        <table class="road-table">
+          <thead>
+            <tr>
+              <th scope="col">Event</th>
+              <th scope="col">Date and Time</th>
+              <th scope="col">Place</th>
+              <th scope="col">Info</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-label="Event">
+                <div class="road-table-event">More Soon</div>
+              </td>
+              <td data-label="Date and Time" class="road-table-muted">TBD</td>
+              <td data-label="Place" class="road-table-muted">Next stop coming together now</td>
+              <td data-label="Info" class="road-table-muted">Check back for the next pour, gathering, or field event.</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </section>
   </main>
@@ -216,33 +288,26 @@
         </div>
 
         <div class="footer-box">
-          <h4 class="mono">Home</h4>
+          <h4 class="mono">Navigation</h4>
           <div class="footer-links mono small">
-            <a href="index.html#mailing-list">Mailing List</a>
-            <a href="index.html#journal">Journal</a>
-            <a href="index.html#find">Find It</a>
-          </div>
-        </div>
-
-        <div class="footer-box">
-          <h4 class="mono">Other Pages</h4>
-          <div class="footer-links mono small">
+            <a href="index.html">Home</a>
             <a href="about.html">About</a>
             <a href="drink-independent.html">Drink Independent</a>
             <a href="trade.html">Trade</a>
-            <a href="mailto:hello@altaheightswine.com">Contact</a>
+            <a href="index.html#journal">Journal</a>
+            <a href="index.html#find">Find Us</a>
             <a href="https://www.instagram.com/altaheightswine/" target="_blank" rel="noopener noreferrer">Instagram</a>
           </div>
         </div>
 
         <div class="footer-box">
+          <h4 class="mono">Route Notes</h4>
+          <p class="muted">Home base for journal entries, mountain wine, and the next stop down the road.</p>
+        </div>
+
+        <div class="footer-box">
           <h4 class="mono">Issue Notes</h4>
-          <div class="footer-links mono small">
-            <span>route archive</span>
-            <span>weather logs</span>
-            <span>elevation markers</span>
-            <span>please enjoy responsibly</span>
-          </div>
+          <p class="muted">Route archive. Weather logs. Elevation markers. Please enjoy responsibly.</p>
         </div>
       </div>
 

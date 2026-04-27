@@ -1673,6 +1673,7 @@ input:focus-visible {
 
 .footer-box h4 {
   margin: 0 0 10px;
+  font-family: "SK Payidar Light", Arial, Helvetica, sans-serif;
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -1686,6 +1687,7 @@ input:focus-visible {
 .footer-links {
   display: grid;
   gap: 7px;
+  font-family: "SK Payidar Light", Arial, Helvetica, sans-serif;
   color: var(--faded);
 }
 
@@ -1699,10 +1701,15 @@ input:focus-visible {
   justify-content: space-between;
   gap: 12px;
   flex-wrap: wrap;
+  font-family: "SK Payidar Light", Arial, Helvetica, sans-serif;
   color: var(--faded);
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.12em;
+}
+
+.footer .mono {
+  font-family: "SK Payidar Light", Arial, Helvetica, sans-serif;
 }
 
 @media (max-width: 1220px) {
