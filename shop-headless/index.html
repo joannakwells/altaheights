@@ -188,15 +188,8 @@
       text-transform: uppercase;
     }
 
-    .shop-card-desc {
-      font-size: 13px;
-      color: var(--faded);
-      line-height: 1.5;
-      flex: 1;
-      margin-bottom: 20px;
-    }
-
     .shop-card-footer {
+      margin-top: auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -716,7 +709,6 @@
                 id
                 title
                 handle
-                description
                 productType
                 tags
                 priceRange {
@@ -995,7 +987,6 @@
         <div class="shop-card-image-wrap">${imageHtml}</div>
         <div class="shop-card-meta">${productLabel}</div>
         <h2 class="serif">${product.title}</h2>
-        <p class="shop-card-desc">${product.description || ''}</p>
         <div class="shop-card-footer">
           <span class="shop-card-price">${price ? formatMoney(price.amount, price.currencyCode) : '-'}</span>
           <div class="shop-card-actions">
