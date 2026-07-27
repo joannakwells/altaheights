@@ -404,7 +404,7 @@
 
   <main>
     <div class="shop-hero">
-      <img src="images/MtTam1.jpeg" alt="Mountain landscape" class="shop-hero-bg">
+      <img src="images/Trees_Green.png" alt="Green-tinted Yosemite mountain landscape framed by trees" class="shop-hero-bg">
       <div class="shop-hero-inner">
         <div class="mono small" style="color: rgba(255,253,248,0.7);">Headless Store / All Bottles</div>
         <h1 class="serif">Drink Independent.</h1>
@@ -602,7 +602,11 @@
       const tags = (product?.tags || []).join(' ').toLowerCase();
       const source = `${title} ${type} ${tags}`;
 
-      if (source.includes('pinot noir') || source.includes('cabernet') || source.includes('red')) {
+      if (title.includes('heritage') && title.includes('mixed')) {
+        return 'white / red';
+      }
+
+      if (source.includes('pinot noir') || source.includes('cabernet') || source.includes('syrah') || source.includes('red')) {
         return 'red';
       }
 
@@ -971,7 +975,10 @@
       const variantId = variant?.id || '';
       const image = product.featuredImage;
       const productCategory = getProductCategory(product);
-      const productLabel = productCategory.charAt(0).toUpperCase() + productCategory.slice(1);
+      const productLabel = productCategory
+        .split(' / ')
+        .map((category) => category.charAt(0).toUpperCase() + category.slice(1))
+        .join(' / ');
 
       const card = document.createElement('article');
       card.className = 'shop-card';
