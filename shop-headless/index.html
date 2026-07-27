@@ -595,6 +595,37 @@
       return type || 'wine';
     }
 
+    function getProductSortRank(product) {
+      const source = `${product?.title || ''} ${product?.handle || ''}`
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, ' ')
+        .trim();
+
+      const orderedMatches = [
+        'alta heights chardonnay',
+        'alta heights pinot noir',
+        'alta heights rose',
+        'wildcat mountain chardonnay',
+        'sonoma mountain cabernet',
+        'la cruz vineyard syrah',
+        'staiger vineyard chardonnay',
+        'berger vineyard cabernet',
+        'heritage wine mixed 6'
+      ];
+
+      const rank = orderedMatches.findIndex((match) => source.includes(match));
+      return rank === -1 ? orderedMatches.length : rank;
+    }
+
+    function sortProducts(products) {
+      return [...products].sort((a, b) => {
+        const rankDifference = getProductSortRank(a) - getProductSortRank(b);
+        return rankDifference || a.title.localeCompare(b.title);
+      });
+    }
+
     function openCart() {
       if (!cartDrawer || !cartOverlay || !cartTrigger) return;
       cartDrawer.classList.add('is-open');
@@ -1053,7 +1084,7 @@
 
     async function loadShop() {
       try {
-        allProducts = await fetchAllProducts();
+        allProducts = sortProducts(await fetchAllProducts());
         const initialProducts = requestedProductHandle
           ? allProducts
           : filterProducts(allProducts, requestedFilter);
