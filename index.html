@@ -1160,6 +1160,9 @@
           signupRequestId += 1;
           const callbackName = `mailingListSignupCallback_${signupRequestId}`;
           const script = document.createElement('script');
+          // Keep Google account cookies out of this public signup request.
+          // Multi-account sessions can otherwise redirect to a missing /u/1 deployment.
+          script.crossOrigin = 'anonymous';
           const timeout = window.setTimeout(() => {
             cleanup();
             reject(new Error('Signup request timed out. Please try again.'));
