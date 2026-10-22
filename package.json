@@ -1,0 +1,9 @@
+{
+  "name": "altaheights-signup",
+  "private": true,
+  "type": "module",
+  "engines": { "node": "22.x" },
+  "scripts": { "test": "node --test tests/*.test.js", "monitor": "node scripts/monitor.mjs" },
+  "dependencies": { "@neondatabase/serverless": "1.0.2" },
+  "devDependencies": { "@electric-sql/pglite": "0.3.14" }
+}

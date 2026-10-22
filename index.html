@@ -383,7 +383,7 @@
     </div>
   </footer>
   <script>
-    const MAILING_LIST_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyHO_hZH7MkkO3MiH5Y8UJYUFyr7_MN2FyMe_W4yI6o28i3NFa6LzXyfh7bd0hjM40mCQ/exec';
+    const MAILING_LIST_ENDPOINT = '/api/signup';
     const SHOPIFY_DOMAIN = 'model-store-9670.myshopify.com';
     const SHOPIFY_STOREFRONT_TOKEN = 'c719c0ff58ad08733d78f86785c95857';
     const SHOPIFY_API_URL = `https://${SHOPIFY_DOMAIN}/api/2026-01/graphql.json`;
@@ -1138,7 +1138,6 @@
 
     if (mailingListForm && mailingListStatus) {
       const formLoadedAtInput = document.querySelector('#form-loaded-at');
-      let signupRequestId = 0;
 
       function updateMailingListStatus(message, state) {
         mailingListStatus.textContent = message || '';
@@ -1155,41 +1154,26 @@
         }
       }
 
-      function submitSignup(payload) {
-        return new Promise((resolve, reject) => {
-          signupRequestId += 1;
-          const callbackName = `mailingListSignupCallback_${signupRequestId}`;
-          const script = document.createElement('script');
-          // Keep Google account cookies out of this public signup request.
-          // Multi-account sessions can otherwise redirect to a missing /u/1 deployment.
-          script.crossOrigin = 'anonymous';
-          const timeout = window.setTimeout(() => {
-            cleanup();
-            reject(new Error('Signup request timed out. Please try again.'));
-          }, 10000);
-
-          function cleanup() {
-            window.clearTimeout(timeout);
-            if (window[callbackName]) {
-              delete window[callbackName];
-            }
-            script.remove();
+      async function submitSignup(payload) {
+        try {
+          const response = await fetch(MAILING_LIST_ENDPOINT, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(Object.fromEntries(payload)),
+            credentials: 'same-origin',
+            signal: AbortSignal.timeout(30000)
+          });
+          const result = await response.json();
+          if (!response.ok || result.success !== true) {
+            throw new Error(result.message || 'We could not confirm your signup. Please try again shortly.');
           }
-
-          window[callbackName] = (response) => {
-            cleanup();
-            resolve(response || {});
-          };
-
-          payload.set('callback', callbackName);
-          script.src = `${MAILING_LIST_ENDPOINT}?${payload.toString()}`;
-          script.onerror = () => {
-            cleanup();
-            reject(new Error('Unable to reach the signup service.'));
-          };
-
-          document.body.appendChild(script);
-        });
+          return result;
+        } catch (error) {
+          if (error.name === 'TimeoutError' || error.name === 'AbortError' || error instanceof TypeError || error instanceof SyntaxError) {
+            throw new Error('We could not confirm your signup. Please check your connection and try again.');
+          }
+          throw error;
+        }
       }
 
       setFreshLoadedAt();

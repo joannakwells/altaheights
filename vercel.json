@@ -1,0 +1,6 @@
+{
+  "functions": {
+    "api/signup.js": { "maxDuration": 60 },
+    "api/signup-maintenance.js": { "maxDuration": 60 }
+  }
+}
