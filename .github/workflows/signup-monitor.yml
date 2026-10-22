@@ -1,0 +1,20 @@
+name: Manual signup health check
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: signup-maintenance
+  cancel-in-progress: false
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node scripts/monitor.mjs
+        env:
+          SIGNUP_MONITOR_SECRET: ${{ secrets.SIGNUP_MONITOR_SECRET }}
