@@ -497,6 +497,11 @@
     const SHOPIFY_DOMAIN = 'model-store-9670.myshopify.com';
     const SHOPIFY_STOREFRONT_TOKEN = 'c719c0ff58ad08733d78f86785c95857';
     const SHOPIFY_API_URL = `https://${SHOPIFY_DOMAIN}/api/2026-01/graphql.json`;
+    const SHOP_PRODUCT_IMAGES = {
+      "2023-sonoma-mountain-cabernet-sauvignon": "sonoma-mountain-cabernet",
+      "2024-alta-heights-pinot-noir": "alta-heights-pinot-noir",
+      "2022-wildcat-mountain-chardonnay": "wildcat-mountain-chardonnay"
+};
     const SHOPIFY_CART_STORAGE_KEY = 'altaHeightsShopifyCartId';
     const AGE_GATE_STORAGE_KEY = 'altaHeightsAgeVerified';
 
@@ -982,7 +987,13 @@
       const price = product.priceRange?.minVariantPrice;
       const available = variant?.availableForSale !== false;
       const variantId = variant?.id || '';
-      const image = product.featuredImage;
+      const optimizedImage = SHOP_PRODUCT_IMAGES[product.handle];
+      const image = optimizedImage
+        ? { url: `images/shop/${optimizedImage}-600.webp`, altText: product.title }
+        : product.featuredImage;
+      const responsiveImageAttributes = optimizedImage
+        ? `srcset="images/shop/${optimizedImage}-600.webp 600w, images/shop/${optimizedImage}-1200.webp 1200w" sizes="(max-width: 860px) 250px, 300px" width="1200" height="1200"`
+        : '';
       const productUrl = `https://${SHOPIFY_DOMAIN}/products/${encodeURIComponent(product.handle)}`;
       const productCategory = getProductCategory(product);
       const productLabel = productCategory
@@ -997,7 +1008,7 @@
       card.dataset.handle = (product.handle || '').toLowerCase();
 
       const imageHtml = image
-        ? `<img class="shop-card-image" src="${image.url}" alt="${image.altText || product.title}" loading="lazy">`
+        ? `<img class="shop-card-image" src="${image.url}" alt="${image.altText || product.title}" ${responsiveImageAttributes} loading="lazy" decoding="async">`
         : `<div class="shop-card-image-placeholder"><div class="shop-bottle-placeholder"></div></div>`;
 
       card.innerHTML = `
