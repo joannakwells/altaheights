@@ -92,6 +92,10 @@
     }
 
     .shop-card-image-wrap {
+      display: block;
+      width: 75%;
+      max-width: 300px;
+      align-self: center;
       aspect-ratio: 3 / 3.6;
       overflow: hidden;
       background: var(--paper);
@@ -102,13 +106,14 @@
     .shop-card-image {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
       object-position: center;
       display: block;
       transition: transform 0.5s ease;
     }
 
-    .shop-card:hover .shop-card-image {
+    .shop-card-image-wrap:hover .shop-card-image,
+    .shop-card-image-wrap:focus-visible .shop-card-image {
       transform: scale(1.03);
     }
 
@@ -979,6 +984,7 @@
       const available = variant?.availableForSale !== false;
       const variantId = variant?.id || '';
       const image = product.featuredImage;
+      const productUrl = `https://${SHOPIFY_DOMAIN}/products/${encodeURIComponent(product.handle)}`;
       const productCategory = getProductCategory(product);
       const productLabel = productCategory
         .split(' / ')
@@ -996,13 +1002,13 @@
         : `<div class="shop-card-image-placeholder"><div class="shop-bottle-placeholder"></div></div>`;
 
       card.innerHTML = `
-        <div class="shop-card-image-wrap">${imageHtml}</div>
+        <a class="shop-card-image-wrap" href="${productUrl}" target="_blank" rel="noopener noreferrer">${imageHtml}</a>
         <div class="shop-card-meta">${productLabel}</div>
         <h2 class="serif">${product.title}</h2>
         <div class="shop-card-footer">
           <span class="shop-card-price">${price ? formatMoney(price.amount, price.currencyCode) : '-'}</span>
           <div class="shop-card-actions">
-            <a href="https://${SHOPIFY_DOMAIN}/products/${product.handle}" target="_blank" rel="noopener noreferrer" class="shop-details-link">Nitty Gritty</a>
+            <a href="${productUrl}" target="_blank" rel="noopener noreferrer" class="shop-details-link">Nitty Gritty</a>
             <button
               class="shop-add-btn"
               type="button"
@@ -1013,6 +1019,7 @@
         </div>
       `;
 
+      card.querySelector('.shop-card-image-wrap').setAttribute('aria-label', `View ${product.title}`);
       return card;
     }
 
