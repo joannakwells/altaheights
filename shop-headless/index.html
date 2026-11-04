@@ -69,12 +69,13 @@
 
     .shop-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(6, 1fr);
       gap: 0;
       border-top: 1px solid var(--line);
     }
 
     .shop-card {
+      grid-column: span 2;
       display: flex;
       flex-direction: column;
       padding: 24px 20px 28px;
@@ -87,7 +88,11 @@
       box-shadow: inset 0 0 0 1px rgba(0, 81, 139, 0.22);
     }
 
-    .shop-card:nth-child(3n) {
+    .shop-card.is-alta-heights {
+      grid-column: span 3;
+    }
+
+    .shop-card.is-row-end {
       border-right: 0;
     }
 
@@ -212,6 +217,25 @@
       align-items: center;
     }
 
+    .shop-buy-link {
+      font-family: "Klumpp", "Courier New", Courier, monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--error);
+      background: var(--error-soft);
+      border: 1px solid rgba(208, 93, 39, 0.32);
+      padding: 0 14px;
+      min-height: 36px;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .shop-buy-link:hover {
+      color: var(--white);
+      background: var(--error);
+    }
+
     .shop-add-btn:hover:not(:disabled) {
       color: var(--white);
       background: var(--error);
@@ -326,7 +350,9 @@
         grid-template-columns: repeat(2, 1fr);
       }
 
-      .shop-card:nth-child(3n) {
+      .shop-card,
+      .shop-card.is-alta-heights {
+        grid-column: span 1;
         border-right: 1px solid var(--line-soft);
       }
 
@@ -396,7 +422,6 @@
           <button class="shop-filter-btn active" data-filter="all" type="button">All</button>
           <button class="shop-filter-btn" data-filter="white" type="button">White</button>
           <button class="shop-filter-btn" data-filter="red" type="button">Red</button>
-          <button class="shop-filter-btn" data-filter="rose" type="button">Rose</button>
         </div>
 
         <div class="shop-grid" id="shop-grid">
@@ -500,7 +525,8 @@
     const SHOP_PRODUCT_IMAGES = {
       "2023-sonoma-mountain-cabernet-sauvignon": "sonoma-mountain-cabernet",
       "2024-alta-heights-pinot-noir": "alta-heights-pinot-noir",
-      "2022-wildcat-mountain-chardonnay": "wildcat-mountain-chardonnay"
+      "2022-wildcat-mountain-chardonnay": "wildcat-mountain-chardonnay",
+      "2024-santa-cruz-mountains-pinot-noir": "model-farm-pinot-noir"
 };
     const SHOPIFY_CART_STORAGE_KEY = 'altaHeightsShopifyCartId';
     const AGE_GATE_STORAGE_KEY = 'altaHeightsAgeVerified';
@@ -617,6 +643,7 @@
         'alta heights pinot noir',
         'alta heights rose',
         'wildcat mountain chardonnay',
+        'santa cruz mountains pinot noir',
         'sonoma mountain cabernet',
         'la cruz vineyard syrah',
         'staiger vineyard chardonnay',
@@ -994,7 +1021,7 @@
       const responsiveImageAttributes = optimizedImage
         ? `srcset="images/shop/${optimizedImage}-600.webp 600w, images/shop/${optimizedImage}-1200.webp 1200w" sizes="(max-width: 860px) 250px, 300px" width="1200" height="1200"`
         : '';
-      const productUrl = `https://${SHOPIFY_DOMAIN}/products/${encodeURIComponent(product.handle)}`;
+      const productUrl = product.externalUrl || `https://${SHOPIFY_DOMAIN}/products/${encodeURIComponent(product.handle)}`;
       const productCategory = getProductCategory(product);
       const productLabel = productCategory
         .split(' / ')
@@ -1003,6 +1030,7 @@
 
       const card = document.createElement('article');
       card.className = 'shop-card';
+      card.classList.toggle('is-alta-heights', ['2024-alta-heights-chardonnay', '2024-alta-heights-pinot-noir'].includes(product.handle));
       card.dataset.type = productCategory;
       card.dataset.tags = (product.tags || []).join(' ').toLowerCase();
       card.dataset.handle = (product.handle || '').toLowerCase();
@@ -1019,12 +1047,12 @@
           <span class="shop-card-price">${price ? formatMoney(price.amount, price.currencyCode) : '-'}</span>
           <div class="shop-card-actions">
             <a href="${productUrl}" target="_blank" rel="noopener noreferrer" class="shop-details-link">Nitty Gritty</a>
-            <button
+            ${product.externalUrl ? `<a class="shop-buy-link" href="${productUrl}" target="_blank" rel="noopener noreferrer">Shop Wine</a>` : `<button
               class="shop-add-btn"
               type="button"
               data-variant-id="${variantId}"
               ${!available ? 'disabled' : ''}
-            >${available ? 'Add to Pack' : 'Sold Out'}</button>
+            >${available ? 'Add to Pack' : 'Sold Out'}</button>`}
           </div>
         </div>
       `;
@@ -1048,6 +1076,14 @@
 
       products.forEach((product) => {
         shopGrid.appendChild(buildProductCard(product));
+      });
+      let rowColumns = 0;
+      shopGrid.querySelectorAll('.shop-card').forEach((card) => {
+        rowColumns += card.classList.contains('is-alta-heights') ? 3 : 2;
+        if (rowColumns >= 6) {
+          card.classList.add('is-row-end');
+          rowColumns = 0;
+        }
       });
 
       shopGrid.querySelectorAll('.shop-add-btn').forEach((btn) => {
@@ -1101,7 +1137,24 @@
 
     async function loadShop() {
       try {
-        allProducts = sortProducts(await fetchAllProducts());
+        const visibleHandles = new Set([
+          '2024-alta-heights-chardonnay',
+          '2024-alta-heights-pinot-noir',
+          '2022-wildcat-mountain-chardonnay',
+          '2023-sonoma-mountain-cabernet-sauvignon'
+        ]);
+        const modelFarmPinot = {
+          title: '2024 Santa Cruz Mountains Pinot Noir',
+          handle: '2024-santa-cruz-mountains-pinot-noir',
+          productType: 'Red',
+          tags: ['red', 'pinot noir', 'Model Farm'],
+          externalUrl: 'https://modelfarmwines.com/shop/2024-Santa-Cruz-Mountains-Pinot-Noir-p873297099',
+          priceRange: { minVariantPrice: { amount: '36.00', currencyCode: 'USD' } }
+        };
+        allProducts = sortProducts([
+          ...(await fetchAllProducts()).filter((product) => visibleHandles.has(product.handle)),
+          modelFarmPinot
+        ]);
         const initialProducts = requestedProductHandle
           ? allProducts
           : filterProducts(allProducts, requestedFilter);
