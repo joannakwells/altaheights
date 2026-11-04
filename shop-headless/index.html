@@ -1142,20 +1142,12 @@
           '2024-alta-heights-chardonnay',
           '2024-alta-heights-pinot-noir',
           '2022-wildcat-mountain-chardonnay',
+          '2024-santa-cruz-mountains-pinot-noir',
           '2023-sonoma-mountain-cabernet-sauvignon'
         ]);
-        const modelFarmPinot = {
-          title: '2024 Santa Cruz Mountains Pinot Noir',
-          handle: '2024-santa-cruz-mountains-pinot-noir',
-          productType: 'Red',
-          tags: ['red', 'pinot noir', 'Model Farm'],
-          externalUrl: 'https://modelfarmwines.com/shop/2024-Santa-Cruz-Mountains-Pinot-Noir-p873297099',
-          priceRange: { minVariantPrice: { amount: '36.00', currencyCode: 'USD' } }
-        };
-        allProducts = sortProducts([
-          ...(await fetchAllProducts()).filter((product) => visibleHandles.has(product.handle)),
-          modelFarmPinot
-        ]);
+        allProducts = sortProducts(
+          (await fetchAllProducts()).filter((product) => visibleHandles.has(product.handle))
+        );
         const initialProducts = requestedProductHandle
           ? allProducts
           : filterProducts(allProducts, requestedFilter);
